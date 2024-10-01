@@ -18,6 +18,7 @@ namespace GameSystems.Guild
         public GuildStats(int newMaxHp, int startGold, string gName, Color color)
         {
             maxHp = newMaxHp;
+            hp = maxHp;
             gold = startGold;
             guildName = gName;
             guildColor = color;

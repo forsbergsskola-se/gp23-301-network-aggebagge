@@ -1,5 +1,6 @@
 using System;
 using GameSystems.Units;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -12,26 +13,31 @@ namespace GameSystems.Guild
         public TextMeshProUGUI gold;
         public TextMeshProUGUI unitCount;
 
-        private PlayerUnits playerUnits;
+        private GuildUnitManager guildUnitManager;
+        private GuildStats guildStats;
+        
         private void Start()
         {
-            playerUnits = FindObjectOfType<PlayerUnits>();
-
-            playerUnits.onAddUnit.AddListener(OnAddUnit);
-            unitCount.text = playerUnits.guildUnits.Count.ToString();
+            GameManager.i.onJoinRoom.AddListener(Setup);
         }
 
-        public void SetupUI(GuildStats guildStats)
+        private void Setup()
         {
+            guildUnitManager = FindObjectOfType<GuildUnitManager>();
+            guildUnitManager.onAddUnit.AddListener(OnAddUnit);
+            unitCount.text = guildUnitManager.guildUnits.Count.ToString();
+
+            guildStats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
+            
             guildTitle.text = guildStats.guildName;
             hp.text = guildStats.hp.ToString();
             gold.text = guildStats.gold.ToString();
         }
-        
-        
+
+
         private void OnAddUnit(UnitSo unitSo)
         {
-            unitCount.text = playerUnits.guildUnits.Count.ToString();
+            unitCount.text = guildUnitManager.guildUnits.Count.ToString();
         }
     }
 }

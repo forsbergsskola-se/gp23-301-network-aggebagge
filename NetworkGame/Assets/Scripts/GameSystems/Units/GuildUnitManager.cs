@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace GameSystems.Units
 {
-    public class PlayerUnits : MonoBehaviour
+    public class GuildUnitManager : MonoBehaviour
     {
         [HideInInspector] public UnityEvent<UnitSo> onAddUnit = new();
 

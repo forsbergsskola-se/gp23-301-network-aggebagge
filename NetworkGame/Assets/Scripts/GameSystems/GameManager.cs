@@ -4,6 +4,7 @@ using System.Linq;
 using GameSystems.Guild;
 using GameSystems.Units;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ namespace GameSystems
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
+        [HideInInspector] public UnityEvent onJoinRoom = new ();
         [HideInInspector] public UnityEvent<int, int> onUpdatePlayerHp = new ();
 
         public int playerCount;
@@ -35,17 +37,46 @@ namespace GameSystems
             {
                 Destroy(gameObject);
             }
+            
+            PhotonNetwork.ConnectUsingSettings();
+            
+
+            
+        }
+
+        public override void OnConnectedToMaster()
+        {
+            base.OnConnectedToMaster();
+            Debug.Log("COONNECTED");
+            PhotonNetwork.JoinRandomRoom();
+        }
+        
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            Debug.Log("Failed to join random room: " + message);
+            // Create a room if joining fails
+            RoomOptions roomOptions = new RoomOptions { MaxPlayers = 6 };
+            PhotonNetwork.CreateRoom(null, roomOptions);
+        }
+
+        public override void OnJoinedRoom()
+        {
+            base.OnJoinedRoom();
+            Debug.Log("JOIN ROOM");
 
             playerCount = PhotonNetwork.PlayerList.Length;
+            Debug.Log(playerCount);
 
             for (int i = 0; i < playerCount; i++)
             {
                 playerGuilds.Add(new GuildStats(playerHp, startGold, guildNames[i], guildColors[i]));
                 playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
+                Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
             }
             
-            
+            onJoinRoom.Invoke();
         }
+
 
         public void AddToPlayerHp(int playerId, int hpToAdd)
         {
@@ -83,12 +114,13 @@ namespace GameSystems
         // Method to get stats for a specific player
         public GuildStats GetPlayerStats(int playerId)
         {
+            Debug.Log(playerId);
             return playerGuilds[GetPlayerIndex(playerId)];
         }
 
         private int GetPlayerIndex(int id)
         {
-            return playerIdList.FirstOrDefault(playerID => playerID == id);
+            return playerIdList.IndexOf(id);
         }
     }
 }

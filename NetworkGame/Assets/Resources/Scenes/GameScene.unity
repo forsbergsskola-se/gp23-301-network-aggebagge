@@ -1649,6 +1649,7 @@ GameObject:
   - component: {fileID: 1202100755}
   - component: {fileID: 1202100754}
   - component: {fileID: 1202100756}
+  - component: {fileID: 1202100757}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1668,22 +1669,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066738122004458be3dce97c56e718d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onJoinRoom:
+    m_PersistentCalls:
+      m_Calls: []
   onUpdatePlayerHp:
     m_PersistentCalls:
       m_Calls: []
   playerCount: 6
   playerHp: 50
   startGold: 4
-  startUnits:
-  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
-  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
-  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
-  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
-  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
-  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
-  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
-  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
-  - {fileID: 11400000, guid: 9a534dfc3b4a76d4bb26ff0a00c60fe2, type: 2}
   playerGuilds: []
   guildNames:
   - Valor
@@ -1699,6 +1693,7 @@ MonoBehaviour:
   - {r: 0.89433956, g: 0.7362869, b: 0.11980776, a: 1}
   - {r: 0.2568957, g: 0.79622644, b: 0.28036606, a: 1}
   - {r: 0.78113204, g: 0.24613024, b: 0.74120265, a: 1}
+  playerIdList: 
 --- !u!4 &1202100755
 Transform:
   m_ObjectHideFlags: 0
@@ -1727,6 +1722,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCount: 3
+--- !u!114 &1202100757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202100753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461d6aca315549218d600eb11925e994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAddUnit:
+    m_PersistentCalls:
+      m_Calls: []
+  guildUnits:
+  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
+  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
+  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
+  - {fileID: 11400000, guid: 9a534dfc3b4a76d4bb26ff0a00c60fe2, type: 2}
+  - {fileID: 11400000, guid: 9a534dfc3b4a76d4bb26ff0a00c60fe2, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
 --- !u!1 &1252928784
 GameObject:
   m_ObjectHideFlags: 0
