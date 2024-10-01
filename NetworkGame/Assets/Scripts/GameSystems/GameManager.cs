@@ -13,7 +13,7 @@ namespace GameSystems
     public class GameManager : MonoBehaviourPunCallbacks
     {
         [HideInInspector] public UnityEvent onJoinRoom = new ();
-        [HideInInspector] public UnityEvent<int, int> onUpdatePlayerHp = new ();
+        [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
         public int playerCount;
         public int playerHp;
@@ -25,6 +25,8 @@ namespace GameSystems
         // Singleton instance for easy access
         public static GameManager i;
         public List<int> playerIdList = new ();
+
+        [HideInInspector] public bool hasJoinedRoom;
         
         private void Awake()
         {
@@ -63,15 +65,13 @@ namespace GameSystems
         {
             base.OnJoinedRoom();
             Debug.Log("JOIN ROOM");
-
+            hasJoinedRoom = true;
             playerCount = PhotonNetwork.PlayerList.Length;
-            Debug.Log(playerCount);
 
             for (int i = 0; i < playerCount; i++)
             {
                 playerGuilds.Add(new GuildStats(playerHp, startGold, guildNames[i], guildColors[i]));
                 playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
-                Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
             }
             
             onJoinRoom.Invoke();
@@ -91,7 +91,7 @@ namespace GameSystems
             }
             photonView.RPC("SyncPlayerStats", RpcTarget.Others, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
 
-            onUpdatePlayerHp.Invoke(playerIndex, playerGuilds[playerIndex].hp);
+            onUpdatePlayerHp.Invoke(playerGuilds[playerIndex]);
         }
         
         public void AddToPlayerGold(int playerId, int goldToAdd)
@@ -114,7 +114,6 @@ namespace GameSystems
         // Method to get stats for a specific player
         public GuildStats GetPlayerStats(int playerId)
         {
-            Debug.Log(playerId);
             return playerGuilds[GetPlayerIndex(playerId)];
         }
 
