@@ -13,6 +13,7 @@ namespace GameSystems.Units
 
         public void SetupUI(UnitSo unitSo)
         {
+            unitImage.sprite = unitSo.sprite;
             uniqueImage.gameObject.SetActive(unitSo.action != UnitSo.Action.None);
 
             if(unitSo.physicalDamage > 0)
