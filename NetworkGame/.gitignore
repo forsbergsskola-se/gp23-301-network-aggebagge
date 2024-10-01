@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Photon
+/Assets/Photon/Examples/           # Ignore example files
+/Assets/Photon/PhotonEditor/       # Keep Photon editor files
+/Assets/Photon/PhotonUnityNetworking/  # Keep Photon Networking files
+/Assets/Photon/PhotonView.prefab    # Example of a specific prefab, adjust as necessary
