@@ -20,7 +20,7 @@ namespace GameSystems.Units
         public int physicalDamage;
         public int defense;
         public int spellDamage;
-        public int gold;
+        [FormerlySerializedAs("gold")] public int goldGain;
         
         
         public int curse;
