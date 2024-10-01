@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using GameSystems.Units;
 using UnityEngine;
 
 namespace GameSystems.Guild
@@ -9,13 +11,16 @@ namespace GameSystems.Guild
         public int maxHp;
         public int hp;
 
-        public int gold;
 
-        public GuildStats(int newMaxHp, int startGold, string gName)
+        public int gold;
+        public Color guildColor;
+
+        public GuildStats(int newMaxHp, int startGold, string gName, Color color)
         {
             maxHp = newMaxHp;
             gold = startGold;
             guildName = gName;
+            guildColor = color;
         }
     }
 }
