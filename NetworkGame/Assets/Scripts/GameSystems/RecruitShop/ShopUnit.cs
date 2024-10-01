@@ -11,14 +11,46 @@ namespace GameSystems.RecruitShop
         public UnitUI unitUI;
         private UnitSo unitSo;
 
+        public Button buyButton;
+        private int cost;
         public void SetupUI(UnitSo unit)
         {
             unitSo = unit;
             costText.text = unit.cost.ToString();
             unitUI.SetupUI(unit);
+
+            cost = unit.cost;
+            
+            
+            
+            if(GameManager.i.hasJoinedRoom)
+                UpdateButtonInteractable();
+            else
+            {
+                GameManager.i.onJoinRoom.AddListener(UpdateButtonInteractable);
+                buyButton.interactable = false;
+            }
+            
+            buyButton.onClick.AddListener(OnClickButton);
+            PlayerStats.i.onUpdateGold.AddListener(OnUpdateGold);
+        }
+
+        private void OnUpdateGold(int arg0)
+        {
+            UpdateButtonInteractable();
+        }
+
+        private void OnClickButton()
+        {
+            PlayerStats.AddGold(-cost);
+            PlayerStats.AddUnit(unitSo);
         }
 
 
+        private void UpdateButtonInteractable()
+        {
+            buyButton.interactable = PlayerStats.GetGold() >= cost;
+        }
 
     }
 }
