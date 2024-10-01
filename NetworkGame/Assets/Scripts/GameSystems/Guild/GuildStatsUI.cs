@@ -13,7 +13,6 @@ namespace GameSystems.Guild
         public TextMeshProUGUI gold;
         public TextMeshProUGUI unitCount;
 
-        private GuildUnitManager guildUnitManager;
         private GuildStats guildStats;
         
         private void Start()
@@ -23,13 +22,13 @@ namespace GameSystems.Guild
 
         private void Setup()
         {
-            guildUnitManager = FindObjectOfType<GuildUnitManager>();
-            guildUnitManager.onAddUnit.AddListener(OnAddUnit);
-            unitCount.text = guildUnitManager.guildUnits.Count.ToString();
+            PlayerStats.i.onAddUnit.AddListener(OnAddUnit);
+            unitCount.text = PlayerStats.GetUnits().Count.ToString();
 
             guildStats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
             
             guildTitle.text = guildStats.guildName;
+            guildTitle.color = guildStats.guildColor;
             hp.text = guildStats.hp.ToString();
             gold.text = guildStats.gold.ToString();
         }
@@ -37,7 +36,7 @@ namespace GameSystems.Guild
 
         private void OnAddUnit(UnitSo unitSo)
         {
-            unitCount.text = guildUnitManager.guildUnits.Count.ToString();
+            unitCount.text = PlayerStats.GetUnits().Count.ToString();
         }
     }
 }
