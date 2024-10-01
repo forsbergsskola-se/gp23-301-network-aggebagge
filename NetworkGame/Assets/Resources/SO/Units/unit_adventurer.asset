@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Adventurer
   sprite: {fileID: 21300000, guid: b37c941d0c4fcd141b581324f39c5f1d, type: 3}
-  cost: 1
+  cost: 2
   physicalDamage: 1
   defense: 0
   spellDamage: 0
-  gold: 1
+  goldGain: 1
   curse: 0
   antiCurse: 0
   action: 0
