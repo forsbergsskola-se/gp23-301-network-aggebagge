@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace GameSystems.Guild
 {
+    [System.Serializable]
     public class GuildStats
     {
         public string guildName;
