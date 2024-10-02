@@ -7,7 +7,7 @@ namespace GameSystems.Player
 {
     public class PlayerUnitUI : UnitUI
     {
-        int count;
+        int count = 1;
         public TextMeshProUGUI countText;
 
         public void AddUnit()
