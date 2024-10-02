@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace GameSystems.Phases
 {
-    public class BasePhase : MonoBehaviour
+    public class BasePhase : MonoBehaviourPunCallbacks
     {
         private PhaseManager pm;
 

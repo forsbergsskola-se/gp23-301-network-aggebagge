@@ -70,6 +70,7 @@ namespace GameSystems
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
+            
             Debug.Log("JOIN ROOM");
             hasJoinedRoom = true;
             playerCount = PhotonNetwork.PlayerList.Length;

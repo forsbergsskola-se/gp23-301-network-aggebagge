@@ -1,9 +1,10 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
 namespace GameSystems.Phases
 {
-    public class PhaseManager : MonoBehaviour
+    public class PhaseManager : MonoBehaviourPunCallbacks
     {
         public Phase phase = Phase.Recruit;
         public BasePhase[] phases;

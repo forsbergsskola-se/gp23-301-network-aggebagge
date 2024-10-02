@@ -14,6 +14,11 @@ namespace GameSystems.Guild
         
         private void Start()
         {
+            GameManager.i.onJoinRoom.AddListener(OnJoinRoom);
+        }
+
+        private void OnJoinRoom()
+        {
             foreach (var guildStats in GameManager.i.playerGuilds)
             {
                 var guildObject = Instantiate(guildObjectPrefab, layout);
