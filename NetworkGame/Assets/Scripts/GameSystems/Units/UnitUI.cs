@@ -16,10 +16,14 @@ namespace GameSystems.Units
         public void SetupUI(UnitSo unitSo)
         {
             unit = unitSo;
-            
             unitImage.sprite = unitSo.sprite;
-            uniqueImage.gameObject.SetActive(unitSo.action != UnitSo.Action.None);
-
+            
+            if (unitSo.attribute != null)
+            {
+                uniqueImage.gameObject.SetActive(true);
+                uniqueImage.sprite = unitSo.attribute.icon;
+            }
+            
             if(unitSo.physicalDamage > 0)
                 damage.text = unitSo.physicalDamage.ToString();
             if(unitSo.goldGain > 0)
