@@ -17,6 +17,8 @@ namespace GameSystems.Battle
 
         private Queue<UnitSo> unitQueue = new();
         private System.Random rng;
+
+        public Transform curseWarning;
         
         private void Start()
         {
@@ -24,6 +26,12 @@ namespace GameSystems.Battle
             addUnitButton.onClick.AddListener(OnClickAddUnit);
             
             rng = new System.Random();
+            playerBattleField.onUpdateCurseCount.AddListener(OnUpdatePlayerCurses);
+        }
+
+        private void OnUpdatePlayerCurses(int curseCount)
+        {
+            curseWarning.gameObject.SetActive(curseCount == 2);
         }
 
         private void OnClickAddUnit()
