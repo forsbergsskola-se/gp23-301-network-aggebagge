@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,13 +8,22 @@ namespace GameSystems.Phases
     {
         private PhaseManager pm;
 
+        public PhaseManager.Phase phase;
         public float phaseDuration;
+
+        private float countdown;
+
+        private void Awake()
+        {
+            pm = GetComponent<PhaseManager>();
+        }
 
         public virtual void OnBeginPhase()
         {
-            if (phaseDuration > 0)
-                StartCoroutine(PhaseTimer());
-
+            countdown = phaseDuration;
+            pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
+            pm.countdownText.gameObject.SetActive(phaseDuration > 0);
+            
         }
         
         public virtual void OnEndPhase()
@@ -21,17 +31,20 @@ namespace GameSystems.Phases
             pm.NextPhase();
         }
 
-        
-        IEnumerator PhaseTimer()
+
+        private void Update()
         {
-            yield return new WaitForSeconds(phaseDuration);
-            OnEndPhase();
-        }
-        
-        
-        public void SetPhaseManager(PhaseManager phaseManager)
-        {
-            pm = phaseManager;
+            if (phase != pm.phase)
+                return;
+
+            if (phaseDuration > 0)
+            {
+                countdown -= Time.deltaTime;
+                pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
+                
+                if(countdown <= 0)
+                    OnEndPhase();
+            }
         }
     }
 }

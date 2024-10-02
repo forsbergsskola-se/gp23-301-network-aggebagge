@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace GameSystems.Phases
@@ -6,6 +7,8 @@ namespace GameSystems.Phases
     {
         public Phase phase = Phase.Recruit;
         public BasePhase[] phases;
+
+        public TextMeshProUGUI countdownText;
         
         public enum Phase
         {
