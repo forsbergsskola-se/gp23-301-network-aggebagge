@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Cursed Adventurer
   sprite: {fileID: 21300000, guid: 8fdd7c95fdb79b84da1f258619030b36, type: 3}
-  gold: 0
+  cost: 0
   physicalDamage: 2
-  defense: 0
-  spellDamage: 0
-  curse: 1
-  antiCurse: 0
-  action: 0
+  goldGain: 0
+  attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}
