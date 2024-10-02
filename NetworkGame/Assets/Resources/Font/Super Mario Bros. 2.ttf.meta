@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ff15117fae60c840a44007186686990
+guid: 529babc6f9de7f644b20d757467f0504
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Little Malio 8-Bit
+  - Super Mario Bros. 2
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
