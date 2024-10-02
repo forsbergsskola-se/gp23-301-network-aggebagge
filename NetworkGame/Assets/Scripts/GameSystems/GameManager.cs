@@ -7,6 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace GameSystems
 {
@@ -15,9 +16,14 @@ namespace GameSystems
         [HideInInspector] public UnityEvent onJoinRoom = new ();
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
-        public int playerCount;
-        public int playerHp;
+        private int playerCount;
+        
+        [Header("Start Values")]
+        public int startHp;
         public int startGold;
+        public int startGroupSize;
+        
+        [Header("Guild Configurations")]
         public List<GuildStats> playerGuilds = new ();
         public string[] guildNames;
         public Color[] guildColors;
@@ -27,7 +33,7 @@ namespace GameSystems
         public List<int> playerIdList = new ();
 
         [HideInInspector] public bool hasJoinedRoom;
-        
+
         private void Awake()
         {
             if (i == null)
@@ -70,7 +76,7 @@ namespace GameSystems
 
             for (int i = 0; i < playerCount; i++)
             {
-                playerGuilds.Add(new GuildStats(playerHp, startGold, guildNames[i], guildColors[i]));
+                playerGuilds.Add(new GuildStats(startHp, startGold, startGroupSize, guildNames[i], guildColors[i]));
                 playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
             }
             

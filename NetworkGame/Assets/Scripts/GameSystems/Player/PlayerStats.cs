@@ -13,7 +13,8 @@ namespace GameSystems.Player
         [HideInInspector] public UnityEvent onUpdateHp = new();
         [HideInInspector] public UnityEvent onUpdateGold = new();
         [HideInInspector] public UnityEvent onAddUnit = new();
-        
+        [HideInInspector] public UnityEvent onAddGroupSize = new();
+
         public static PlayerStats i;
         private GuildStats stats;
         
@@ -59,7 +60,13 @@ namespace GameSystems.Player
             
             i.onUpdateGold.Invoke();
         }
-
+        public static void AddGroupSize()
+        {
+            i.stats.groupSize++;
+            i.onAddGroupSize.Invoke();
+        }
+        
+       
         public static List<UnitSo> GetUnits()
         {
             return i.unitList;
@@ -68,15 +75,17 @@ namespace GameSystems.Player
         {
             return i.stats.gold;
         }
-        
         public static int GetHp()
         {
             return i.stats.hp;
         }
-        
         public static GuildStats GetGuildStats()
         {
             return i.stats;
+        }
+        public static int GetGroupSize()
+        {
+            return i.stats.groupSize;
         }
         
     }
