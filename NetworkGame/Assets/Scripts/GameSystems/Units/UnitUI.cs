@@ -6,6 +6,8 @@ namespace GameSystems.Units
 {
     public class UnitUI : MonoBehaviour
     {
+        [HideInInspector]public UnitSo unit;
+        
         public Image unitImage;
         public Image uniqueImage;
         public TextMeshProUGUI damage;
@@ -13,6 +15,8 @@ namespace GameSystems.Units
 
         public void SetupUI(UnitSo unitSo)
         {
+            unit = unitSo;
+            
             unitImage.sprite = unitSo.sprite;
             uniqueImage.gameObject.SetActive(unitSo.action != UnitSo.Action.None);
 

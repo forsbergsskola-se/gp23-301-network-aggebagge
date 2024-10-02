@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 using GameSystems.Guild;
 using GameSystems.Units;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-namespace GameSystems
+namespace GameSystems.Player
 {
     public class PlayerStats : MonoBehaviour
     {
-        [HideInInspector] public UnityEvent<int> onUpdateHp = new();
-        [HideInInspector] public UnityEvent<int> onUpdateGold = new();
-        [HideInInspector] public UnityEvent<UnitSo> onAddUnit = new();
+        [HideInInspector] public UnityEvent onPlayerSetupComplete = new();
+        [HideInInspector] public UnityEvent onUpdateHp = new();
+        [HideInInspector] public UnityEvent onUpdateGold = new();
+        [HideInInspector] public UnityEvent onAddUnit = new();
         
         public static PlayerStats i;
         private GuildStats stats;
@@ -35,6 +34,7 @@ namespace GameSystems
         private void OnJoinRoom()
         {
             stats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
+            onPlayerSetupComplete.Invoke();
         }
 
         private void OnUpdatePlayerHp(GuildStats guildStats)
@@ -42,14 +42,14 @@ namespace GameSystems
             if (guildStats != stats)
                 return;
             
-            onUpdateHp.Invoke(guildStats.hp);
+            onUpdateHp.Invoke();
         }
 
 
         public static void AddUnit(UnitSo unitSo)
         {
             i.unitList.Add(unitSo);
-            i.onAddUnit.Invoke(unitSo);
+            i.onAddUnit.Invoke();
         }
         
         public static void AddGold(int gold)
@@ -57,7 +57,7 @@ namespace GameSystems
             i.stats.gold += gold;
             i.stats.gold = Mathf.Clamp(i.stats.gold, 0, 99);
             
-            i.onUpdateGold.Invoke(i.stats.gold);
+            i.onUpdateGold.Invoke();
         }
 
         public static List<UnitSo> GetUnits()

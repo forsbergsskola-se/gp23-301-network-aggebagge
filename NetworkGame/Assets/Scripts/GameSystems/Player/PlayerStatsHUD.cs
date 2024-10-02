@@ -1,12 +1,11 @@
-using System;
-using GameSystems.Units;
+using GameSystems.Guild;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-namespace GameSystems.Guild
+namespace GameSystems.Player
 {
-    public class GuildStatsUI : MonoBehaviour
+    public class PlayerStatsHUD : MonoBehaviour
     {
         public TextMeshProUGUI guildTitle;
         public TextMeshProUGUI hp;
@@ -17,25 +16,30 @@ namespace GameSystems.Guild
         
         private void Start()
         {
-            GameManager.i.onJoinRoom.AddListener(Setup);
+            PlayerStats.i.onPlayerSetupComplete.AddListener(Setup);
         }
 
         private void Setup()
         {
-            PlayerStats.i.onAddUnit.AddListener(OnAddUnit);
             unitCount.text = PlayerStats.GetUnits().Count.ToString();
 
             guildStats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
             
             guildTitle.text = guildStats.guildName;
             guildTitle.color = guildStats.guildColor;
-            hp.text = guildStats.hp.ToString();
-            gold.text = guildStats.gold.ToString();
+            
+            
+            PlayerStats.i.onAddUnit.AddListener(UpdateUI);
+            PlayerStats.i.onUpdateGold.AddListener(UpdateUI);
+            PlayerStats.i.onUpdateHp.AddListener(UpdateUI);
+            
+            UpdateUI();
         }
 
-
-        private void OnAddUnit(UnitSo unitSo)
+        private void UpdateUI()
         {
+            hp.text = guildStats.hp.ToString();
+            gold.text = guildStats.gold.ToString();
             unitCount.text = PlayerStats.GetUnits().Count.ToString();
         }
     }
