@@ -16,9 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8e79faa5be5105142a30ea5ec8002d54, type: 3}
   cost: 4
   physicalDamage: 0
-  defense: 0
-  spellDamage: 0
   goldGain: 4
-  curse: 1
-  antiCurse: 0
-  action: 0
+  attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}
