@@ -32,7 +32,7 @@ namespace GameSystems.Phases
                     break;
                 case Phase.Battle: phase = Phase.Recruit;
                     break;
-            };
+            }
             
             phases[(int)phase].OnBeginPhase();
         }
