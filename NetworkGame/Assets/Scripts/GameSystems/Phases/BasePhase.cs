@@ -25,7 +25,8 @@ namespace GameSystems.Phases
         }
 
         public virtual void OnBeginPhase()
-        {
+        {            
+            Debug.Log("Begin" + phase);
             canvas.interactable = true;
             isEndingPhase = false;
             countdown = phaseDuration;
@@ -37,7 +38,8 @@ namespace GameSystems.Phases
         {
             if (phase != pm.phase)
                 return;
-            
+            Debug.Log("End" + phase);
+
             isEndingPhase = true;
             canvas.interactable = false;
             pm.countdownText.gameObject.SetActive(false);

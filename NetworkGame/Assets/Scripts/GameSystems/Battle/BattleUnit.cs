@@ -1,27 +1,23 @@
-using System.Collections;
 using GameSystems.Units;
-using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameSystems.Battle
 {
     public class BattleUnit : UnitUI
     {
-        public GameObject popupTextPrefab;
-        public GameObject popupIconPrefab;
+        public BonusPopup popupPrefab;
 
         public void PopupText(bool isDamage, int value)
         {
-            var go = Instantiate(popupTextPrefab, transform);
-            go.GetComponent<TextMeshProUGUI>().text = value.ToString();
-            go.GetComponent<TextMeshProUGUI>().color = isDamage ? GameManager.i.damageColor : GameManager.i.goldColor;
+            var bonusPopup = Instantiate(popupPrefab, transform.position + new Vector3(0, 50, 0), quaternion.identity, transform);
+            bonusPopup.SetText(isDamage, value);
         }
         
         public void PopupIcon(Sprite icon)
         {
-            var go = Instantiate(popupIconPrefab, transform);
-            go.GetComponent<Image>().sprite = icon;
+            var bonusPopup = Instantiate(popupPrefab, transform.position + new Vector3(0, 50, 0), quaternion.identity, transform);
+            bonusPopup.SetIcon(icon);
         }
     }
 }

@@ -30,10 +30,8 @@ namespace GameSystems.RecruitShop
 
             cost = unit.cost;
             
-            UpdateButtonInteractable();
             buyButton.onClick.AddListener(OnClickButton);
             PlayerStats.i.onUpdateGold.AddListener(UpdateButtonInteractable);
-            
         }
 
         private void OnClickButton()

@@ -25,5 +25,10 @@ namespace GameSystems.Phases
             base.OnEndPhase();
             recruitTransform.gameObject.SetActive(false);
         }
+
+        protected override void OnEndingPhase()
+        {
+            base.OnEndingPhase();
+        }
     }
 }
