@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit_knight
+  m_Name: unit_orc
   m_EditorClassIdentifier: 
-  unitName: Adventurer
-  sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
-  cost: 7
+  unitName: Orc
+  sprite: {fileID: 21300000, guid: de3bc6af246568e449b97f09943c477e, type: 3}
+  cost: 6
   damage: 3
-  goldGain: 0
-  attribute: {fileID: 0}
+  goldGain: 2
+  attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}
