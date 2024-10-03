@@ -29,6 +29,9 @@ namespace GameSystems.Phases
         
         public virtual void OnEndPhase()
         {
+            if (phase != pm.phase)
+                return;
+            
             pm.NextPhase();
         }
 

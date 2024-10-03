@@ -1,17 +1,22 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GameSystems.Guild;
+using GameSystems.Phases;
 using GameSystems.Player;
 using GameSystems.Units;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace GameSystems.Battle
 {
     public class BattleManager : MonoBehaviour
     {
+        [HideInInspector] public UnityEvent onPlayerEndPrep = new();
+        
         public BattleFieldUI playerBattleField;
         public BattleFieldUI enemyBattleField;
         public PlayerBattleStats playerBattleStats;
@@ -47,9 +52,32 @@ namespace GameSystems.Battle
         
         
 
-        public void OnEndPlayerPrep()
+        public void EndPlayerPrep()
         {
+            if(playerBattleStats.isCursed)
+                onPlayerEndPrep.Invoke();
+            else
+                StartCoroutine(AnimateBonuses());
+        }
+
+        private IEnumerator AnimateBonuses()
+        {
+            float animationWaitTime = 0.25f;
+
+            yield return new WaitForSeconds(1);
             
+            //loop and animate each bonus
+            foreach (BattleUnit battleUnit in playerBattleStats.battleUnits)
+            {
+                if (battleUnit.unit.goldGain > 0)
+                {
+                    battleUnit.PopupText(false, battleUnit.unit.goldGain);
+                    yield return new WaitForSeconds(animationWaitTime);
+                }
+            }
+            
+            yield return new WaitForSeconds(1);
+            onPlayerEndPrep.Invoke();
         }
         
 

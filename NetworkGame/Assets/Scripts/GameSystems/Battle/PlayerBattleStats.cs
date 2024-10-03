@@ -18,14 +18,14 @@ namespace GameSystems.Battle
         private int unitSlots;
         
 
-        public List<BattleUnit> battleUnits = new ();
-        public Queue<UnitSo> unitQueue = new ();
+        [HideInInspector] public List<BattleUnit> battleUnits = new ();
+        [HideInInspector] public Queue<UnitSo> unitQueue = new ();
 
         private PlayerBattleStatsUI battleStatsUI;
         private System.Random rng;
 
 
-        private bool isCursed;
+        [HideInInspector]  public bool isCursed;
 
         private void Awake()
         {

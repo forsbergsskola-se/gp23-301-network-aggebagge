@@ -27,6 +27,9 @@ namespace GameSystems
         public List<GuildStats> playerGuilds = new ();
         public string[] guildNames;
         public Color[] guildColors;
+        public Color damageColor;
+        public Color goldColor;
+
         
         // Singleton instance for easy access
         public static GameManager i;
@@ -94,7 +97,7 @@ namespace GameSystems
             {
                 //REMOVE PLAYER
             }
-            photonView.RPC("SyncPlayerStats", RpcTarget.Others, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
+            photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
 
             onUpdatePlayerHp.Invoke(playerGuilds[playerIndex]);
         }
@@ -105,7 +108,7 @@ namespace GameSystems
             playerGuilds[playerIndex].gold += goldToAdd;
             playerGuilds[playerIndex].gold = Mathf.Clamp(playerGuilds[playerIndex].gold, 0, 99);
             
-            photonView.RPC("SyncPlayerStats", RpcTarget.Others, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
+            photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
         }
         
         

@@ -74,7 +74,6 @@ namespace GameSystems.Battle
                 }
                 player += 2;
             }
-            Debug.Log("OnOpponentsPrepared");
             OnOpponentsPrepared.Invoke(battleRooms);
         }
 

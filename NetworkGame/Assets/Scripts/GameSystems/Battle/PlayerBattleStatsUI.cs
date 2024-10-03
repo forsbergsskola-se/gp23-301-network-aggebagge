@@ -60,7 +60,7 @@ namespace GameSystems.Battle
         {
             addUnitButton.interactable = false;
             readyButton.interactable = false;
-            BattleManager.i.OnEndPlayerPrep();
+            BattleManager.i.EndPlayerPrep();
         }
         
     }

@@ -1091,9 +1091,9 @@ RectTransform:
   - {fileID: 1076072668}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -215}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &121235361
@@ -3833,9 +3833,9 @@ RectTransform:
   - {fileID: 627788191}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -15}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &916665080
@@ -5094,6 +5094,7 @@ GameObject:
   - component: {fileID: 1202100758}
   - component: {fileID: 1202100759}
   - component: {fileID: 1202100760}
+  - component: {fileID: 1202100761}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5137,6 +5138,8 @@ MonoBehaviour:
   - {r: 0.89433956, g: 0.7362869, b: 0.11980776, a: 1}
   - {r: 0.2568957, g: 0.79622644, b: 0.28036606, a: 1}
   - {r: 0.78113204, g: 0.24613024, b: 0.74120265, a: 1}
+  damageColor: {r: 0, g: 0, b: 0, a: 0}
+  goldColor: {r: 0, g: 0, b: 0, a: 0}
   playerIdList: 
   hasJoinedRoom: 0
 --- !u!4 &1202100755
@@ -5242,6 +5245,28 @@ MonoBehaviour:
     groupSize: 0
     gold: 0
     guildColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1202100761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202100753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1242557302
 GameObject:
   m_ObjectHideFlags: 0
@@ -5627,6 +5652,7 @@ GameObject:
   - component: {fileID: 1263463876}
   - component: {fileID: 1263463874}
   - component: {fileID: 1263463875}
+  - component: {fileID: 1263463877}
   m_Layer: 0
   m_Name: PhaseManager
   m_TagString: Untagged
@@ -5704,7 +5730,6 @@ MonoBehaviour:
   phase: 3
   phaseDuration: 40
   battleTransform: {fileID: 1374593006}
-  readyButton: {fileID: 0}
 --- !u!114 &1263463875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5740,6 +5765,28 @@ MonoBehaviour:
   guildText: {fileID: 56258633}
   vsText: {fileID: 25744218}
   opponentText: {fileID: 734527539}
+--- !u!114 &1263463877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263463867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1277862687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8091,9 +8138,9 @@ RectTransform:
   - {fileID: 838467179}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -115}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1848845421

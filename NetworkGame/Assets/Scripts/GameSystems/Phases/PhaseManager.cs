@@ -15,7 +15,7 @@ namespace GameSystems.Phases
         public BasePhase[] phases;
 
         public TextMeshProUGUI countdownText;
-        private List<bool> playersReady;
+        private List<bool> playersReady = new ();
         
         public enum Phase
         {
@@ -66,14 +66,14 @@ namespace GameSystems.Phases
         public void PlayerReady()
         {
             GameManager.i.GetMyPlayerIndex();
-            photonView.RPC("SyncPlayerReady", RpcTarget.Others, GameManager.i.GetMyPlayerIndex());
+            photonView.RPC("SyncPlayersReady", RpcTarget.All, GameManager.i.GetMyPlayerIndex());
         }
         
         [PunRPC]
         void SyncPlayersReady(int playerIndex)
         {
             playersReady[playerIndex] = true;
-
+            
             if (playersReady.All(b => b == true))
                 OnEndPhase.Invoke();
         }
