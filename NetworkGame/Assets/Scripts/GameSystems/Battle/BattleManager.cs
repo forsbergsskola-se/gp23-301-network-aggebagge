@@ -15,8 +15,8 @@ namespace GameSystems.Battle
         public BattleFieldUI playerBattleField;
         public BattleFieldUI enemyBattleField;
         public PlayerBattleStats playerBattleStats;
-        
 
+        [HideInInspector]public GuildStats opponent;
         public static BattleManager i;
 
         private void Awake()
@@ -26,21 +26,26 @@ namespace GameSystems.Battle
 
         private void Start()
         {
-            BattleRoomManager.i.OnOpponentsPrepared.AddListener(SetupBattle);
+            BattleRoomManager.i.OnOpponentsPrepared.AddListener(GetOpponent);
         }
 
      
 
-        private void SetupBattle(List<BattleRoomManager.BattleRoom> battleRooms)
+        private void GetOpponent(List<BattleRoomManager.BattleRoom> battleRooms)
+        {
+            opponent = GetOpponentGuildStats(battleRooms);
+        }
+
+        public void SetupBattle()
         {
             playerBattleStats.SetupNewBattle();
-                
-            GuildStats opponentGuildStats = GetOpponentGuildStats(battleRooms);
             playerBattleField.SetupSlots(PlayerStats.GetGroupSize());
             
-            if(opponentGuildStats != null)
-                enemyBattleField.SetupSlots(opponentGuildStats.groupSize);
+            if(opponent != null)
+                enemyBattleField.SetupSlots(opponent.groupSize);
         }
+        
+        
 
         public void OnEndPlayerPrep()
         {

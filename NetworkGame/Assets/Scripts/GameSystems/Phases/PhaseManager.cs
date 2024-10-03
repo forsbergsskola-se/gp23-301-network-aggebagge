@@ -13,9 +13,12 @@ namespace GameSystems.Phases
         
         public enum Phase
         {
+            Lobby,
             Recruit,
+            OpponentReveal,
             Prep,
-            Battle
+            Battle,
+            End
         }
 
         private void Start()
@@ -25,6 +28,7 @@ namespace GameSystems.Phases
 
         private void OnJoinRoom()
         {
+            phase = Phase.Recruit;
             phases[0].OnBeginPhase();
         }
 
@@ -32,15 +36,22 @@ namespace GameSystems.Phases
         {
             switch (phase)
             {
-                case Phase.Recruit: phase = Phase.Prep;
+                case Phase.Recruit: phase = Phase.OpponentReveal; 
+                    phases[1].OnBeginPhase();
+                    break;
+                case Phase.OpponentReveal: phase = Phase.Prep; 
+                    phases[2].OnBeginPhase();
                     break;
                 case Phase.Prep: phase = Phase.Battle;
+                    phases[3].OnBeginPhase();
                     break;
                 case Phase.Battle: phase = Phase.Recruit;
+                    phases[0].OnBeginPhase();
                     break;
             }
             
-            phases[(int)phase].OnBeginPhase();
         }
+        
+        
     }
 }

@@ -50,7 +50,6 @@ namespace GameSystems.Battle
         private void OnJoinRoom()
         {
             int rooms = Mathf.CeilToInt(GameManager.i.playerGuilds.Count * 0.5f);
-
             
             for (int i = 0; i < rooms; i++)
             {
@@ -75,7 +74,7 @@ namespace GameSystems.Battle
                 }
                 player += 2;
             }
-            
+            Debug.Log("OnOpponentsPrepared");
             OnOpponentsPrepared.Invoke(battleRooms);
         }
 

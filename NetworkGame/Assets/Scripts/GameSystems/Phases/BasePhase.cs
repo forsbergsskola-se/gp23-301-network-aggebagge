@@ -24,7 +24,6 @@ namespace GameSystems.Phases
             countdown = phaseDuration;
             pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
             pm.countdownText.gameObject.SetActive(phaseDuration > 0);
-            
         }
         
         public virtual void OnEndPhase()

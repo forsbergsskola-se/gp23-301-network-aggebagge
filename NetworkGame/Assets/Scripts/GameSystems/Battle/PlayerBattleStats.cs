@@ -27,7 +27,7 @@ namespace GameSystems.Battle
 
         private bool isCursed;
 
-        private void Start()
+        private void Awake()
         {
             rng = new System.Random();
             battleStatsUI = GetComponent<PlayerBattleStatsUI>();
