@@ -15,7 +15,7 @@ namespace GameSystems.Phases
         public BasePhase[] phases;
 
         public TextMeshProUGUI countdownText;
-        public List<bool> playersReady;
+        private List<bool> playersReady;
         
         public enum Phase
         {

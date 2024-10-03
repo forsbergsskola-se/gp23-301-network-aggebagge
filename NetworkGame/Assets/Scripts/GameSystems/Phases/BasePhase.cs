@@ -7,14 +7,14 @@ namespace GameSystems.Phases
 {
     public class BasePhase : MonoBehaviourPunCallbacks
     {
-        private PhaseManager pm;
+        [HideInInspector] public PhaseManager pm;
 
         public PhaseManager.Phase phase;
         public float phaseDuration;
 
         private float countdown;
 
-        private void Awake()
+        public virtual void Awake()
         {
             pm = GetComponent<PhaseManager>();
             pm.OnEndPhase.AddListener(OnEndPhase);

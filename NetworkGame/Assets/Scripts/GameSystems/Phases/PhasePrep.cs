@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
 using GameSystems.Battle;
-using GameSystems.Player;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameSystems.Phases
 {
     public class PhasePrep : BasePhase
     {
         public Transform battleTransform;
-        
 
         public override void OnBeginPhase()
         {
@@ -19,10 +15,6 @@ namespace GameSystems.Phases
             battleTransform.gameObject.SetActive(true);
             BattleManager.i.SetupBattle();
         }
-
-        
-        
-        
         
     }
 }

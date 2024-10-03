@@ -1091,9 +1091,9 @@ RectTransform:
   - {fileID: 1076072668}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -215}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &121235361
@@ -1531,7 +1531,7 @@ GameObject:
   - component: {fileID: 219433736}
   - component: {fileID: 219433735}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Ready Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3833,9 +3833,9 @@ RectTransform:
   - {fileID: 627788191}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &916665080
@@ -5646,6 +5646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9701709bbcfaf469736f9c027bbeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEndPhase:
+    m_PersistentCalls:
+      m_Calls: []
   phase: 0
   phases:
   - {fileID: 1263463873}
@@ -5680,9 +5683,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5cc734576f41b8aa2c49848c60e3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
   phase: 1
   phaseDuration: 30
   recruitTransform: {fileID: 204420839}
+  readyButton: {fileID: 219433735}
 --- !u!114 &1263463874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5695,9 +5700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dcaba48fc248a9a7536e41de2a1e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
   phase: 3
   phaseDuration: 40
   battleTransform: {fileID: 1374593006}
+  readyButton: {fileID: 0}
 --- !u!114 &1263463875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5710,6 +5717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52b691559f24c2cb108063ad9f4beb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
   phase: 4
   phaseDuration: 0
   battleTransform: {fileID: 1374593006}
@@ -5725,6 +5733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e033750bd48476ab725c32dada0c4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
   phase: 2
   phaseDuration: 8
   background: {fileID: 915500521}
@@ -8082,9 +8091,9 @@ RectTransform:
   - {fileID: 838467179}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -115}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1848845421
