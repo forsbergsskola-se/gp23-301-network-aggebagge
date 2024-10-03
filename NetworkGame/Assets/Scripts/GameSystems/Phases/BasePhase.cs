@@ -31,7 +31,7 @@ namespace GameSystems.Phases
         {
             if (phase != pm.phase)
                 return;
-            
+            pm.countdownText.gameObject.SetActive(false);
             pm.NextPhase();
         }
 

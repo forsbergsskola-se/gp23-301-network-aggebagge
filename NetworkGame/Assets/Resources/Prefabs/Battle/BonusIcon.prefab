@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7767534420162920540}
   - component: {fileID: 6709273066349360681}
   - component: {fileID: 1289802951871801140}
+  - component: {fileID: 7449696715302727458}
   m_Layer: 0
   m_Name: BonusIcon
   m_TagString: Untagged
@@ -75,3 +76,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7449696715302727458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360002077065184813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78755f5b8ddf4b1797ef732cf6aac7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

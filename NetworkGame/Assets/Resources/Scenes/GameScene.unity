@@ -1443,7 +1443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &204420839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5235,6 +5235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c57661693f14c799d02753dd30f7ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlayerEndPrep:
+    m_PersistentCalls:
+      m_Calls: []
   playerBattleField: {fileID: 317242972}
   enemyBattleField: {fileID: 1607761463}
   playerBattleStats: {fileID: 1374593011}
@@ -6529,6 +6532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   battleUnits: []
+  isCursed: 0
 --- !u!1 &1388295074
 GameObject:
   m_ObjectHideFlags: 0

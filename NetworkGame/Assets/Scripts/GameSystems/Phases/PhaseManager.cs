@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
@@ -43,6 +44,12 @@ namespace GameSystems.Phases
 
         public void NextPhase()
         {
+            StartCoroutine(PrepareNextPhase());
+        }
+
+        private IEnumerator PrepareNextPhase()
+        {
+            yield return new WaitForSeconds(1);
             ResetPlayerReady();
             
             switch (phase)
@@ -60,8 +67,8 @@ namespace GameSystems.Phases
                     phases[0].OnBeginPhase();
                     break;
             }
-            
         }
+        
 
         public void PlayerReady()
         {
