@@ -17,6 +17,7 @@ namespace GameSystems.Phases
         private void Awake()
         {
             pm = GetComponent<PhaseManager>();
+            pm.OnEndPhase.AddListener(OnEndPhase);
         }
 
         public virtual void OnBeginPhase()

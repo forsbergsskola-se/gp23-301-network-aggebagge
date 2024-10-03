@@ -55,13 +55,11 @@ namespace GameSystems
         public override void OnConnectedToMaster()
         {
             base.OnConnectedToMaster();
-            Debug.Log("COONNECTED");
             PhotonNetwork.JoinRandomRoom();
         }
         
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("Failed to join random room: " + message);
             // Create a room if joining fails
             RoomOptions roomOptions = new RoomOptions { MaxPlayers = 6 };
             PhotonNetwork.CreateRoom(null, roomOptions);
@@ -127,6 +125,11 @@ namespace GameSystems
         private int GetPlayerIndex(int id)
         {
             return playerIdList.IndexOf(id);
+        }
+
+        public int GetMyPlayerIndex()
+        {
+            return GetPlayerIndex(PhotonNetwork.LocalPlayer.ActorNumber);
         }
     }
 }
