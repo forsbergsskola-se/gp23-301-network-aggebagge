@@ -4,6 +4,7 @@ using System.Linq;
 using GameSystems.Guild;
 using GameSystems.Player;
 using GameSystems.Units;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,70 +14,39 @@ namespace GameSystems.Battle
     {
         public BattleFieldUI playerBattleField;
         public BattleFieldUI enemyBattleField;
-        public Button addUnitButton;
-
-        private Queue<UnitSo> unitQueue = new();
-        private System.Random rng;
-
-        public Transform curseWarning;
+        public PlayerBattleStats playerBattleStats;
         
+
+        public static BattleManager i;
+
+        private void Awake()
+        {
+            i = this;
+        }
+
         private void Start()
         {
             BattleRoomManager.i.OnOpponentsPrepared.AddListener(SetupBattle);
-            addUnitButton.onClick.AddListener(OnClickAddUnit);
-            
-            rng = new System.Random();
-            playerBattleField.onUpdateCurseCount.AddListener(OnUpdatePlayerCurses);
         }
 
-        private void OnUpdatePlayerCurses(int curseCount)
-        {
-            curseWarning.gameObject.SetActive(curseCount == 2);
-        }
-
-        private void OnClickAddUnit()
-        {
-            playerBattleField.AddUnit(unitQueue.Dequeue());
-
-            if (playerBattleField.battleUnits.Count == playerBattleField.slotCount || unitQueue.Count == 0)
-            {
-                addUnitButton.interactable = false;
-            }
-        }
-
-
-        private void CreateUnitQueue()
-        {
-            List<UnitSo> units = new List<UnitSo>(PlayerStats.GetUnits());
-            ShuffleList(units);
-
-            unitQueue = new Queue<UnitSo>(units);
-        }
-
-        void ShuffleList<T>(List<T> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                (list[n], list[k]) = (list[k], list[n]); // Cleaner tuple swap
-            }
-            
-        }
-        
+     
 
         private void SetupBattle(List<BattleRoomManager.BattleRoom> battleRooms)
         {
-            CreateUnitQueue();
-            addUnitButton.interactable = true;
-            
+            playerBattleStats.SetupNewBattle();
+                
             GuildStats opponentGuildStats = GetOpponentGuildStats(battleRooms);
             playerBattleField.SetupSlots(PlayerStats.GetGroupSize());
             
             if(opponentGuildStats != null)
                 enemyBattleField.SetupSlots(opponentGuildStats.groupSize);
         }
+
+        public void OnEndPlayerPrep()
+        {
+            
+        }
+        
 
         private GuildStats GetOpponentGuildStats(List<BattleRoomManager.BattleRoom> battleRooms)
         {
