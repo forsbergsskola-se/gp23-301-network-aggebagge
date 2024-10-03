@@ -10,8 +10,8 @@ namespace GameSystems.Units
         public Sprite sprite;
         public int cost;
 
-        [Header("Stats")]
-        public int physicalDamage;
+        [FormerlySerializedAs("physicalDamage")] [Header("Stats")]
+        public int damage;
         public int goldGain;
 
         public UnitAttributeSo attribute;
