@@ -20,6 +20,11 @@ namespace GameSystems.Phases
 
         private void Start()
         {
+            GameManager.i.onJoinRoom.AddListener(OnJoinRoom);
+        }
+
+        private void OnJoinRoom()
+        {
             phases[0].OnBeginPhase();
         }
 
