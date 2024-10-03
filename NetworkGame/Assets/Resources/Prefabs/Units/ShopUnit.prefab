@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 120}
+  m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &7987897723856875589
 CanvasRenderer:
@@ -201,7 +201,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5272725304219229859
 CanvasRenderer:
@@ -256,8 +256,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 60
-  m_PreferredHeight: 60
+  m_PreferredWidth: 50
+  m_PreferredHeight: 50
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -327,10 +327,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc31d399ddde1eb4c84d39bcc4f12974, type: 2}
-  m_sharedMaterial: {fileID: 6324466982127278900, guid: cc31d399ddde1eb4c84d39bcc4f12974, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
+  m_sharedMaterial: {fileID: 7771865114312701276, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -354,8 +354,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -426,6 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5355542985170565065}
   - component: {fileID: 2088705787259311190}
+  - component: {fileID: 8544760257629519804}
   m_Layer: 0
   m_Name: ShopUnit
   m_TagString: Untagged
@@ -452,7 +453,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 180, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2088705787259311190
 MonoBehaviour:
@@ -469,6 +470,14 @@ MonoBehaviour:
   costText: {fileID: 7072092100392630670}
   unitUI: {fileID: 8953354077163522399}
   buyButton: {fileID: 4110963509787244212}
+--- !u!222 &8544760257629519804
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116193917428399281}
+  m_CullTransparentMesh: 1
 --- !u!1001 &3762395836346745754
 PrefabInstance:
   m_ObjectHideFlags: 0
