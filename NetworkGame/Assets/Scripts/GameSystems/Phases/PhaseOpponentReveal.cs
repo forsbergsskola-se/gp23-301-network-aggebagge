@@ -39,7 +39,7 @@ namespace GameSystems.Phases
             StartCoroutine(OpponentRevealAnimation());
         }
 
-        public override void OnEndPhase()
+        protected override void OnEndPhase()
         {
             base.OnEndPhase();
             

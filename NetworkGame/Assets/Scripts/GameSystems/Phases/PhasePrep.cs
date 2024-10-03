@@ -11,7 +11,7 @@ namespace GameSystems.Phases
 
         private void Start()
         {
-            BattleManager.i.onPlayerEndPrep.AddListener(OnEndPhase);
+            BattleManager.i.onPlayerEndPrep.AddListener(OnEndingPhase);
         }
 
         public override void OnBeginPhase()

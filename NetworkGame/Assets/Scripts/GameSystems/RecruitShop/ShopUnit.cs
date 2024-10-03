@@ -30,16 +30,7 @@ namespace GameSystems.RecruitShop
 
             cost = unit.cost;
             
-            
-            
-            // if(GameManager.i.hasJoinedRoom)
-            //     UpdateButtonInteractable();
-            // else
-            // {
-            //     GameManager.i.onJoinRoom.AddListener(UpdateButtonInteractable);
-            //     buyButton.interactable = false;
-            // }
-            
+            UpdateButtonInteractable();
             buyButton.onClick.AddListener(OnClickButton);
             PlayerStats.i.onUpdateGold.AddListener(UpdateButtonInteractable);
             

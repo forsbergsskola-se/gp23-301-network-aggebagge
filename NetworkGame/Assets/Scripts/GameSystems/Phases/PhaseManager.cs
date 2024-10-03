@@ -5,12 +5,13 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace GameSystems.Phases
 {
     public class PhaseManager : MonoBehaviourPunCallbacks
     {
-        public UnityEvent OnEndPhase = new();
+        [FormerlySerializedAs("OnEndPhase")] public UnityEvent OnAllPlayersReady = new();
         
         public Phase phase = Phase.Recruit;
         public BasePhase[] phases;
@@ -42,14 +43,10 @@ namespace GameSystems.Phases
             phases[0].OnBeginPhase();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public void NextPhase()
         {
-            StartCoroutine(PrepareNextPhase());
-        }
-
-        private IEnumerator PrepareNextPhase()
-        {
-            yield return new WaitForSeconds(1);
+            // StartCoroutine(PrepareNextPhase());
             ResetPlayerReady();
             
             switch (phase)
@@ -68,6 +65,28 @@ namespace GameSystems.Phases
                     break;
             }
         }
+
+        // private IEnumerator PrepareNextPhase()
+        // {
+        //     yield return new WaitForSeconds(1);
+        //     ResetPlayerReady();
+        //     
+        //     switch (phase)
+        //     {
+        //         case Phase.Recruit: phase = Phase.OpponentReveal; 
+        //             phases[1].OnBeginPhase();
+        //             break;
+        //         case Phase.OpponentReveal: phase = Phase.Prep; 
+        //             phases[2].OnBeginPhase();
+        //             break;
+        //         case Phase.Prep: phase = Phase.Battle;
+        //             phases[3].OnBeginPhase();
+        //             break;
+        //         case Phase.Battle: phase = Phase.Recruit;
+        //             phases[0].OnBeginPhase();
+        //             break;
+        //     }
+        // }
         
 
         public void PlayerReady()
@@ -82,8 +101,10 @@ namespace GameSystems.Phases
             playersReady[playerIndex] = true;
             
             if (playersReady.All(b => b == true))
-                OnEndPhase.Invoke();
+                OnAllPlayersReady.Invoke();
         }
+        
+        
         
         void ResetPlayerReady()
         {

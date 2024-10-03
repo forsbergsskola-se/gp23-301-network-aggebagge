@@ -2056,6 +2056,7 @@ GameObject:
   - component: {fileID: 343233683}
   - component: {fileID: 343233682}
   - component: {fileID: 343233681}
+  - component: {fileID: 343233684}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2149,6 +2150,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &343233684
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343233679}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &353918841
 GameObject:
   m_ObjectHideFlags: 0
@@ -5675,7 +5688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9701709bbcfaf469736f9c027bbeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEndPhase:
+  OnAllPlayersReady:
     m_PersistentCalls:
       m_Calls: []
   phase: 0
@@ -5763,7 +5776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
   phase: 2
-  phaseDuration: 8
+  phaseDuration: 3
   background: {fileID: 915500521}
   guildText: {fileID: 56258633}
   vsText: {fileID: 25744218}

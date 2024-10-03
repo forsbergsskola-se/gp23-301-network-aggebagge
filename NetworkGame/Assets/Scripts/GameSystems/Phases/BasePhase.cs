@@ -14,31 +14,56 @@ namespace GameSystems.Phases
 
         private float countdown;
 
+        private bool isEndingPhase = false;
+        private CanvasGroup canvas;
+
         public virtual void Awake()
         {
             pm = GetComponent<PhaseManager>();
-            pm.OnEndPhase.AddListener(OnEndPhase);
+            pm.OnAllPlayersReady.AddListener(OnEndingPhase);
+            canvas = FindObjectOfType<CanvasGroup>();
         }
 
         public virtual void OnBeginPhase()
         {
+            canvas.interactable = true;
+            isEndingPhase = false;
             countdown = phaseDuration;
             pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
             pm.countdownText.gameObject.SetActive(phaseDuration > 0);
         }
-        
-        public virtual void OnEndPhase()
+
+        protected virtual void OnEndingPhase()
         {
             if (phase != pm.phase)
                 return;
+            
+            isEndingPhase = true;
+            canvas.interactable = false;
             pm.countdownText.gameObject.SetActive(false);
+            StartCoroutine(EndPhaseDelay());
+        }
+
+        protected virtual void OnEndPhase()
+        {
+            if (phase != pm.phase)
+                return;
+
             pm.NextPhase();
+        }
+
+        private IEnumerator EndPhaseDelay()
+        {
+            yield return new WaitForSeconds(2);
+
+            if (phase == pm.phase)
+                OnEndPhase();
         }
 
 
         private void Update()
         {
-            if (phase != pm.phase)
+            if (phase != pm.phase || isEndingPhase)
                 return;
 
             if (phaseDuration > 0)
@@ -47,7 +72,7 @@ namespace GameSystems.Phases
                 pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
                 
                 if(countdown <= 0)
-                    OnEndPhase();
+                    OnEndingPhase();
             }
         }
     }
