@@ -16,7 +16,7 @@ namespace GameSystems.Guild
             hpText.text = guildStats.hp.ToString();
             nameText.color = guildStats.guildColor;
             GetComponent<Image>().color = new Color(guildStats.guildColor.r, guildStats.guildColor.g,
-                guildStats.guildColor.b, 0.25f);
+                guildStats.guildColor.b, 0.75f);
         }
         
         public void UpdateUI(string hp)
