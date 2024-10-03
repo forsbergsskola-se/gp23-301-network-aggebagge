@@ -24,8 +24,8 @@ namespace GameSystems.Units
                 uniqueImage.sprite = unitSo.attribute.icon;
             }
             
-            if(unitSo.physicalDamage > 0)
-                damage.text = unitSo.physicalDamage.ToString();
+            if(unitSo.damage > 0)
+                damage.text = unitSo.damage.ToString();
             if(unitSo.goldGain > 0)
                 gold.text = unitSo.goldGain.ToString();
         }
