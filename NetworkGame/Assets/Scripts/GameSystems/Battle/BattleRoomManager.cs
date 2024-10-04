@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GameSystems.Guild;
 using GameSystems.Units;
 using Photon.Pun;
@@ -89,18 +90,18 @@ namespace GameSystems.Battle
         
         public void SetPlayerUnits(List<UnitData> units, int battleRoomIndex, bool isGuild1)
         {
-            photonView.RPC("SyncUnits", RpcTarget.All, units, battleRoomIndex, isGuild1);
+            photonView.RPC("SyncUnits", RpcTarget.All, units.ToArray(), battleRoomIndex, isGuild1);
         }
         
         [PunRPC]
-        void SyncUnits(List<UnitData> units, int battleRoomIndex, bool isGuild1)
+        void SyncUnits(UnitData[] units, int battleRoomIndex, bool isGuild1)
         {
-            battleRooms[battleRoomIndex].SetUnits(units, isGuild1);
+            battleRooms[battleRoomIndex].SetUnits(units.ToList(), isGuild1);
         }
 
         public List<UnitData> GetOpponentUnits(int index, bool isGuild1)
         {
-            return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
+            return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units.ToList();
         }
         
     }
