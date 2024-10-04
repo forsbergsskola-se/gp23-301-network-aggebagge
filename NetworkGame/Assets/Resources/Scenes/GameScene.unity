@@ -4772,7 +4772,7 @@ MonoBehaviour:
     gold: 0
     guildColor: {r: 0, g: 0, b: 0, a: 0}
   opponentDamageText: {fileID: 999268457}
-  opponentCursedText: {fileID: 0}
+  opponentCursedText: {fileID: 924624548}
   resultText: {fileID: 1013394539}
   battleStats:
   - loseDamage: 2
