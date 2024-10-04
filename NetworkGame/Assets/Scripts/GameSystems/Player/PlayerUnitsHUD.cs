@@ -13,11 +13,14 @@ namespace GameSystems.Player
         public PlayerUnitUI unitUIPrefab;
 
         List<PlayerUnitUI> playerUnits = new ();
-        
+        Queue<UnitData> deployedUnits = new ();
+
         private void Start()
         {
             PlayerStats.i.onPlayerSetupComplete.AddListener(Setup);
             PlayerStats.i.onAddUnit.AddListener(OnAddUnit);
+            BattleManager.i.playerBattleStats.onDeployUnit.AddListener(RemoveUnitFromHUD);
+            BattleManager.i.onPlayerEndBattle.AddListener(ReturnDeployedUnits);
         }
 
         private void Setup()
@@ -32,10 +35,10 @@ namespace GameSystems.Player
             AddUnitToHUD(units[^1]);
         }
 
-        public void ReturnBattleUnits(List<UnitData> units)
+        public void ReturnDeployedUnits()
         {
-            foreach (var unitData in units)
-                AddUnitToHUD(unitData);
+            for (int i = 0; i < deployedUnits.Count; i++)
+                AddUnitToHUD(deployedUnits.Dequeue());
         }
 
         private void AddUnitToHUD(UnitData unitData)
@@ -67,6 +70,7 @@ namespace GameSystems.Player
                 return;
             }
             playerUnitUI.RemoveUnit();
+            deployedUnits.Enqueue(unitData);
         }
     }
 }

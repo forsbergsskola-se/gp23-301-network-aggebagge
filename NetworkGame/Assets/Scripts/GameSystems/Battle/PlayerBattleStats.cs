@@ -10,7 +10,7 @@ namespace GameSystems.Battle
 {
     public class PlayerBattleStats : MonoBehaviour
     {
-        [HideInInspector] public UnityEvent<BattleUnit> onAddUnit = new ();
+        [HideInInspector] public UnityEvent<UnitData> onDeployUnit = new ();
         
         private int damage;
         private int curses;
@@ -31,7 +31,7 @@ namespace GameSystems.Battle
         {
             rng = new System.Random();
             battleStatsUI = GetComponent<PlayerBattleStatsUI>();
-            battleStatsUI.addUnitButton.onClick.AddListener(AddUnit);
+            battleStatsUI.addUnitButton.onClick.AddListener(DeployUnit);
         }
 
 
@@ -84,11 +84,11 @@ namespace GameSystems.Battle
         }
         
         
-        private void AddUnit()
+        private void DeployUnit()
         {
             UnitData unit = unitQueue.Dequeue();
             var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit);
-            
+            onDeployUnit.Invoke(unit);
             battleUnits.Add(battleUnit);
             
             if (battleUnits.Count == unitSlots || unitQueue.Count == 0)
