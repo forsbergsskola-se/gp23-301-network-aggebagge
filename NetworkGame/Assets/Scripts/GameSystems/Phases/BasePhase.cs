@@ -15,7 +15,7 @@ namespace GameSystems.Phases
         private float countdown;
 
         private bool isEndingPhase = false;
-        private CanvasGroup canvas;
+        [HideInInspector] public CanvasGroup canvas;
 
         public virtual void Awake()
         {

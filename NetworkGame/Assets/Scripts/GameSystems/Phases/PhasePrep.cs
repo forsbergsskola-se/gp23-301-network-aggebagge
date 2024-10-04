@@ -19,7 +19,7 @@ namespace GameSystems.Phases
             base.OnBeginPhase();
 
             battleTransform.gameObject.SetActive(true);
-            BattleManager.i.SetupBattle();
+            BattleManager.i.SetupBattleField();
         }
         
     }

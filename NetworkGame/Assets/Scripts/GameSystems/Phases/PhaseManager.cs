@@ -65,28 +65,7 @@ namespace GameSystems.Phases
                     break;
             }
         }
-
-        // private IEnumerator PrepareNextPhase()
-        // {
-        //     yield return new WaitForSeconds(1);
-        //     ResetPlayerReady();
-        //     
-        //     switch (phase)
-        //     {
-        //         case Phase.Recruit: phase = Phase.OpponentReveal; 
-        //             phases[1].OnBeginPhase();
-        //             break;
-        //         case Phase.OpponentReveal: phase = Phase.Prep; 
-        //             phases[2].OnBeginPhase();
-        //             break;
-        //         case Phase.Prep: phase = Phase.Battle;
-        //             phases[3].OnBeginPhase();
-        //             break;
-        //         case Phase.Battle: phase = Phase.Recruit;
-        //             phases[0].OnBeginPhase();
-        //             break;
-        //     }
-        // }
+        
         
 
         public void PlayerReady()
