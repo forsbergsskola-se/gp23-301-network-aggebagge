@@ -50,7 +50,7 @@ namespace GameSystems.Battle
 
         private void Start()
         {
-            BattleRoomManager.i.OnOpponentsPrepared.AddListener(GetOpponent);
+            BattleRoomManager.i.onOpponentsPrepared.AddListener(GetOpponent);
         }
 
      

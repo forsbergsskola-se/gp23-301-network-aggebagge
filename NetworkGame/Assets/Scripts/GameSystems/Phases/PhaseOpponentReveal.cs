@@ -17,7 +17,7 @@ namespace GameSystems.Phases
         private void Start()
         {
             PlayerStats.i.onPlayerSetupComplete.AddListener(OnPlayerSetupComplete);
-            BattleRoomManager.i.OnOpponentsPrepared.AddListener(OnOpponentsPrepared);
+            BattleRoomManager.i.onOpponentsPrepared.AddListener(OnOpponentsPrepared);
         }
 
         private void OnPlayerSetupComplete()
