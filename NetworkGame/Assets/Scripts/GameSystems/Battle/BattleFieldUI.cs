@@ -16,10 +16,16 @@ namespace GameSystems.Battle
         public BattleUnit battleUnitPrefab;
         public GameObject fieldSlotPrefab;
 
+        public List<BattleUnit> units = new();
+        
         private Queue<GameObject> fieldSlots = new ();
         
         public void SetupSlots(int slots)
         {
+            units.Clear();
+            foreach (Transform child in layout)
+                Destroy(child.gameObject);
+            
             for (int i = 0; i < slots; i++)
             {
                 var fieldSlot = Instantiate(fieldSlotPrefab, layout);
@@ -31,21 +37,9 @@ namespace GameSystems.Battle
         {
             var battleUnit = Instantiate(battleUnitPrefab, fieldSlots.Dequeue().transform);
             battleUnit.SetupUI(unitSo);
+            units.Add(battleUnit);
 
             return battleUnit;
-            // BattleManager.i.playerBattleStats.AddBattleUnit(unitSo);
-            //
-            // if(battleUnit.unit.damage > 0)
-            //     onAddDamage.Invoke(battleUnit.unit.damage);
-            //
-            //
-            // if (battleUnit.unit.attribute != null)
-            // {
-            //     if (battleUnit.unit.attribute.type == UnitAttributeSo.AttributeType.Curse)
-            //         onAddCurse.Invoke();
-            //     else if (battleUnit.unit.attribute.type == UnitAttributeSo.AttributeType.AntiCurse)
-            //         onAddAntiCurse.Invoke();
-            // }
         }
     }
 }

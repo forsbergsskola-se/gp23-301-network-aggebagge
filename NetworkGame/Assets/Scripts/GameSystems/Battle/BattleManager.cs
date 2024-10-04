@@ -1,29 +1,46 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using GameSystems.Guild;
-using GameSystems.Phases;
 using GameSystems.Player;
 using GameSystems.Units;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace GameSystems.Battle
 {
     public class BattleManager : MonoBehaviour
     {
         [HideInInspector] public UnityEvent onPlayerEndPrep = new();
-        
+        [HideInInspector] public UnityEvent onPlayerEndBattle = new();
+
         public BattleFieldUI playerBattleField;
         public BattleFieldUI enemyBattleField;
         public PlayerBattleStats playerBattleStats;
 
-        [HideInInspector]public GuildStats opponent;
         public static BattleManager i;
 
+        private bool isGuild1;
+        private int battleRoomIndex;
+        
+        [HideInInspector]public GuildStats opponent;
+        public TextMeshProUGUI opponentDamageText;
+        private List<UnitSo> opponentUnits;
+
+        public TextMeshProUGUI resultText;
+
+        private int battleCount;
+        public BattleStats[] battleStats;
+        
+        [Serializable]
+        public class BattleStats
+        {
+            public int loseDamage;
+            public int winGold;
+            public int monsterDamage;
+        }
+        
         private void Awake()
         {
             i = this;
@@ -41,8 +58,12 @@ namespace GameSystems.Battle
             opponent = GetOpponentGuildStats(battleRooms);
         }
 
-        public void SetupBattle()
+        public void SetupBattleField()
         {
+            battleCount++;
+            
+            resultText.gameObject.SetActive(false);
+            
             playerBattleStats.SetupNewBattle();
             playerBattleField.SetupSlots(PlayerStats.GetGroupSize());
             
@@ -54,30 +75,76 @@ namespace GameSystems.Battle
 
         public void EndPlayerPrep()
         {
-            if(playerBattleStats.isCursed)
-                onPlayerEndPrep.Invoke();
-            else
-                StartCoroutine(AnimateBonuses());
+            onPlayerEndPrep.Invoke();
+        }
+
+        public void OnBattlePhaseBegin()
+        {
+            BattleRoomManager.i.SetPlayerUnits(playerBattleStats.battleUnits, battleRoomIndex, isGuild1);
+            opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
+            
+            StartCoroutine(AnimateBonuses());
         }
 
         private IEnumerator AnimateBonuses()
         {
             float animationWaitTime = 0.25f;
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             
-            //loop and animate each bonus
-            foreach (BattleUnit battleUnit in playerBattleStats.battleUnits)
+            if (playerBattleStats.isCursed)
             {
-                if (battleUnit.unit.goldGain > 0)
+                //loop and animate each bonus
+                foreach (var battleUnit in playerBattleStats.battleUnits)
                 {
-                    battleUnit.PopupText(false, battleUnit.unit.goldGain);
-                    yield return new WaitForSeconds(animationWaitTime);
+                    if (battleUnit.unit.goldGain > 0)
+                    {
+                        battleUnit.PopupText(false, battleUnit.unit.goldGain);
+                        yield return new WaitForSeconds(animationWaitTime);
+                    }
                 }
+                
+                yield return new WaitForSeconds(1);
             }
             
+            int opponentDamage = 0;
+            var battleStat = battleStats[battleCount];
+
+            if (opponent != null)
+            {
+                foreach (var unitSo in opponentUnits)
+                {
+                    enemyBattleField.AddUnit(unitSo);
+                    opponentDamage += unitSo.damage;
+                    opponentDamageText.text = opponentDamage.ToString();
+                    
+                    yield return new WaitForSeconds(animationWaitTime);
+                }
+                
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                opponentDamage = battleStat.monsterDamage;
+            }
+
+            bool isWin = playerBattleStats.GetDamage() > opponentDamage;
+            bool isLose = playerBattleStats.GetDamage() < opponentDamage;
+
+            resultText.text = isWin? "<size=150%>Winner</size>\n+" + battleStat.winGold + " Gold" : isLose? "<size=150%>Loser</size>\n-" + battleStat.loseDamage + " Hp" : "<size=150%>Draw</size>";
+            resultText.gameObject.SetActive(true);
+            
             yield return new WaitForSeconds(1);
-            onPlayerEndPrep.Invoke();
+            
+            if(isWin)
+                PlayerStats.AddGold(battleStat.winGold);
+            else if (isLose)
+                GameManager.i.PlayerTakeDamage(-battleStat.loseDamage);
+            
+            
+            yield return new WaitForSeconds(2);
+
+            onPlayerEndBattle.Invoke();
         }
         
 
@@ -89,15 +156,24 @@ namespace GameSystems.Battle
             {
                 if (battleRoom.guild1 == playerGuildStats)
                 {
+                    battleRoomIndex = battleRooms.IndexOf(battleRoom);
+                    isGuild1 = true;
                     return battleRoom.guild2;
                 }
                 if (battleRoom.guild2 == playerGuildStats)
                 {
+                    battleRoomIndex = battleRooms.IndexOf(battleRoom);
+                    isGuild1 = false;
                     return battleRoom.guild1;
                 }
             }
 
             return null;
+        }
+
+        public BattleStats GetBattleStats()
+        {
+            return battleStats[battleCount];
         }
     }
 }

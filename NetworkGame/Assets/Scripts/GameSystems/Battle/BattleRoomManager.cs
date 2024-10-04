@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameSystems.Guild;
+using GameSystems.Units;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,9 +14,6 @@ namespace GameSystems.Battle
         
         public UnityEvent<List<BattleRoom>> OnOpponentsPrepared = new();
         private List<BattleRoom> battleRooms = new();
-        private int battleCount = 1;
-        public int[] monsterDamage;
-
 
         private void Awake()
         {
@@ -27,7 +25,8 @@ namespace GameSystems.Battle
             public GuildStats guild1;
             public GuildStats guild2;
 
-            public int monsterDamage;
+            public List<UnitSo> guild1Units = new();
+            public List<UnitSo> guild2Units = new();
 
             public void SetBattleRoom(GuildStats g1, GuildStats g2)
             {
@@ -35,10 +34,22 @@ namespace GameSystems.Battle
                 guild2 = g2;
             }
             
-            public void SetBattleRoom(GuildStats g, int mDamage)
+            public void SetBattleRoom(GuildStats g)
             {
                 guild1 = g;
-                monsterDamage = mDamage;
+            }
+
+            public void SetUnits(List<BattleUnit> units, bool isGuild1)
+            {
+                SetUnits(units, isGuild1? guild1Units : guild2Units);
+            }
+
+            private void SetUnits(List<BattleUnit> units, List<UnitSo> list)
+            {
+                list.Clear();
+                
+                foreach (var battleUnit in units)
+                    list.Add(battleUnit.unit);
             }
         }
 
@@ -70,21 +81,29 @@ namespace GameSystems.Battle
                 }
                 else
                 {
-                    battleRooms[i].SetBattleRoom(GameManager.i.playerGuilds[player], GetMonsterDamage());
+                    battleRooms[i].SetBattleRoom(GameManager.i.playerGuilds[player]);
                 }
                 player += 2;
             }
             OnOpponentsPrepared.Invoke(battleRooms);
         }
-
-        public void OnBattleEnd()
+        
+        public void SetPlayerUnits(List<BattleUnit> units, int battleRoomIndex, bool isGuild1)
         {
-            battleCount++;
+            photonView.RPC("SyncUnits", RpcTarget.All, units, battleRoomIndex, isGuild1);
         }
 
-        private int GetMonsterDamage()
+        public List<UnitSo> GetOpponentUnits(int index, bool isGuild1)
         {
-            return monsterDamage[battleCount - 1];
+            return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
         }
+        
+        [PunRPC]
+        void SyncUnits(List<BattleUnit> units, int battleRoomIndex, bool isGuild1)
+        {
+            battleRooms[battleRoomIndex].SetUnits(units, isGuild1);
+        }
+
+        
     }
 }
