@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameSystems.Guild;
 using GameSystems.Units;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,7 +33,7 @@ namespace GameSystems.Player
 
         private void OnJoinRoom()
         {
-            stats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
+            stats = GuildManager.i.GetPlayerStats();
             unitList.AddRange(UnitManager.GetStartUnits());
             onPlayerSetupComplete.Invoke();
         }

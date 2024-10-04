@@ -22,7 +22,7 @@ namespace GameSystems.Player
 
         private void Setup()
         {
-            guildStats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
+            guildStats = GuildManager.i.GetPlayerStats();
             
             guildTitle.text = guildStats.guildName;
             guildTitle.color = guildStats.guildColor;

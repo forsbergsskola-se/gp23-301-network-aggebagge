@@ -7,22 +7,23 @@ namespace GameSystems.Guild
     [System.Serializable]
     public class GuildStats
     {
+        public int playerID;
         public string guildName;
         public int maxHp;
         public int hp;
-        public int groupSize;
-
         public int gold;
+        public int groupSize;
         public Color guildColor;
 
-        public GuildStats(int startHp, int startGold, int startGroupSize, string gName, Color color)
+        public GuildStats(int id, string gName, Color color)
         {
-            maxHp = startHp;
-            hp = maxHp;
-            gold = startGold;
+            playerID = id;
+            // maxHp = startHp;
+            // hp = maxHp;
+            // gold = startGold;
             guildName = gName;
             guildColor = color;
-            groupSize = startGroupSize;
+            // groupSize = startGroupSize;
         }
     }
 }

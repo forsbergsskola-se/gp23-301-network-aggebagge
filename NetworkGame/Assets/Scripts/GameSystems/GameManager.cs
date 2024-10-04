@@ -16,17 +16,17 @@ namespace GameSystems
         [HideInInspector] public UnityEvent onJoinRoom = new ();
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
-        private int playerCount;
+        public int playersAlive;
         
-        [Header("Start Values")]
-        public int startHp;
-        public int startGold;
-        public int startGroupSize;
-        
-        [Header("Guild Configurations")]
-        public List<GuildStats> playerGuilds = new ();
-        public string[] guildNames;
-        public Color[] guildColors;
+        // [Header("Start Values")]
+        // public int startHp;
+        // public int startGold;
+        // public int startGroupSize;
+        //
+        // [Header("Guild Configurations")]
+        // public List<GuildStats> playerGuilds = new ();
+        // public string[] guildNames;
+        // public Color[] guildColors;
         public Color damageColor;
         public Color goldColor;
 
@@ -72,55 +72,55 @@ namespace GameSystems
             
             Debug.Log("JOIN ROOM");
             hasJoinedRoom = true;
-            playerCount = PhotonNetwork.PlayerList.Length;
+            // playerCount = PhotonNetwork.PlayerList.Length;
 
-            for (int i = 0; i < playerCount; i++)
-            {
-                playerGuilds.Add(new GuildStats(startHp, startGold, startGroupSize, guildNames[i], guildColors[i]));
-                playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
-            }
+            // for (int i = 0; i < playerCount; i++)
+            // {
+            //     playerGuilds.Add(new GuildStats(startHp, startGold, startGroupSize, guildNames[i], guildColors[i]));
+            //     playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
+            // }
             
             onJoinRoom.Invoke();
         }
 
 
-        public void PlayerTakeDamage(int damage)
-        {
-            int index = GetMyPlayerIndex();
-            playerGuilds[index].hp -= damage;
-            playerGuilds[index].hp = Mathf.Clamp(playerGuilds[index].hp, 0, playerGuilds[index].maxHp);
-
-            if (playerGuilds[index].hp <= 0)
-            {
-                //REMOVE PLAYER
-            }
-            photonView.RPC("SyncPlayerStats", RpcTarget.All, index, playerGuilds[index].hp, playerGuilds[index].gold);
-
-            onUpdatePlayerHp.Invoke(playerGuilds[index]);
-        }
-        
-        public void AddToPlayerGold(int playerId, int goldToAdd)
-        {
-            int playerIndex = GetPlayerIndex(playerId);
-            playerGuilds[playerIndex].gold += goldToAdd;
-            playerGuilds[playerIndex].gold = Mathf.Clamp(playerGuilds[playerIndex].gold, 0, 99);
-            
-            photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
-        }
-        
-        
-        [PunRPC]
-        void SyncPlayerStats(int playerIndex, int hp, int gold)
-        {
-            playerGuilds[playerIndex].hp = hp;
-            playerGuilds[playerIndex].gold = gold;
-        }
+        // public void PlayerTakeDamage(int damage)
+        // {
+        //     int index = GetMyPlayerIndex();
+        //     playerGuilds[index].hp -= damage;
+        //     playerGuilds[index].hp = Mathf.Clamp(playerGuilds[index].hp, 0, playerGuilds[index].maxHp);
+        //
+        //     if (playerGuilds[index].hp <= 0)
+        //     {
+        //         //REMOVE PLAYER
+        //     }
+        //     photonView.RPC("SyncPlayerStats", RpcTarget.All, index, playerGuilds[index].hp, playerGuilds[index].gold);
+        //
+        //     onUpdatePlayerHp.Invoke(playerGuilds[index]);
+        // }
+        //
+        // public void AddToPlayerGold(int playerId, int goldToAdd)
+        // {
+        //     int playerIndex = GetPlayerIndex(playerId);
+        //     playerGuilds[playerIndex].gold += goldToAdd;
+        //     playerGuilds[playerIndex].gold = Mathf.Clamp(playerGuilds[playerIndex].gold, 0, 99);
+        //     
+        //     photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
+        // }
+        //
+        //
+        // [PunRPC]
+        // void SyncPlayerStats(int playerIndex, int hp, int gold)
+        // {
+        //     playerGuilds[playerIndex].hp = hp;
+        //     playerGuilds[playerIndex].gold = gold;
+        // }
         
         // Method to get stats for a specific player
-        public GuildStats GetPlayerStats(int playerId)
-        {
-            return playerGuilds[GetPlayerIndex(playerId)];
-        }
+        // public GuildStats GetPlayerStats(int playerId)
+        // {
+        //     return playerGuilds[GetPlayerIndex(playerId)];
+        // }
 
         private int GetPlayerIndex(int id)
         {

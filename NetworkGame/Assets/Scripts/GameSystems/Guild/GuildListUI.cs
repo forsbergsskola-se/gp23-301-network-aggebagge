@@ -19,7 +19,7 @@ namespace GameSystems.Guild
 
         private void OnJoinRoom()
         {
-            foreach (var guildStats in GameManager.i.playerGuilds)
+            foreach (var guildStats in GuildManager.i.playerGuilds)
             {
                 var guildObject = Instantiate(guildObjectPrefab, layout);
                 guildObject.SetupUI(guildStats);
