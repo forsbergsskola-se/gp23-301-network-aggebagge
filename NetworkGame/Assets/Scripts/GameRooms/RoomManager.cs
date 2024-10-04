@@ -25,7 +25,11 @@ namespace GameRooms
         public override void OnConnectedToMaster()
         {
             base.OnConnectedToMaster();
-            CreateRoom();
+            
+            if(PlayerPrefsData.i.IsHost())
+                CreateRoom();
+            else
+                roomCode = PlayerPrefsData.i.GetCode();
         }
 
         private void CreateRoom()

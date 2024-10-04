@@ -1091,9 +1091,9 @@ RectTransform:
   - {fileID: 1076072668}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -215}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &121235361
@@ -1446,7 +1446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sadf12
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
   m_sharedMaterial: {fileID: 7771865114312701276, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
@@ -2759,7 +2759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &722102288
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3600,9 +3600,9 @@ RectTransform:
   - {fileID: 627788191}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &916665080
@@ -4884,7 +4884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066738122004458be3dce97c56e718d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onJoinRoom:
+  onStartGame:
     m_PersistentCalls:
       m_Calls: []
   onUpdatePlayerHp:
@@ -6528,6 +6528,10 @@ PrefabInstance:
     - target: {fileID: 8705971768390846476, guid: 0a62e5777b9856d4385e50da66e672f8, type: 3}
       propertyPath: m_Name
       value: Start Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705971768390846476, guid: 0a62e5777b9856d4385e50da66e672f8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8382,10 +8386,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomManager: {fileID: 1202100762}
+  lobby: {fileID: 1815600320}
   lobbyPlayers: []
   lobbyPlayerPrefab: {fileID: 5358977929329445331, guid: e5f60c38ad8302e4aa2cf38a0e341543, type: 3}
   layout: {fileID: 1274361152}
+  codeText: {fileID: 248150818}
   startButton: {fileID: 1399458028}
+  codeUITransform: {fileID: 722102288}
 --- !u!1001 &1823240174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8525,9 +8532,9 @@ RectTransform:
   - {fileID: 838467179}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -115}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1848845421

@@ -31,10 +31,10 @@ namespace GameSystems.Phases
 
         private void Start()
         {
-            GameManager.i.onStartGame.AddListener(OnJoinRoom);
+            GameManager.i.onStartGame.AddListener(OnStartGame);
         }
 
-        private void OnJoinRoom()
+        private void OnStartGame()
         {
             foreach (var players in GameManager.i.playerIdList)
                 playersReady.Add(false);
@@ -88,9 +88,7 @@ namespace GameSystems.Phases
         void ResetPlayerReady()
         {
             for (int i = 0; i < playersReady.Count; i++)
-            {
                 playersReady[i] = false;
-            }
         }
         
     }
