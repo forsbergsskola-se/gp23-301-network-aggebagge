@@ -26,6 +26,8 @@ namespace GameSystems.Battle
         
         [HideInInspector]public GuildStats opponent;
         public TextMeshProUGUI opponentDamageText;
+        public TextMeshProUGUI opponentCursedText;
+
         private List<UnitData> opponentUnits;
 
         public TextMeshProUGUI resultText;
@@ -61,7 +63,8 @@ namespace GameSystems.Battle
         public void SetupBattleField()
         {
             battleCount++;
-            
+            opponentDamageText.text = "";
+            opponentCursedText.gameObject.SetActive(false);
             resultText.gameObject.SetActive(false);
             
             playerBattleStats.SetupNewBattle();
@@ -98,7 +101,7 @@ namespace GameSystems.Battle
 
             yield return new WaitForSeconds(0.5f);
             
-            if (playerBattleStats.isCursed)
+            if (!playerBattleStats.isCursed)
             {
                 //loop and animate each bonus
                 foreach (var unitData in playerBattleStats.battleUnits)
@@ -114,6 +117,7 @@ namespace GameSystems.Battle
             }
             
             int opponentDamage = 0;
+            int opponentCurses = 0;
             var battleStat = battleStats[battleCount];
 
             if (opponent != null)
@@ -123,6 +127,14 @@ namespace GameSystems.Battle
                     enemyBattleField.AddUnit(unitSo);
                     opponentDamage += unitSo.damage;
                     opponentDamageText.text = opponentDamage.ToString();
+                    if (unitSo.attributeType == AttributeType.Curse)
+                    {
+                        opponentCurses++;
+                        if (opponentCurses == 3)
+                            opponentCursedText.gameObject.SetActive(true);
+                    }
+                    else if (unitSo.attributeType == AttributeType.AntiCurse)
+                        opponentCurses--;
                     
                     yield return new WaitForSeconds(animationWaitTime);
                 }
