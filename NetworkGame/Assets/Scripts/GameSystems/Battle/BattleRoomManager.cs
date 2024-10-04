@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameSystems.Guild;
@@ -13,8 +12,8 @@ namespace GameSystems.Battle
     {
         public static BattleRoomManager i;
         
-        public UnityEvent<List<BattleRoom>> OnOpponentsPrepared = new();
-        private List<BattleRoom> battleRooms = new();
+        [HideInInspector] public UnityEvent<List<BattleRoom>> onOpponentsPrepared = new();
+        private readonly List<BattleRoom> battleRooms = new();
 
         private void Awake()
         {
@@ -26,8 +25,8 @@ namespace GameSystems.Battle
             public GuildStats guild1;
             public GuildStats guild2;
 
-            public List<UnitData> guild1Units = new();
-            public List<UnitData> guild2Units = new();
+            public readonly List<UnitData> guild1Units = new();
+            public readonly List<UnitData> guild2Units = new();
 
             public void SetBattleRoom(GuildStats g1, GuildStats g2)
             {
@@ -60,9 +59,9 @@ namespace GameSystems.Battle
 
         private void OnJoinRoom()
         {
-            int rooms = Mathf.CeilToInt(GameManager.i.playerGuilds.Count * 0.5f);
+            int rooms = Mathf.CeilToInt(GameManager.i.playersAlive * 0.5f);
             
-            for (int i = 0; i < rooms; i++)
+            for (int r = 0; r < rooms; r++)
             {
                 battleRooms.Add(new BattleRoom());
             }
@@ -72,20 +71,21 @@ namespace GameSystems.Battle
         public void PrepareBattleOpponents()
         {
             int player = 0;
+            var guilds = GuildManager.i.playerGuilds;
             
-            for (int i = 0; i < battleRooms.Count && player < GameManager.i.playerGuilds.Count; i++)
+            for (int room = 0; room < battleRooms.Count && player < GameManager.i.playersAlive; room++)
             {
-                if (player < GameManager.i.playerGuilds.Count - 1)
+                if (player < GameManager.i.playersAlive - 1)
                 {
-                    battleRooms[i].SetBattleRoom(GameManager.i.playerGuilds[player], GameManager.i.playerGuilds[player + 1]);
+                    battleRooms[room].SetBattleRoom(guilds[player], guilds[player + 1]);
                 }
                 else
                 {
-                    battleRooms[i].SetBattleRoom(GameManager.i.playerGuilds[player]);
+                    battleRooms[room].SetBattleRoom(guilds[player]);
                 }
                 player += 2;
             }
-            OnOpponentsPrepared.Invoke(battleRooms);
+            onOpponentsPrepared.Invoke(battleRooms);
         }
         
         public void SetPlayerUnits(List<UnitData> units, int battleRoomIndex, bool isGuild1)
