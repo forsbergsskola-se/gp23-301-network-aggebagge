@@ -86,20 +86,19 @@ namespace GameSystems
         }
 
 
-        public void AddToPlayerHp(int playerId, int hpToAdd)
+        public void PlayerTakeDamage(int damage)
         {
-            int playerIndex = GetPlayerIndex(playerId);
+            int index = GetMyPlayerIndex();
+            playerGuilds[index].hp -= damage;
+            playerGuilds[index].hp = Mathf.Clamp(playerGuilds[index].hp, 0, playerGuilds[index].maxHp);
 
-            playerGuilds[playerIndex].hp += hpToAdd;
-            playerGuilds[playerIndex].hp = Mathf.Clamp(playerGuilds[playerIndex].hp, 0, playerGuilds[playerIndex].maxHp);
-
-            if (playerGuilds[playerId].hp <= 0)
+            if (playerGuilds[index].hp <= 0)
             {
                 //REMOVE PLAYER
             }
-            photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
+            photonView.RPC("SyncPlayerStats", RpcTarget.All, index, playerGuilds[index].hp, playerGuilds[index].gold);
 
-            onUpdatePlayerHp.Invoke(playerGuilds[playerIndex]);
+            onUpdatePlayerHp.Invoke(playerGuilds[index]);
         }
         
         public void AddToPlayerGold(int playerId, int goldToAdd)
