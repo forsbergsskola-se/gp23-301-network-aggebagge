@@ -42,7 +42,7 @@ namespace GameSystems
             if (i == null)
             {
                 i = this;
-                DontDestroyOnLoad(this);
+                // DontDestroyOnLoad(this);
             }
             else
             {
@@ -80,7 +80,6 @@ namespace GameSystems
             //     playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
             // }
             
-            onStartGame.Invoke();
         }
 
 
