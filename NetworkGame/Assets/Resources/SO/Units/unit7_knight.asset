@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
   m_Name: unit7_knight
   m_EditorClassIdentifier: 
+  id: 6
   unitName: Adventurer
   sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
   cost: 7

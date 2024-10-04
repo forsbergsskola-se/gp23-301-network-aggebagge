@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
   m_Name: unit6_priest
   m_EditorClassIdentifier: 
+  id: 5
   unitName: Priest
   sprite: {fileID: 21300000, guid: 2c6f1e3ecd5272a41b2a38476a63c87f, type: 3}
   cost: 6
