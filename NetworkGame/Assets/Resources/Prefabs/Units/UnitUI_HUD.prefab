@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2439727670124808960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -220,19 +220,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1157222106382330343, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1157222106382330343, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1314822261019547259, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1314822261019547259, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2482392113466702338, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_text
@@ -240,11 +240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482392113466702338, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2482392113466702338, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2881539916111549192, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_Pivot.x
@@ -272,11 +272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2881539916111549192, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2881539916111549192, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2881539916111549192, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,11 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3359498515322419621, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3359498515322419621, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3623533766060948679, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_Name
@@ -344,11 +344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4768741966088826111, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4768741966088826111, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5221364171890477765, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
@@ -401,7 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721ff7a7f9cb46ac93ee65ceb0a7d654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 0}
   unitImage: {fileID: 6620616016838257766}
   uniqueImage: {fileID: 5307767343581766466}
   damage: {fileID: 6798037409607186830}
