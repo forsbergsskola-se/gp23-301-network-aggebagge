@@ -85,7 +85,9 @@ namespace GameSystems.Battle
                 dataList.Add(unit.data);
             
             BattleRoomManager.i.SetPlayerUnits(dataList, battleRoomIndex, isGuild1);
-            opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
+            
+            if(opponent != null)
+                opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
             
             StartCoroutine(AnimateBonuses());
         }
