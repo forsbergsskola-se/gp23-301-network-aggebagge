@@ -1,4 +1,5 @@
 using System;
+using GameSystems.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,12 @@ namespace GameSystems.Battle
         public Transform curseLayout;
         public TextMeshProUGUI playerDamageText;
         public TextMeshProUGUI opponentDamageText;
+        
+        public TextMeshProUGUI yourGuildText;
+        public TextMeshProUGUI opponentGuildText;
+        public TextMeshProUGUI winGoldText;
+        public TextMeshProUGUI loseHpText;
+
         public Button addUnitButton;
         public Button readyButton;
 
@@ -19,6 +26,9 @@ namespace GameSystems.Battle
         private void Start()
         {
             readyButton.onClick.AddListener(OnEndPrep);
+            
+            yourGuildText.text = PlayerStats.GetGuildStats().guildName;
+            yourGuildText.color = PlayerStats.GetGuildStats().guildColor;
         }
 
         public void OnUpdatePlayerDamage(int damage)
@@ -48,6 +58,13 @@ namespace GameSystems.Battle
             opponentDamageText.text = "";
             addUnitButton.interactable = true;
             readyButton.interactable = true;
+
+            
+            opponentGuildText.text = BattleManager.i.opponent != null ? BattleManager.i.opponent.guildName : "Monster";
+            opponentGuildText.color = BattleManager.i.opponent != null ? BattleManager.i.opponent.guildColor : Color.gray;
+
+            winGoldText.text = BattleManager.i.GetBattleStats().winGold.ToString();
+            loseHpText.text = BattleManager.i.GetBattleStats().loseDamage.ToString();
         }
 
         public void OnCursed()

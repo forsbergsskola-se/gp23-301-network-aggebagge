@@ -127,7 +127,11 @@ namespace GameSystems.Battle
             }
             
         }
-        
+
+        public int GetDamage()
+        {
+            return damage;
+        }
         
     }
 }
