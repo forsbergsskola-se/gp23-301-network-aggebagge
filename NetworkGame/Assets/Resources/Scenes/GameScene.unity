@@ -1091,9 +1091,9 @@ RectTransform:
   - {fileID: 1076072668}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -215}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &121235361
@@ -1274,8 +1274,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380.63812, y: -40}
-  m_SizeDelta: {x: 238.72375, y: 80}
+  m_AnchoredPosition: {x: 380, y: -30}
+  m_SizeDelta: {x: 240, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163659347
 MonoBehaviour:
@@ -1443,7 +1443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &204420839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1568,8 +1568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 238.72375, y: -40}
-  m_SizeDelta: {x: 47.447502, y: 50}
+  m_AnchoredPosition: {x: 240, y: -40}
+  m_SizeDelta: {x: 42, y: 42}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &232054752
 MonoBehaviour:
@@ -1805,6 +1805,7 @@ MonoBehaviour:
   layout: {fileID: 1288211115}
   battleUnitPrefab: {fileID: 3658974419962992212, guid: 52c2b7fe97bd60144ad1411142420836, type: 3}
   fieldSlotPrefab: {fileID: 6825063595804194274, guid: e69b96891db7ee74d8b1f27a3ce1a54a, type: 3}
+  units: []
 --- !u!1 &339788314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,8 +2305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 60}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: -100, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &546211009
 GameObject:
@@ -3374,7 +3375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 11.276245, y: -40}
+  m_AnchoredPosition: {x: 18, y: -40}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &867964781
@@ -3607,9 +3608,9 @@ RectTransform:
   - {fileID: 627788191}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &916665080
@@ -3789,7 +3790,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 90}
-  m_SizeDelta: {x: 500, y: 200}
+  m_SizeDelta: {x: 600, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013394539
 MonoBehaviour:
@@ -3811,7 +3812,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Winner
+  m_text: '<size=150%>Winner</size>
+
+    -2 Hp'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
   m_sharedMaterial: {fileID: 7771865114312701276, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
@@ -3820,8 +3823,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281588223
-  m_fontColor: {r: 1, g: 0.85106295, b: 0.20188677, a: 1}
+    rgba: 4278236415
+  m_fontColor: {r: 1, g: 0.70595783, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3838,8 +3841,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -3849,7 +3852,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -5
-  m_wordSpacing: 0
+  m_wordSpacing: -50
   m_lineSpacing: 20
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -4996,7 +4999,6 @@ MonoBehaviour:
   OnOpponentsPrepared:
     m_PersistentCalls:
       m_Calls: []
-  monsterDamage: 04000000060000000a0000000f000000160000001e0000002a0000003700000046000000640000008c000000b9000000
 --- !u!114 &1202100760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5012,6 +5014,9 @@ MonoBehaviour:
   onPlayerEndPrep:
     m_PersistentCalls:
       m_Calls: []
+  onPlayerEndBattle:
+    m_PersistentCalls:
+      m_Calls: []
   playerBattleField: {fileID: 317242972}
   enemyBattleField: {fileID: 1607761463}
   playerBattleStats: {fileID: 1374593011}
@@ -5022,6 +5027,63 @@ MonoBehaviour:
     groupSize: 0
     gold: 0
     guildColor: {r: 0, g: 0, b: 0, a: 0}
+  opponentDamageText: {fileID: 999268457}
+  resultText: {fileID: 1013394539}
+  battleStats:
+  - loseDamage: 2
+    winGold: 2
+    monsterDamage: 5
+  - loseDamage: 3
+    winGold: 2
+    monsterDamage: 8
+  - loseDamage: 4
+    winGold: 3
+    monsterDamage: 12
+  - loseDamage: 6
+    winGold: 3
+    monsterDamage: 15
+  - loseDamage: 8
+    winGold: 3
+    monsterDamage: 18
+  - loseDamage: 10
+    winGold: 4
+    monsterDamage: 22
+  - loseDamage: 12
+    winGold: 4
+    monsterDamage: 26
+  - loseDamage: 15
+    winGold: 5
+    monsterDamage: 30
+  - loseDamage: 18
+    winGold: 5
+    monsterDamage: 34
+  - loseDamage: 21
+    winGold: 6
+    monsterDamage: 38
+  - loseDamage: 24
+    winGold: 6
+    monsterDamage: 42
+  - loseDamage: 28
+    winGold: 7
+    monsterDamage: 46
+  - loseDamage: 32
+    winGold: 8
+    monsterDamage: 50
+  - loseDamage: 36
+    winGold: 9
+    monsterDamage: 54
+  - loseDamage: 40
+    winGold: 10
+    monsterDamage: 60
+  - loseDamage: 44
+    winGold: 11
+    monsterDamage: 64
+  - loseDamage: 48
+    winGold: 12
+    monsterDamage: 68
+  - loseDamage: 52
+    winGold: 13
+    monsterDamage: 72
 --- !u!114 &1202100761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5489,6 +5551,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 1
   phaseDuration: 30
+  canvas: {fileID: 0}
   recruitTransform: {fileID: 204420839}
   readyButton: {fileID: 219433735}
 --- !u!114 &1263463874
@@ -5506,6 +5569,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 3
   phaseDuration: 40
+  canvas: {fileID: 0}
   battleTransform: {fileID: 1374593006}
 --- !u!114 &1263463875
 MonoBehaviour:
@@ -5522,6 +5586,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 4
   phaseDuration: 0
+  canvas: {fileID: 0}
   battleTransform: {fileID: 1374593006}
 --- !u!114 &1263463876
 MonoBehaviour:
@@ -5538,6 +5603,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 2
   phaseDuration: 3
+  canvas: {fileID: 0}
   background: {fileID: 915500521}
   guildText: {fileID: 56258633}
   vsText: {fileID: 25744218}
@@ -6287,6 +6353,10 @@ MonoBehaviour:
   curseLayout: {fileID: 1902847298}
   playerDamageText: {fileID: 1670203237}
   opponentDamageText: {fileID: 999268457}
+  yourGuildText: {fileID: 1242557304}
+  opponentGuildText: {fileID: 339788316}
+  winGoldText: {fileID: 833879137}
+  loseHpText: {fileID: 1786023305}
   addUnitButton: {fileID: 1969043935}
   readyButton: {fileID: 178354746}
   cursedText: {fileID: 1306760046}
@@ -6790,8 +6860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -40}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 242, y: -40}
+  m_SizeDelta: {x: 42, y: 42}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1536046183
 MonoBehaviour:
@@ -6928,6 +6998,7 @@ MonoBehaviour:
   layout: {fileID: 1299278764}
   battleUnitPrefab: {fileID: 3658974419962992212, guid: 52c2b7fe97bd60144ad1411142420836, type: 3}
   fieldSlotPrefab: {fileID: 6825063595804194274, guid: e69b96891db7ee74d8b1f27a3ce1a54a, type: 3}
+  units: []
 --- !u!1001 &1629591918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7612,7 +7683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 151.27625, y: -40}
+  m_AnchoredPosition: {x: 158, y: -40}
   m_SizeDelta: {x: 40, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1786023305
@@ -7916,9 +7987,9 @@ RectTransform:
   - {fileID: 838467179}
   m_Father: {fileID: 1797911008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -115}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1848845421
@@ -8213,8 +8284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.63812, y: -40}
-  m_SizeDelta: {x: 261.27625, y: 80}
+  m_AnchoredPosition: {x: 130, y: -30}
+  m_SizeDelta: {x: 260, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1926455243
 MonoBehaviour:
@@ -9032,15 +9103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19245279, g: 0.16191679, b: 0.117287256, a: 1}
+  m_Color: {r: 0.8490566, g: 0.5494838, b: 0.56678116, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: cc0b0f0dc0aefeb4bbd803177b5b7069, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9048,7 +9119,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.2
 --- !u!222 &2116727144
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9194,8 +9265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 80}
+  m_AnchoredPosition: {x: 0, y: 12}
+  m_SizeDelta: {x: -100, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2138993399
 MonoBehaviour:
