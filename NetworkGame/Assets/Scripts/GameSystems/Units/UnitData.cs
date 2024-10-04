@@ -19,7 +19,8 @@ namespace GameSystems.Units
             id = unitSo.id;
             damage = unitSo.damage;
             goldGain = unitSo.goldGain;
-            attributeType = unitSo.attribute.type;
+            
+            attributeType = unitSo.attribute == null? UnitAttributeSo.AttributeType.None : unitSo.attribute.type;
         }
     }
 }
