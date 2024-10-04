@@ -26,7 +26,7 @@ namespace GameSystems.Battle
         
         [HideInInspector]public GuildStats opponent;
         public TextMeshProUGUI opponentDamageText;
-        private List<UnitSo> opponentUnits;
+        private List<UnitData> opponentUnits;
 
         public TextMeshProUGUI resultText;
 
@@ -80,7 +80,11 @@ namespace GameSystems.Battle
 
         public void OnBattlePhaseBegin()
         {
-            BattleRoomManager.i.SetPlayerUnits(playerBattleStats.battleUnits, battleRoomIndex, isGuild1);
+            List<UnitData> dataList = new();
+            foreach (var unit in playerBattleStats.battleUnits)
+                dataList.Add(unit.data);
+            
+            BattleRoomManager.i.SetPlayerUnits(dataList, battleRoomIndex, isGuild1);
             opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
             
             StartCoroutine(AnimateBonuses());
@@ -95,11 +99,11 @@ namespace GameSystems.Battle
             if (playerBattleStats.isCursed)
             {
                 //loop and animate each bonus
-                foreach (var battleUnit in playerBattleStats.battleUnits)
+                foreach (var unitData in playerBattleStats.battleUnits)
                 {
-                    if (battleUnit.unit.goldGain > 0)
+                    if (unitData.data.goldGain > 0)
                     {
-                        battleUnit.PopupText(false, battleUnit.unit.goldGain);
+                        unitData.PopupText(false, unitData.data.goldGain);
                         yield return new WaitForSeconds(animationWaitTime);
                     }
                 }

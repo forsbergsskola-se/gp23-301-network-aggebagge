@@ -31,14 +31,14 @@ namespace GameSystems.Player
             AddUnitToHUD(units[^1]);
         }
 
-        private void AddUnitToHUD(UnitSo unitSo)
+        private void AddUnitToHUD(UnitData unitData)
         {
-            PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.unit == unitSo);
+            PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data == unitData);
             
             if (playerUnitUI == null)
             {
                 var unitUI = Instantiate(unitUIPrefab, layout);
-                unitUI.SetupUI(unitSo);
+                unitUI.SetupUI(unitData);
                 playerUnits.Add(unitUI);
             }
             else

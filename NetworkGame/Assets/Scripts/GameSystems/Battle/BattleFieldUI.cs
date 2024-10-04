@@ -33,10 +33,10 @@ namespace GameSystems.Battle
             }
         }
 
-        public BattleUnit AddUnit(UnitSo unitSo)
+        public BattleUnit AddUnit(UnitData unitData)
         {
             var battleUnit = Instantiate(battleUnitPrefab, fieldSlots.Dequeue().transform);
-            battleUnit.SetupUI(unitSo);
+            battleUnit.SetupUI(unitData);
             units.Add(battleUnit);
 
             return battleUnit;

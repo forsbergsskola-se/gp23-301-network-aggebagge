@@ -7,6 +7,7 @@ namespace GameSystems.Units
     {
         public enum AttributeType
         {
+            None,
             Curse,
             AntiCurse,
             Foresight

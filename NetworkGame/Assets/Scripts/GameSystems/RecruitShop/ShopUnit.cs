@@ -11,7 +11,7 @@ namespace GameSystems.RecruitShop
     {
         public TextMeshProUGUI costText;
         public UnitUI unitUI;
-        private UnitSo unitSo;
+        private UnitData data;
 
         public Button buyButton;
         private int cost;
@@ -22,13 +22,12 @@ namespace GameSystems.RecruitShop
             PlayerStats.i.onPlayerSetupComplete.AddListener(UpdateButtonInteractable);
         }
 
-        public void SetupUI(UnitSo unit)
+        public void SetupUI(UnitData unitData)
         {
-            unitSo = unit;
-            costText.text = unit.cost.ToString();
-            unitUI.SetupUI(unit);
-
-            cost = unit.cost;
+            data = unitData;
+            cost = UnitManager.GetUnitSo(unitData.id).cost;
+            costText.text = cost.ToString();
+            unitUI.SetupUI(unitData);
             
             buyButton.onClick.AddListener(OnClickButton);
             PlayerStats.i.onUpdateGold.AddListener(UpdateButtonInteractable);
@@ -37,7 +36,7 @@ namespace GameSystems.RecruitShop
         private void OnClickButton()
         {
             PlayerStats.AddGold(-cost);
-            PlayerStats.AddUnit(unitSo);
+            PlayerStats.AddUnit(data);
         }
 
 

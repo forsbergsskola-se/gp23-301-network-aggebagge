@@ -6,6 +6,7 @@ namespace GameSystems.Units
     [CreateAssetMenu(fileName = "unit_", menuName = "SO/Unit", order = 0)]
     public class UnitSo : ScriptableObject
     {
+        public int id;
         public string unitName;
         public Sprite sprite;
         public int cost;

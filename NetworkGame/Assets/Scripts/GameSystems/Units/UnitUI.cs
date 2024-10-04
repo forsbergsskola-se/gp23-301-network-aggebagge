@@ -6,28 +6,29 @@ namespace GameSystems.Units
 {
     public class UnitUI : MonoBehaviour
     {
-        [HideInInspector]public UnitSo unit;
+        [HideInInspector]public UnitData data;
         
         public Image unitImage;
         public Image uniqueImage;
         public TextMeshProUGUI damage;
         public TextMeshProUGUI gold;
 
-        public void SetupUI(UnitSo unitSo)
+        public void SetupUI(UnitData unitData)
         {
-            unit = unitSo;
+            data = unitData;
+            UnitSo unitSo = UnitManager.GetUnitSo(unitData.id);
             unitImage.sprite = unitSo.sprite;
             
-            if (unitSo.attribute != null)
+            if (unitData.attributeType != UnitAttributeSo.AttributeType.None)
             {
                 uniqueImage.gameObject.SetActive(true);
                 uniqueImage.sprite = unitSo.attribute.icon;
             }
             
-            if(unitSo.damage > 0)
-                damage.text = unitSo.damage.ToString();
-            if(unitSo.goldGain > 0)
-                gold.text = unitSo.goldGain.ToString();
+            if(unitData.damage > 0)
+                damage.text = unitData.damage.ToString();
+            if(unitData.goldGain > 0)
+                gold.text = unitData.goldGain.ToString();
         }
     }
 }

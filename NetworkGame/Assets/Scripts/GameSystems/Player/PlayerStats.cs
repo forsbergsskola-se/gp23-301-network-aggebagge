@@ -18,7 +18,7 @@ namespace GameSystems.Player
         public static PlayerStats i;
         private GuildStats stats;
         
-        [SerializeField] private List<UnitSo> unitList = new();
+        [SerializeField] private readonly List<UnitData> unitList = new();
         
 
         private void Awake()
@@ -47,9 +47,9 @@ namespace GameSystems.Player
         }
 
 
-        public static void AddUnit(UnitSo unitSo)
+        public static void AddUnit(UnitData unitData)
         {
-            i.unitList.Add(unitSo);
+            i.unitList.Add(unitData);
             i.onAddUnit.Invoke();
         }
         
@@ -67,7 +67,7 @@ namespace GameSystems.Player
         }
         
        
-        public static List<UnitSo> GetUnits()
+        public static List<UnitData> GetUnits()
         {
             return i.unitList;
         }

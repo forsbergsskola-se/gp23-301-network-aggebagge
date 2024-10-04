@@ -11,11 +11,13 @@ namespace GameSystems.RecruitShop
         
         private void Start()
         {
-            var unitList = FindObjectOfType<UnitRoster>().unitList;
-            foreach (var unitSo in unitList)
+            var unitList = UnitManager.GetShopUnits();
+            
+            
+            foreach (var unitData in unitList)
             {
                 ShopUnit unitInstance = Instantiate(shopUnitPrefab, unitLayout);
-                unitInstance.SetupUI(unitSo);
+                unitInstance.SetupUI(unitData);
             }
         }
     }

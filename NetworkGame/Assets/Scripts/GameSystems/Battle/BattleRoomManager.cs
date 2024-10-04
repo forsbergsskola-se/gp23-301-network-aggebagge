@@ -25,8 +25,8 @@ namespace GameSystems.Battle
             public GuildStats guild1;
             public GuildStats guild2;
 
-            public List<UnitSo> guild1Units = new();
-            public List<UnitSo> guild2Units = new();
+            public List<UnitData> guild1Units = new();
+            public List<UnitData> guild2Units = new();
 
             public void SetBattleRoom(GuildStats g1, GuildStats g2)
             {
@@ -39,17 +39,16 @@ namespace GameSystems.Battle
                 guild1 = g;
             }
 
-            public void SetUnits(List<BattleUnit> units, bool isGuild1)
+            public void SetUnits(List<UnitData> units, bool isGuild1)
             {
                 SetUnits(units, isGuild1? guild1Units : guild2Units);
             }
 
-            private void SetUnits(List<BattleUnit> units, List<UnitSo> list)
+            private void SetUnits(List<UnitData> units, List<UnitData> list)
             {
                 list.Clear();
-                
-                foreach (var battleUnit in units)
-                    list.Add(battleUnit.unit);
+
+                list.AddRange(units);
             }
         }
 
@@ -88,22 +87,21 @@ namespace GameSystems.Battle
             OnOpponentsPrepared.Invoke(battleRooms);
         }
         
-        public void SetPlayerUnits(List<BattleUnit> units, int battleRoomIndex, bool isGuild1)
+        public void SetPlayerUnits(List<UnitData> units, int battleRoomIndex, bool isGuild1)
         {
             photonView.RPC("SyncUnits", RpcTarget.All, units, battleRoomIndex, isGuild1);
         }
-
-        public List<UnitSo> GetOpponentUnits(int index, bool isGuild1)
-        {
-            return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
-        }
         
         [PunRPC]
-        void SyncUnits(List<BattleUnit> units, int battleRoomIndex, bool isGuild1)
+        void SyncUnits(List<UnitData> units, int battleRoomIndex, bool isGuild1)
         {
             battleRooms[battleRoomIndex].SetUnits(units, isGuild1);
         }
 
+        public List<UnitData> GetOpponentUnits(int index, bool isGuild1)
+        {
+            return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
+        }
         
     }
 }

@@ -19,7 +19,7 @@ namespace GameSystems.Battle
         
 
         [HideInInspector] public List<BattleUnit> battleUnits = new ();
-        [HideInInspector] public Queue<UnitSo> unitQueue = new ();
+        [HideInInspector] public Queue<UnitData> unitQueue = new ();
 
         private PlayerBattleStatsUI battleStatsUI;
         private System.Random rng;
@@ -86,7 +86,7 @@ namespace GameSystems.Battle
         
         private void AddUnit()
         {
-            UnitSo unit = unitQueue.Dequeue();
+            UnitData unit = unitQueue.Dequeue();
             var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit);
             
             battleUnits.Add(battleUnit);
@@ -94,15 +94,15 @@ namespace GameSystems.Battle
             if (battleUnits.Count == unitSlots || unitQueue.Count == 0)
                 battleStatsUI.addUnitButton.interactable = false;
 
-            if (battleUnit.unit.damage > 0)
-                AddDamage(battleUnit.unit.damage);
+            if (battleUnit.data.damage > 0)
+                AddDamage(battleUnit.data.damage);
             
             
-            if (battleUnit.unit.attribute != null)
+            if (battleUnit.data.attributeType != UnitAttributeSo.AttributeType.None)
             {
-                if (battleUnit.unit.attribute.type == UnitAttributeSo.AttributeType.Curse)
+                if (battleUnit.data.attributeType == UnitAttributeSo.AttributeType.Curse)
                     AddCurse();
-                else if (battleUnit.unit.attribute.type == UnitAttributeSo.AttributeType.AntiCurse)
+                else if (battleUnit.data.attributeType == UnitAttributeSo.AttributeType.AntiCurse)
                     AddCurseSlot();
             }
         }
@@ -110,10 +110,10 @@ namespace GameSystems.Battle
         
         private void CreateUnitQueue()
         {
-            List<UnitSo> units = new List<UnitSo>(PlayerStats.GetUnits());
+            List<UnitData> units = new List<UnitData>(PlayerStats.GetUnits());
             ShuffleList(units);
 
-            unitQueue = new Queue<UnitSo>(units);
+            unitQueue = new Queue<UnitData>(units);
         }
 
         void ShuffleList<T>(List<T> list)
