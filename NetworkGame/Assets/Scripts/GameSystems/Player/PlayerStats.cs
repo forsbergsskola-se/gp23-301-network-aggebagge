@@ -60,6 +60,17 @@ namespace GameSystems.Player
             
             i.onUpdateGold.Invoke();
         }
+        
+        public static void TakeDamage(int damage)
+        {
+            i.stats.hp -= damage;
+            i.onUpdateHp.Invoke();
+
+            if (i.stats.hp <= 0)
+            {
+                //DEATH!
+            }
+        }
         public static void AddGroupSize()
         {
             i.stats.groupSize++;

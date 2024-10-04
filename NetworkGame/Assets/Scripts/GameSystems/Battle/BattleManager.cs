@@ -157,8 +157,7 @@ namespace GameSystems.Battle
             if(isWin)
                 PlayerStats.AddGold(battleStat.winGold);
             else if (isLose)
-                GameManager.i.PlayerTakeDamage(-battleStat.loseDamage);
-            
+                PlayerStats.TakeDamage(battleStat.loseDamage);
             
             yield return new WaitForSeconds(2);
 
