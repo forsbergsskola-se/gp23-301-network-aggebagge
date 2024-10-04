@@ -13,7 +13,7 @@ namespace GameSystems
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
-        [HideInInspector] public UnityEvent onJoinRoom = new ();
+        [HideInInspector] public UnityEvent onStartGame = new ();
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
         public int playersAlive;
@@ -49,22 +49,22 @@ namespace GameSystems
                 Destroy(gameObject);
             }
             
-            PhotonCustomTypes.Register();
-            PhotonNetwork.ConnectUsingSettings();
+            // PhotonCustomTypes.Register();
+            // PhotonNetwork.ConnectUsingSettings();
         }
 
-        public override void OnConnectedToMaster()
-        {
-            base.OnConnectedToMaster();
-            PhotonNetwork.JoinRandomRoom();
-        }
+        // public override void OnConnectedToMaster()
+        // {
+        //     base.OnConnectedToMaster();
+        //     // PhotonNetwork.JoinRandomRoom();
+        // }
         
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            // Create a room if joining fails
-            RoomOptions roomOptions = new RoomOptions { MaxPlayers = 6 };
-            PhotonNetwork.CreateRoom(null, roomOptions);
-        }
+        // public override void OnJoinRandomFailed(short returnCode, string message)
+        // {
+        //     // Create a room if joining fails
+        //     RoomOptions roomOptions = new RoomOptions { MaxPlayers = 6 };
+        //     PhotonNetwork.CreateRoom(null, roomOptions);
+        // }
 
         public override void OnJoinedRoom()
         {
@@ -80,7 +80,7 @@ namespace GameSystems
             //     playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
             // }
             
-            onJoinRoom.Invoke();
+            onStartGame.Invoke();
         }
 
 

@@ -28,10 +28,10 @@ namespace GameSystems.Player
         private void Start()
         {
             GameManager.i.onUpdatePlayerHp.AddListener(OnUpdatePlayerHp);
-            GameManager.i.onJoinRoom.AddListener(OnJoinRoom);
+            GameManager.i.onStartGame.AddListener(OnStartGame);
         }
 
-        private void OnJoinRoom()
+        private void OnStartGame()
         {
             stats = GuildManager.i.GetPlayerStats();
             unitList.AddRange(UnitManager.GetStartUnits());

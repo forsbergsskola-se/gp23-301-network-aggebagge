@@ -11,7 +11,7 @@ namespace GameSystems.Phases
 {
     public class PhaseManager : MonoBehaviourPunCallbacks
     {
-        [FormerlySerializedAs("OnEndPhase")] public UnityEvent OnAllPlayersReady = new();
+        [HideInInspector] public UnityEvent onAllPlayersReady = new();
         
         public Phase phase = Phase.Recruit;
         public BasePhase[] phases;
@@ -31,7 +31,7 @@ namespace GameSystems.Phases
 
         private void Start()
         {
-            GameManager.i.onJoinRoom.AddListener(OnJoinRoom);
+            GameManager.i.onStartGame.AddListener(OnJoinRoom);
         }
 
         private void OnJoinRoom()
@@ -80,7 +80,7 @@ namespace GameSystems.Phases
             playersReady[playerIndex] = true;
             
             if (playersReady.All(b => b == true))
-                OnAllPlayersReady.Invoke();
+                onAllPlayersReady.Invoke();
         }
         
         

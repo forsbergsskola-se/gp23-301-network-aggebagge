@@ -54,7 +54,7 @@ namespace GameSystems.Battle
 
         private void Start()
         {
-            GameManager.i.onJoinRoom.AddListener(OnJoinRoom);
+            GameManager.i.onStartGame.AddListener(OnJoinRoom);
         }
 
         private void OnJoinRoom()

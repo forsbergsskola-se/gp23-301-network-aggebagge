@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -9,7 +11,8 @@ namespace GameRooms
 {
     public class RoomManager  : MonoBehaviourPunCallbacks
     {
-        public UnityEvent onUpdatePlayerCount = new();
+        [HideInInspector] public UnityEvent onJoinedRoom = new();
+        [HideInInspector] public UnityEvent onUpdatePlayerCount = new();
         
         private string roomCode;
         private int playerCount = 1;
@@ -19,9 +22,23 @@ namespace GameRooms
             PhotonNetwork.ConnectUsingSettings();
         }
 
-        public void CreateRoom()
+        public override void OnConnectedToMaster()
+        {
+            base.OnConnectedToMaster();
+            CreateRoom();
+        }
+
+        private void CreateRoom()
         {
              roomCode = GenerateRoomCode();
+             
+             // Set custom room properties for the room code
+             var roomOptions = new RoomOptions();
+             Hashtable customRoomProperties = new Hashtable();
+             customRoomProperties.Add("roomCode", roomCode);  // Store the code as a custom property
+             roomOptions.CustomRoomProperties = customRoomProperties;
+
+             PhotonNetwork.CreateRoom(null, roomOptions); // Create a room with default name (or you can use roomCode as the name)
         }
 
         public void JoinRoom(string input)
@@ -35,6 +52,7 @@ namespace GameRooms
 
             playerCount = PhotonNetwork.PlayerList.Length;
             photonView.RPC("SyncPlayers", RpcTarget.All, playerCount);
+            onJoinedRoom.Invoke();
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
@@ -55,6 +73,11 @@ namespace GameRooms
         {
             playerCount = players;
             onUpdatePlayerCount.Invoke();
+        }
+
+        public string GetRoomCode()
+        {
+            return roomCode;
         }
         
     }

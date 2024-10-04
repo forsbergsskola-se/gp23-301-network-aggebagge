@@ -20,7 +20,7 @@ namespace GameSystems.Phases
         public virtual void Awake()
         {
             pm = GetComponent<PhaseManager>();
-            pm.OnAllPlayersReady.AddListener(OnEndingPhase);
+            pm.onAllPlayersReady.AddListener(OnEndingPhase);
             canvas = FindObjectOfType<CanvasGroup>();
         }
 
