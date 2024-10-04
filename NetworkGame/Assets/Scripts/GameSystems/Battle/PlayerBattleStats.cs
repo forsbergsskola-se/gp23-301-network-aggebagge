@@ -98,11 +98,11 @@ namespace GameSystems.Battle
                 AddDamage(battleUnit.data.damage);
             
             
-            if (battleUnit.data.attributeType != UnitAttributeSo.AttributeType.None)
+            if (battleUnit.data.attributeType != AttributeType.None)
             {
-                if (battleUnit.data.attributeType == UnitAttributeSo.AttributeType.Curse)
+                if (battleUnit.data.attributeType == AttributeType.Curse)
                     AddCurse();
-                else if (battleUnit.data.attributeType == UnitAttributeSo.AttributeType.AntiCurse)
+                else if (battleUnit.data.attributeType == AttributeType.AntiCurse)
                     AddCurseSlot();
             }
         }

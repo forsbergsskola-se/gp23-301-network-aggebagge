@@ -49,10 +49,8 @@ namespace GameSystems
                 Destroy(gameObject);
             }
             
+            PhotonCustomTypes.Register();
             PhotonNetwork.ConnectUsingSettings();
-            
-
-            
         }
 
         public override void OnConnectedToMaster()

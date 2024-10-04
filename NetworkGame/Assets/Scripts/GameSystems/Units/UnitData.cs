@@ -1,13 +1,16 @@
+using System;
+
 namespace GameSystems.Units
 {
+    
     public class UnitData
     {
         public int id;
         public int damage;
         public int goldGain;
-        public UnitAttributeSo.AttributeType attributeType;
+        public AttributeType attributeType;
 
-        public UnitData(int dmg, int gold, UnitAttributeSo.AttributeType atType)
+        public UnitData(int dmg, int gold, AttributeType atType)
         {
             damage = dmg;
             goldGain = gold;
@@ -20,7 +23,11 @@ namespace GameSystems.Units
             damage = unitSo.damage;
             goldGain = unitSo.goldGain;
             
-            attributeType = unitSo.attribute == null? UnitAttributeSo.AttributeType.None : unitSo.attribute.type;
+            attributeType = unitSo.attribute == null? AttributeType.None : unitSo.attribute.type;
+        }
+
+        public UnitData()
+        {
         }
     }
 }

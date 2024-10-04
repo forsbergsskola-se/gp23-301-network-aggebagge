@@ -33,19 +33,9 @@ namespace GameSystems.Player
 
         private void AddUnitToHUD(UnitData unitData)
         {
-            PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data == unitData);
-            
-            if (playerUnitUI == null)
-            {
-                var unitUI = Instantiate(unitUIPrefab, layout);
-                unitUI.SetupUI(unitData);
-                playerUnits.Add(unitUI);
-            }
-            else
-            {
-                playerUnitUI.AddUnit();
-            }
-            
+            var unitUI = Instantiate(unitUIPrefab, layout);
+            unitUI.SetupUI(unitData);
+            playerUnits.Add(unitUI);
         }
     }
 }

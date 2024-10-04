@@ -35,6 +35,7 @@ namespace GameSystems.Player
         private void OnJoinRoom()
         {
             stats = GameManager.i.GetPlayerStats(PhotonNetwork.LocalPlayer.ActorNumber);
+            unitList.AddRange(UnitManager.GetStartUnits());
             onPlayerSetupComplete.Invoke();
         }
 

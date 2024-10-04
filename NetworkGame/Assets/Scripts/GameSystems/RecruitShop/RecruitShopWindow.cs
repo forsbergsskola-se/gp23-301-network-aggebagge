@@ -13,7 +13,6 @@ namespace GameSystems.RecruitShop
         {
             var unitList = UnitManager.GetShopUnits();
             
-            
             foreach (var unitData in unitList)
             {
                 ShopUnit unitInstance = Instantiate(shopUnitPrefab, unitLayout);

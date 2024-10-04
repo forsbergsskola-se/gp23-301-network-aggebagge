@@ -19,7 +19,7 @@ namespace GameSystems.Units
             UnitSo unitSo = UnitManager.GetUnitSo(unitData.id);
             unitImage.sprite = unitSo.sprite;
             
-            if (unitData.attributeType != UnitAttributeSo.AttributeType.None)
+            if (unitData.attributeType != AttributeType.None)
             {
                 uniqueImage.gameObject.SetActive(true);
                 uniqueImage.sprite = unitSo.attribute.icon;

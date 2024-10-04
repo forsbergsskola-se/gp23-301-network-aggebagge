@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameSystems.Player;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,7 +13,10 @@ namespace GameSystems.Units
         public int unitCount;
         private HashSet<UnitSo> unitList = new();
         private HashSet<UnitData> shopUnits = new();
-        
+
+        public List<UnitSo> startUnits;
+        private List<UnitData> startUnitDataList = new();
+
         private void Awake()
         {
             i = this;
@@ -27,7 +31,11 @@ namespace GameSystems.Units
                     shopUnits.Add(new UnitData(unitSo));
                 }
             }
+
+            foreach (var startUnit in startUnits)
+                startUnitDataList.Add(new UnitData(startUnit));
         }
+        
 
         public static UnitSo GetUnitSo(int id)
         {
@@ -37,6 +45,11 @@ namespace GameSystems.Units
         public static HashSet<UnitData> GetShopUnits()
         {
             return i.shopUnits;
+        }
+
+        public static List<UnitData> GetStartUnits()
+        {
+            return i.startUnitDataList;
         }
         
     }

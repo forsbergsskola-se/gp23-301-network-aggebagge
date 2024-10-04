@@ -31,6 +31,8 @@ namespace GameSystems.RecruitShop
             
             buyButton.onClick.AddListener(OnClickButton);
             PlayerStats.i.onUpdateGold.AddListener(UpdateButtonInteractable);
+
+            UpdateButtonInteractable();
         }
 
         private void OnClickButton()
