@@ -4909,6 +4909,7 @@ GameObject:
   - component: {fileID: 1202100760}
   - component: {fileID: 1202100762}
   - component: {fileID: 1202100761}
+  - component: {fileID: 1202100763}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4937,6 +4938,7 @@ MonoBehaviour:
   playersAlive: 0
   damageColor: {r: 1, g: 0, b: 0.34117648, a: 1}
   goldColor: {r: 1, g: 1, b: 0.32156864, a: 1}
+  myId: 0
   playerIdList: 
   hasJoinedRoom: 0
 --- !u!4 &1202100755
@@ -5146,6 +5148,50 @@ MonoBehaviour:
   onUpdatePlayerCount:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1202100763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202100753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9459a429f46d4980980ca84f0d97b59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHp: 50
+  startGold: 5
+  startGroupSize: 5
+  playerGuilds: []
+  guildNames:
+  - Valor
+  - Ember
+  - Aegis
+  - Thorn
+  - Sentinel
+  - Blades
+  - Raven
+  - Titan
+  - Phoenix
+  - Lotus
+  - Nexus
+  - Prime
+  guildColors:
+  - {r: 0.19999999, g: 0.704731, b: 1, a: 1}
+  - {r: 0.9169811, g: 0.21978551, b: 0.21280874, a: 1}
+  - {r: 1, g: 0.79984796, b: 0, a: 1}
+  - {r: 0.3244357, g: 0.93962264, b: 0.49876475, a: 1}
+  - {r: 0.16860795, g: 0.22569767, b: 0.7509433, a: 1}
+  - {r: 0.55949444, g: 0.6719031, b: 0.6754716, a: 1}
+  - {r: 0.509839, g: 0.16862743, b: 0.7490196, a: 1}
+  - {r: 0, g: 0.4566037, b: 0.03418869, a: 1}
+  - {r: 1, g: 0.47860008, b: 0, a: 1}
+  - {r: 1, g: 0.37647057, b: 0.7227306, a: 1}
+  - {r: 0.18414383, g: 0.8792453, b: 0.8189348, a: 1}
+  - {r: 0.4566037, g: 0, b: 0.13431841, a: 1}
+  damageColor: {r: 0, g: 0, b: 0, a: 0}
+  goldColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1242557302
 GameObject:
   m_ObjectHideFlags: 0

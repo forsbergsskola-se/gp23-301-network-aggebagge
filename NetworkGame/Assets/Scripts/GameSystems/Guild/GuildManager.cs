@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameSystems.Guild
 {
     public class GuildManager : MonoBehaviourPunCallbacks
     {
+        [HideInInspector] public UnityEvent onGuildCreated = new();
         public static GuildManager i;
 
         [Header("Start Values")]
@@ -17,11 +19,10 @@ namespace GameSystems.Guild
         
         
         [Header("Guild Configurations")]
-        public List<GuildStats> playerGuilds = new ();
+        [HideInInspector] public List<GuildStats> playerGuilds = new ();
         public string[] guildNames;
         public Color[] guildColors;
-        public Color damageColor;
-        public Color goldColor;
+        
 
         private int fields = 6;
         
@@ -50,6 +51,7 @@ namespace GameSystems.Guild
             if (!PhotonNetwork.IsMasterClient)
             {
                 photonView.RPC("RequestGuildsFromMaster", RpcTarget.MasterClient);
+                Debug.Log(playerGuilds.Count);
                 CreateGuild();
             }
             else
@@ -79,19 +81,29 @@ namespace GameSystems.Guild
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             int playerIndex = PhotonNetwork.PlayerList.Length;
 
-            var guildStats = new GuildStats(id, guildNames[playerIndex], guildColors[playerIndex]);
+            var guildStats = new GuildStats(id, guildNames[playerIndex - 1], guildColors[playerIndex - 1]);
             playerGuilds.Add(guildStats);
+            Debug.Log(playerGuilds.Count);
             
             // Synchronize the updated guilds list with all players
             SyncGuilds();
+            
+            onGuildCreated.Invoke();
         }
         
         
         [PunRPC]
-        void RequestGuildsFromMaster()
+        void RequestGuildsFromMaster(PhotonMessageInfo info)
         {
-            // The Master Client sends the guilds list to the new player
-            SyncGuilds();  // Call the sync method to send guilds to the requesting player
+            photonView.RPC("SendGuildsToClient", info.Sender, playerGuilds);
+        }
+        
+        [PunRPC]
+        public void SendGuildsToClient(List<GuildStats> guilds)
+        {
+            playerGuilds.Clear();
+            playerGuilds.AddRange(guilds);
+            Debug.Log("Sends guilds to client");
         }
         
         // Serialize the GuildStats list into basic types (for sending over Photon)

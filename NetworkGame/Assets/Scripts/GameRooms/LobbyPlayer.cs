@@ -20,7 +20,7 @@ namespace GameRooms
             
             guildText.text = guildStats.guildName;
             guildText.color = guildStats.guildColor;
-            
+            guildCrest.color = guildStats.guildColor;
         }
     }
 }

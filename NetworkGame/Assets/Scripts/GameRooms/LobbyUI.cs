@@ -24,9 +24,8 @@ namespace GameRooms
         public Transform codeUITransform;
         private void Start()
         {
-            OnUpdatePlayerCount();
-            roomManager.onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
             roomManager.onJoinedRoom.AddListener(OnJoinedRoom);
+            GuildManager.i.onGuildCreated.AddListener(OnGuildCreated);
         }
 
         private void OnJoinedRoom()
@@ -47,15 +46,22 @@ namespace GameRooms
             lobby.gameObject.SetActive(false);
         }
 
-        private void OnUpdatePlayerCount()
+        private void OnGuildCreated()
         {
-            foreach (var player in PhotonNetwork.PlayerList)
+            UpdateLobbyGuilds();
+            roomManager.onUpdatePlayerCount.AddListener(UpdateLobbyGuilds);
+        }
+
+        void UpdateLobbyGuilds()
+        {
+            Debug.Log(PhotonNetwork.PlayerList.Length + " " + GuildManager.i.playerGuilds.Count);
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
-                if(lobbyPlayers.Any(lp => lp.id == player.ActorNumber))
+                if(lobbyPlayers.Any(lp => lp.id == PhotonNetwork.PlayerList[i].ActorNumber))
                     continue;
 
                 var lp = Instantiate(lobbyPlayerPrefab, layout);
-                lp.SetupValues(GuildManager.i.GetPlayerStats());
+                lp.SetupValues(GuildManager.i.playerGuilds[i]);
                 
                 lobbyPlayers.Add(lp);
             }
