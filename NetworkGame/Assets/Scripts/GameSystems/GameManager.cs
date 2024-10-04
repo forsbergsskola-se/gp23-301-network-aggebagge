@@ -30,6 +30,8 @@ namespace GameSystems
         public Color damageColor;
         public Color goldColor;
 
+
+        [HideInInspector] public int myId;
         
         // Singleton instance for easy access
         public static GameManager i;
@@ -48,7 +50,7 @@ namespace GameSystems
             {
                 Destroy(gameObject);
             }
-            
+
             // PhotonCustomTypes.Register();
             // PhotonNetwork.ConnectUsingSettings();
         }
@@ -72,6 +74,7 @@ namespace GameSystems
             
             Debug.Log("JOIN ROOM");
             hasJoinedRoom = true;
+            myId = PhotonNetwork.LocalPlayer.ActorNumber;
             // playerCount = PhotonNetwork.PlayerList.Length;
 
             // for (int i = 0; i < playerCount; i++)
@@ -79,7 +82,7 @@ namespace GameSystems
             //     playerGuilds.Add(new GuildStats(startHp, startGold, startGroupSize, guildNames[i], guildColors[i]));
             //     playerIdList.Add(PhotonNetwork.PlayerList[i].ActorNumber);
             // }
-            
+
         }
 
 
