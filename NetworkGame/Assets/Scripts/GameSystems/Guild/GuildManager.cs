@@ -50,21 +50,13 @@ namespace GameSystems.Guild
             if (!PhotonNetwork.IsMasterClient)
             {
                 photonView.RPC("RequestGuildsFromMaster", RpcTarget.MasterClient);
+                CreateGuild();
             }
             else
             {
-                // Initialize guilds for the master client, if necessary
-                // InitializeGuilds();
+                CreateGuild();
             }
         }
-
-        // Called by new players to request the guild list from the Master Client
-        // [PunRPC]
-        // void RequestGuildsFromMaster()
-        // {
-        //     // The Master Client sends the guilds list to the new player
-        //     photonView.RPC("SyncGuilds", RpcTarget.OthersBuffered, SerializeGuilds(playerGuilds));
-        // }
 
         // This method will be called to receive the guilds list and update the local player's guilds
         [PunRPC]
@@ -73,23 +65,33 @@ namespace GameSystems.Guild
             playerGuilds = DeserializeGuilds(serializedGuilds);
             Debug.Log("Guilds have been synchronized.");
         }
+        
+        // This method sends the current guilds list to all players
+        private void SyncGuilds()
+        {
+            photonView.RPC("SyncGuilds", RpcTarget.OthersBuffered, SerializeGuilds(playerGuilds));
+        }
 
         // Helper function to initialize guilds (only for Master Client)
-        // private void InitializeGuilds()
-        // {
-        //     // Initialize your playerGuilds list here with data
-        //     playerGuilds = new List<GuildStats>
-        //     {
-        //         new GuildStats(, "Guild 1", startHp, startGold);
-        //     };
-        // }
+        private void CreateGuild()
+        {
+            // Initialize your playerGuilds list here with data
+            int id = PhotonNetwork.LocalPlayer.ActorNumber;
+            int playerIndex = PhotonNetwork.PlayerList.Length;
+
+            var guildStats = new GuildStats(id, guildNames[playerIndex], guildColors[playerIndex]);
+            playerGuilds.Add(guildStats);
+            
+            // Synchronize the updated guilds list with all players
+            SyncGuilds();
+        }
         
         
         [PunRPC]
         void RequestGuildsFromMaster()
         {
             // The Master Client sends the guilds list to the new player
-            photonView.RPC("SyncGuilds", RpcTarget.OthersBuffered, SerializeGuilds(playerGuilds));
+            SyncGuilds();  // Call the sync method to send guilds to the requesting player
         }
         
         // Serialize the GuildStats list into basic types (for sending over Photon)
@@ -138,7 +140,8 @@ namespace GameSystems.Guild
         
         public GuildStats GetPlayerStats()
         {
-            return playerGuilds.FirstOrDefault(gs => gs.playerID == PhotonNetwork.LocalPlayer.ActorNumber);
+            int id = PhotonNetwork.LocalPlayer.ActorNumber;
+            return playerGuilds.FirstOrDefault(gs => gs.playerID == id);
         }
     }
 }
