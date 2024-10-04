@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameSystems.Battle;
 using GameSystems.Units;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace GameSystems.Player
         public PlayerUnitUI unitUIPrefab;
 
         List<PlayerUnitUI> playerUnits = new ();
-
+        
         private void Start()
         {
             PlayerStats.i.onPlayerSetupComplete.AddListener(Setup);
@@ -31,11 +32,41 @@ namespace GameSystems.Player
             AddUnitToHUD(units[^1]);
         }
 
+        public void ReturnBattleUnits(List<UnitData> units)
+        {
+            foreach (var unitData in units)
+                AddUnitToHUD(unitData);
+        }
+
         private void AddUnitToHUD(UnitData unitData)
         {
-            var unitUI = Instantiate(unitUIPrefab, layout);
-            unitUI.SetupUI(unitData);
-            playerUnits.Add(unitUI);
+            PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
+            
+            if (playerUnitUI == null)
+            {
+                var unitUI = Instantiate(unitUIPrefab, layout);
+                unitUI.SetupUI(unitData);
+                playerUnits.Add(unitUI);
+            }
+            else
+            {
+                playerUnitUI.AddUnit();
+            }
+            
+            // var unitUI = Instantiate(unitUIPrefab, layout);
+            // unitUI.SetupUI(unitData);
+            // playerUnits.Add(unitUI);
+        }
+
+        private void RemoveUnitFromHUD(UnitData unitData)
+        {
+            PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
+            if (playerUnitUI == null)
+            {
+                Debug.LogError("Missing? | Unit Id:" + unitData.id);
+                return;
+            }
+            playerUnitUI.RemoveUnit();
         }
     }
 }

@@ -14,6 +14,15 @@ namespace GameSystems.Player
         {
             count++;
             countText.text = count.ToString();
+            if (count == 1)
+                gameObject.SetActive(false);
+        }
+
+        public void RemoveUnit()
+        {
+            count--;
+            if(count <= 0)
+                gameObject.SetActive(false);
         }
     }
 }
