@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2439727670124808960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -218,6 +218,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 579650674274230224, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1157222106382330343, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 25
@@ -245,6 +249,10 @@ PrefabInstance:
     - target: {fileID: 2482392113466702338, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_fontSizeBase
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762878748306853013, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2881539916111549192, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_Pivot.x
@@ -338,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitUI_HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 3858664859025940686, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4768741966088826111, guid: da02ab1f397bc6f44aa5372698c3ce7f, type: 3}
       propertyPath: m_text
       value: 
@@ -379,7 +391,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 8945346744541643660}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
