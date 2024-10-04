@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameSystems;
+using GameSystems.Guild;
+using GameSystems.Player;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -52,8 +54,10 @@ namespace GameRooms
                 if(lobbyPlayers.Any(lp => lp.id == player.ActorNumber))
                     continue;
 
-                Instantiate(lobbyPlayerPrefab, layout);
-
+                var lp = Instantiate(lobbyPlayerPrefab, layout);
+                lp.SetupValues(GuildManager.i.GetPlayerStats());
+                
+                lobbyPlayers.Add(lp);
             }
         }
         
