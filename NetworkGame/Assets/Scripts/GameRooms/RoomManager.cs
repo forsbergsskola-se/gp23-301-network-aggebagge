@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace GameRooms
@@ -29,7 +31,10 @@ namespace GameRooms
             if(PlayerPrefsData.i.IsHost())
                 CreateRoom();
             else
+            {
                 roomCode = PlayerPrefsData.i.GetCode();
+                JoinRoom(roomCode);
+            }
         }
 
         private void CreateRoom()
@@ -41,13 +46,36 @@ namespace GameRooms
              Hashtable customRoomProperties = new Hashtable();
              customRoomProperties.Add("roomCode", roomCode);  // Store the code as a custom property
              roomOptions.CustomRoomProperties = customRoomProperties;
-
+             roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };  // Make sure this property is visible in the lobby
+             
              PhotonNetwork.CreateRoom(null, roomOptions); // Create a room with default name (or you can use roomCode as the name)
+             
         }
 
-        public void JoinRoom(string input)
+        public void JoinRoom(string codeInput)
         {
-            PhotonNetwork.JoinRoom(roomCode);
+            // Store the input for future use
+            roomCode = codeInput.ToUpper();
+    
+            // Load the rooms from the lobby
+            PhotonNetwork.JoinLobby();
+        }
+
+        // Callback when the room list is updated (after joining the lobby)
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            foreach (RoomInfo room in roomList)
+            {
+                if (room.CustomProperties.ContainsKey("roomCode") && room.CustomProperties["roomCode"].ToString() == roomCode)
+                {
+                    // Found the room, now join it
+                    PhotonNetwork.JoinRoom(room.Name);
+                    return;
+                }
+            }
+
+            // If we reach here, no room was found
+            Debug.LogError("Room with code " + roomCode + " not found.");
         }
 
         public override void OnJoinedRoom()
@@ -62,6 +90,7 @@ namespace GameRooms
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
             base.OnJoinRoomFailed(returnCode, message);
+            SceneManager.LoadScene("MainMenu");
             Debug.Log("Could not join room");
         }
 
