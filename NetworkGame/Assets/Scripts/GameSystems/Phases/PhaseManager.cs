@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace GameSystems.Phases
 {
     public class PhaseManager : MonoBehaviourPunCallbacks
     {
+        public static PhaseManager i;
         [HideInInspector] public UnityEvent onAllPlayersReady = new();
         
         public Phase phase = Phase.Recruit;
@@ -27,6 +29,11 @@ namespace GameSystems.Phases
             Prep,
             Battle,
             End
+        }
+
+        private void Awake()
+        {
+            i = this;
         }
 
         private void Start()
@@ -70,8 +77,12 @@ namespace GameSystems.Phases
 
         public void PlayerReady()
         {
-            GameManager.i.GetMyPlayerIndex();
-            photonView.RPC("SyncPlayersReady", RpcTarget.All, GameManager.i.GetMyPlayerIndex());
+            PlayerReady(GameManager.i.GetMyPlayerIndex());
+        }
+        
+        public void PlayerReady(int index)
+        {
+            photonView.RPC("SyncPlayersReady", RpcTarget.All, index);
         }
         
         [PunRPC]

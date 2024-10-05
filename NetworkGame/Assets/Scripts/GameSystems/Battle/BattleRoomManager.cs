@@ -14,7 +14,7 @@ namespace GameSystems.Battle
     {
         public static BattleRoomManager i;
         
-        [HideInInspector] public UnityEvent onPreparationsComplete = new();
+        [HideInInspector] public UnityEvent<int> onSyncUnitsComplete = new();
         [HideInInspector] public UnityEvent<List<BattleRoom>> onOpponentsPrepared = new();
         private readonly List<BattleRoom> battleRooms = new();
 
@@ -31,32 +31,19 @@ namespace GameSystems.Battle
             public readonly List<UnitData> guild1Units = new();
             public readonly List<UnitData> guild2Units = new();
 
-            private bool isg1Ready;
-            private bool isg2Ready;
-
             public void SetBattleRoom(GuildStats g1, GuildStats g2)
             {
                 guild1 = g1;
                 guild2 = g2;
             }
-            
             public void SetBattleRoom(GuildStats g)
             {
                 guild1 = g;
             }
 
-            public bool IsReady()
-            {
-                return isg1Ready && isg2Ready;
-            }
-
             public void SetUnits(List<UnitData> units, bool isGuild1)
             {
                 SetUnits(units, isGuild1? guild1Units : guild2Units);
-                if(isGuild1)
-                    isg1Ready = true;
-                else
-                    isg2Ready = true;
             }
 
             private void SetUnits(List<UnitData> units, List<UnitData> list)
@@ -112,22 +99,15 @@ namespace GameSystems.Battle
         
         public void PlayerEndBattle(List<UnitData> units, int battleRoomIndex, bool isGuild1)
         {
-            photonView.RPC("SyncUnits", RpcTarget.All, units.ToArray(), battleRoomIndex, isGuild1);
-            
+            int myIndex = GameManager.i.GetMyPlayerIndex();
+            photonView.RPC("SyncUnits", RpcTarget.All, units.ToArray(), battleRoomIndex, isGuild1, myIndex);
         }
         
         [PunRPC]
-        void SyncUnits(UnitData[] units, int battleRoomIndex, bool isGuild1)
+        void SyncUnits(UnitData[] units, int battleRoomIndex, bool isGuild1, int playerIndex)
         {
             battleRooms[battleRoomIndex].SetUnits(units.ToList(), isGuild1);
-
-            foreach (var battleRoom in battleRooms)
-            {
-                if(!battleRoom.IsReady())
-                    return;
-            }
-            
-            onPreparationsComplete.Invoke();
+            onSyncUnitsComplete.Invoke(playerIndex);
         }
 
         public List<UnitData> GetOpponentUnits(int index, bool isGuild1)
