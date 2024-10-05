@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using GameSystems.Guild;
-using GameSystems.Phases;
-using GameSystems.Player;
 using GameSystems.Units;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace GameSystems.Battle
@@ -123,18 +119,18 @@ namespace GameSystems.Battle
 
         private void SyncBattleRoomsWithClients()
         {
-            // Convert BattleRoom list to an array of Hashtables
-            object[] serializedBattleRooms = new object[battleRooms.Count];
+            // Create a Hashtable to hold serialized battle rooms
+            Hashtable serializedBattleRooms = new Hashtable();
 
             for (int i = 0; i < battleRooms.Count; i++)
             {
-                serializedBattleRooms[i] = battleRooms[i].ToHashtable();
+                serializedBattleRooms[i.ToString()] = battleRooms[i].ToHashtable(); // Serialize to Hashtable
             }
 
             // Send the serialized data to all players via RPC
             photonView.RPC("SyncBattleRooms", RpcTarget.All, serializedBattleRooms);
         }
-        
+
         [PunRPC]
         void SyncBattleRooms(Hashtable serializedBattleRooms)
         {
@@ -144,9 +140,8 @@ namespace GameSystems.Battle
             // Deserialize each BattleRoom from the Hashtable
             foreach (DictionaryEntry entry in serializedBattleRooms)
             {
-                Hashtable serializedRoom = (Hashtable)entry.Value;
-                // Convert Hashtable back to BattleRoom and add to list
-                battleRooms.Add(BattleRoom.FromHashtable(serializedRoom));
+                Hashtable roomData = (Hashtable)entry.Value; // Cast to Hashtable
+                battleRooms.Add(BattleRoom.FromHashtable(roomData)); // Deserialize to BattleRoom
             }
 
             // Call an event or method to indicate that the battle rooms are ready
