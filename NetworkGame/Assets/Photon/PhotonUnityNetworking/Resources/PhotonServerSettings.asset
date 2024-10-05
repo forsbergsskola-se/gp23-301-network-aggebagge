@@ -47,6 +47,7 @@ MonoBehaviour:
   - SyncPlayers
   - SendGuildsToClient
   - SyncGuildsRPC
+  - SyncGameStart
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
