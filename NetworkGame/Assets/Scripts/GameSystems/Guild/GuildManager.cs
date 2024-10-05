@@ -90,10 +90,6 @@ namespace GameSystems.Guild
                 playerGuilds.Add(GuildStats.FromHashtable((Hashtable)guildData.Value)); // Cast to Hashtable
             }
 
-            foreach (var gs in playerGuilds)
-                Debug.Log(gs.playerID + " " + gs.guildName);
-            
-            
             Debug.Log("Received guild data: " + serializedGuilds.Count + " guild(s) synced.");
             onGuildSynced.Invoke();
         }
