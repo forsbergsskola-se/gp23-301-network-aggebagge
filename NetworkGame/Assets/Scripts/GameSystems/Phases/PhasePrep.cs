@@ -11,7 +11,7 @@ namespace GameSystems.Phases
 
         private void Start()
         {
-            BattleManager.i.onPlayerEndPrep.AddListener(OnEndingPhase);
+            BattleManager.i.onPlayerEndPrep.AddListener(pm.PlayerReady);
         }
 
         public override void OnBeginPhase()
@@ -20,6 +20,7 @@ namespace GameSystems.Phases
 
             battleTransform.gameObject.SetActive(true);
             BattleManager.i.SetupBattleField();
+            
         }
         
     }
