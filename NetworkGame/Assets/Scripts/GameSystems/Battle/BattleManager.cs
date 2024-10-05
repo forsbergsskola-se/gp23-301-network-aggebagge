@@ -55,9 +55,9 @@ namespace GameSystems.Battle
 
      
 
-        private void GetOpponent(List<BattleRoomManager.BattleRoom> battleRooms)
+        private void GetOpponent()
         {
-            opponent = GetOpponentGuildStats(battleRooms);
+            opponent =  BattleRoomManager.i.GetOpponentGuildStats();
         }
 
         public void SetupBattleField()
@@ -88,7 +88,7 @@ namespace GameSystems.Battle
         {
             if (opponent != null)
             {
-                opponentUnits = BattleRoomManager.i.GetOpponentUnits(GameManager.i.GetPlayerIndex(opponent.playerID));
+                opponentUnits = BattleRoomManager.i.GetOpponentUnits();
                 enemyBattleField.SetupSlots(opponentUnits.Count);
             }
             Debug.Log(opponentUnits.Count);
@@ -166,28 +166,28 @@ namespace GameSystems.Battle
         }
         
 
-        private GuildStats GetOpponentGuildStats(List<BattleRoomManager.BattleRoom> battleRooms)
-        {
-            GuildStats playerGuildStats = PlayerStats.GetGuildStats();
-
-            foreach (var battleRoom in battleRooms)
-            {
-                if (battleRoom.guild1 == playerGuildStats)
-                {
-                    battleRoomIndex = battleRooms.IndexOf(battleRoom);
-                    isGuild1 = true;
-                    return battleRoom.guild2;
-                }
-                if (battleRoom.guild2 == playerGuildStats)
-                {
-                    battleRoomIndex = battleRooms.IndexOf(battleRoom);
-                    isGuild1 = false;
-                    return battleRoom.guild1;
-                }
-            }
-
-            return null;
-        }
+        // private GuildStats GetOpponentGuildStats(List<BattleRoomManager.BattleRoom> battleRooms)
+        // {
+        //     GuildStats playerGuildStats = PlayerStats.GetGuildStats();
+        //
+        //     foreach (var battleRoom in battleRooms)
+        //     {
+        //         if (battleRoom.guild1 == playerGuildStats)
+        //         {
+        //             battleRoomIndex = battleRooms.IndexOf(battleRoom);
+        //             isGuild1 = true;
+        //             return battleRoom.guild2;
+        //         }
+        //         if (battleRoom.guild2 == playerGuildStats)
+        //         {
+        //             battleRoomIndex = battleRooms.IndexOf(battleRoom);
+        //             isGuild1 = false;
+        //             return battleRoom.guild1;
+        //         }
+        //     }
+        //
+        //     return null;
+        // }
 
         public BattleStats GetBattleStats()
         {

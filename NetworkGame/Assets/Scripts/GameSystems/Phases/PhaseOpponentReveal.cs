@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameSystems.Battle;
 using GameSystems.Player;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace GameSystems.Phases
             BattleRoomManager.i.PrepareBattleOpponents();
         }
 
-        private void OnOpponentsPrepared(List<BattleRoomManager.BattleRoom> arg0)
+        private void OnOpponentsPrepared()
         {
             StartCoroutine(OpponentRevealAnimation());
         }

@@ -60,12 +60,7 @@ namespace GameSystems
 
         private void OnUpdatePlayerCount()
         {
-            playersAlive = PhotonNetwork.PlayerList.Length;
             
-            playerIdList.Clear();
-
-            foreach (var player in PhotonNetwork.PlayerList)
-                playerIdList.Add(player.ActorNumber);
         }
 
 
@@ -77,7 +72,6 @@ namespace GameSystems
         
         public void StartGame()
         {
-            onBeginCountdown.Invoke();
             photonView.RPC("SyncGameStart", RpcTarget.All);
         }
         
@@ -85,6 +79,16 @@ namespace GameSystems
         void SyncGameStart()
         {
             onBeginCountdown.Invoke();
+            
+            playersAlive = PhotonNetwork.PlayerList.Length;
+
+            playerIdList.Clear();
+
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                Debug.Log(player.ActorNumber);
+                playerIdList.Add(player.ActorNumber);
+            }
         }
 
         
@@ -129,7 +133,14 @@ namespace GameSystems
 
         public int GetPlayerIndex(int id)
         {
-            return playerIdList.IndexOf(id);
+            for(int i = 0; i < playerIdList.Count; i++)
+            {
+                Debug.Log(playerIdList[i] + " " + id);
+                if (playerIdList[i] == id)
+                    return i;
+            }
+            
+            return -1;
         }
 
         public int GetMyPlayerIndex()

@@ -48,6 +48,10 @@ MonoBehaviour:
   - SendGuildsToClient
   - SyncGuildsRPC
   - SyncGameStart
+  - SyncBattleRooms
+  - GetUnitList
+  - SetUnitList
+  - SetPlayerUnits
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
