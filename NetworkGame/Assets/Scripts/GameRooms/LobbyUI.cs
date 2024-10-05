@@ -22,12 +22,51 @@ namespace GameRooms
         public TextMeshProUGUI codeText;
         public Button startButton;
         public Transform codeUITransform;
+        
+        public TextMeshProUGUI countdownText;
+        public int countdownTime;
+        private float countdownTimer;
+        public bool hasGameStarted;
+
+        
         private void Start()
         {
             roomManager.onJoinedRoom.AddListener(OnJoinedRoom);
             // GuildManager.i.onGuildCreated.AddListener(OnGuildCreated);
             GuildManager.i.onGuildSynced.AddListener(UpdateLobbyGuilds);
+            GameManager.i.onStartGame.AddListener(OnStartGame);
+            GameManager.i.onBeginCountdown.AddListener(OnBeginCountdown);
+        }
+        
+        private void Update()
+        {
+            if(hasGameStarted)
+                return;
+            
+            if(countdownTimer <= 0)
+                return;
 
+            countdownTimer -= Time.deltaTime;
+            countdownText.text = Mathf.CeilToInt(countdownTimer).ToString();
+
+            if (countdownTimer <= 0)
+            {
+                hasGameStarted = true;
+                countdownText.gameObject.SetActive(false);
+                GameManager.i.onStartGame.Invoke();
+            }
+        }
+
+        private void OnBeginCountdown()
+        {
+            codeUITransform.gameObject.SetActive(false);
+            countdownTimer = countdownTime;
+            countdownText.gameObject.SetActive(true);
+        }
+
+        private void OnStartGame()
+        {
+            lobby.gameObject.SetActive(false);
         }
 
         private void OnJoinedRoom()
@@ -46,8 +85,7 @@ namespace GameRooms
 
         private void OnClickStart()
         {
-            GameManager.i.onStartGame.Invoke();
-            lobby.gameObject.SetActive(false);
+            GameManager.i.StartGame();
         }
 
         // private void OnGuildCreated()
