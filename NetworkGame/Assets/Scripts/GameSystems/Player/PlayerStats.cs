@@ -18,8 +18,12 @@ namespace GameSystems.Player
         private GuildStats stats;
         
         [SerializeField] private readonly List<UnitData> unitList = new();
-        
 
+        public int maxHp;
+        public int hp;
+        public int gold;
+        public int groupSize;
+        
         private void Awake()
         {
             i = this;
@@ -33,9 +37,14 @@ namespace GameSystems.Player
 
         private void OnStartGame()
         {
-            stats = GuildManager.i.GetPlayerStats();
+            stats = GuildManager.i.GetPlayerGuildStats();
             unitList.AddRange(UnitManager.GetStartUnits());
             onPlayerSetupComplete.Invoke();
+
+            maxHp = GuildManager.i.startHp;
+            hp = maxHp;
+            gold = GuildManager.i.startGold;
+            groupSize = GuildManager.i.startGroupSize;
         }
 
         private void OnUpdatePlayerHp(GuildStats guildStats)
@@ -55,25 +64,25 @@ namespace GameSystems.Player
         
         public static void AddGold(int gold)
         {
-            i.stats.gold += gold;
-            i.stats.gold = Mathf.Clamp(i.stats.gold, 0, 99);
+            i.gold += gold;
+            i.gold = Mathf.Clamp(i.gold, 0, 99);
             
             i.onUpdateGold.Invoke();
         }
         
         public static void TakeDamage(int damage)
         {
-            i.stats.hp -= damage;
+            i.hp -= damage;
             i.onUpdateHp.Invoke();
 
-            if (i.stats.hp <= 0)
+            if (i.hp <= 0)
             {
                 //DEATH!
             }
         }
         public static void AddGroupSize()
         {
-            i.stats.groupSize++;
+            i.groupSize++;
             i.onAddGroupSize.Invoke();
         }
         
@@ -84,11 +93,11 @@ namespace GameSystems.Player
         }
         public static int GetGold()
         {
-            return i.stats.gold;
+            return i.gold;
         }
         public static int GetHp()
         {
-            return i.stats.hp;
+            return i.hp;
         }
         public static GuildStats GetGuildStats()
         {
@@ -96,7 +105,7 @@ namespace GameSystems.Player
         }
         public static int GetGroupSize()
         {
-            return i.stats.groupSize;
+            return i.groupSize;
         }
         
     }

@@ -9,10 +9,10 @@ namespace GameSystems.Guild
     {
         public int playerID;
         public string guildName;
-        public int maxHp;
-        public int hp;
-        public int gold;
-        public int groupSize;
+        // public int maxHp;
+        // public int hp;
+        // public int gold;
+        // public int groupSize;
         public Color guildColor;
 
         public GuildStats(int id, string gName, Color color)
@@ -28,8 +28,6 @@ namespace GameSystems.Guild
 
         public GuildStats()
         {}
-        
-        
         
         
         // Convert to Hashtable for easier serialization

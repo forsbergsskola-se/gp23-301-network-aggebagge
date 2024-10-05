@@ -41,9 +41,9 @@ namespace GameSystems.Guild
                 photonView.RPC("RequestGuildsFromMaster", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer.ActorNumber);
             else
                 CreateGuildForPlayer(PhotonNetwork.LocalPlayer.ActorNumber);
-
         }
         
+
         private void SyncGuilds()
         {
             // Create an object array to hold the serialized guilds
@@ -105,7 +105,7 @@ namespace GameSystems.Guild
             }
         }
         
-        public GuildStats GetPlayerStats()
+        public GuildStats GetPlayerGuildStats()
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             

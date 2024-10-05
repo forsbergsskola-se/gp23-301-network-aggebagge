@@ -1,8 +1,5 @@
-using GameSystems.Guild;
-using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GameSystems.Player
 {
@@ -13,8 +10,6 @@ namespace GameSystems.Player
         public TextMeshProUGUI gold;
         public TextMeshProUGUI groupSize;
 
-        private GuildStats guildStats;
-        
         private void Start()
         {
             PlayerStats.i.onPlayerSetupComplete.AddListener(Setup);
@@ -22,8 +17,7 @@ namespace GameSystems.Player
 
         private void Setup()
         {
-            guildStats = PlayerStats.GetGuildStats();
-            
+            var guildStats = PlayerStats.GetGuildStats();
             guildTitle.text = guildStats.guildName;
             guildTitle.color = guildStats.guildColor;
             
@@ -36,9 +30,9 @@ namespace GameSystems.Player
 
         private void UpdateUI()
         {
-            hp.text = guildStats.hp.ToString();
-            gold.text = guildStats.gold.ToString();
-            groupSize.text = guildStats.groupSize.ToString();
+            hp.text = PlayerStats.i.hp.ToString();
+            gold.text = PlayerStats.i.gold.ToString();
+            groupSize.text = PlayerStats.i.groupSize.ToString();
         }
     }
 }
