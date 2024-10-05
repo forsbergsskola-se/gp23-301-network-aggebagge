@@ -127,7 +127,7 @@ namespace GameSystems
         //     return playerGuilds[GetPlayerIndex(playerId)];
         // }
 
-        private int GetPlayerIndex(int id)
+        public int GetPlayerIndex(int id)
         {
             return playerIdList.IndexOf(id);
         }
