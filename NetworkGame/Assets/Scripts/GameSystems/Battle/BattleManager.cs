@@ -69,9 +69,6 @@ namespace GameSystems.Battle
             
             playerBattleStats.SetupNewBattle();
             playerBattleField.SetupSlots(PlayerStats.GetGroupSize());
-            
-            if(opponent != null)
-                enemyBattleField.SetupSlots(opponent.groupSize);
         }
         
         
@@ -88,9 +85,12 @@ namespace GameSystems.Battle
                 dataList.Add(unit.data);
             
             BattleRoomManager.i.SetPlayerUnits(dataList, battleRoomIndex, isGuild1);
-            
-            if(opponent != null)
+
+            if (opponent != null)
+            {
                 opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
+                enemyBattleField.SetupSlots(opponentUnits.Count);
+            }
             
             StartCoroutine(AnimateBonuses());
         }
