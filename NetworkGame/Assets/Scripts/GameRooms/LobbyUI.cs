@@ -59,17 +59,25 @@ namespace GameRooms
 
         void UpdateLobbyGuilds()
         {
+
+            foreach (var gs in GuildManager.i.playerGuilds)
+            {
+                Debug.Log(gs.guildName);
+            }
+            
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
                 if(i >= GuildManager.i.playerGuilds.Count)
                     continue;
-                if(lobbyPlayers.Any(lp => lp.id == PhotonNetwork.PlayerList[i].ActorNumber))
+                if(lobbyPlayers.Any(lp => lp.id == GuildManager.i.playerGuilds[i].playerID))
                     continue;
                 
                 if(GuildManager.i.playerGuilds.All(pg => pg.playerID != PhotonNetwork.PlayerList[i].ActorNumber))
                     continue;
                 
                 var lp = Instantiate(lobbyPlayerPrefab, layout);
+                Debug.Log(GuildManager.i.playerGuilds[i].guildName);
+
                 lp.SetupValues(GuildManager.i.playerGuilds[i]);
                 
                 lobbyPlayers.Add(lp);
