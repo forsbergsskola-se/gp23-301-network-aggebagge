@@ -10,6 +10,8 @@ namespace GameSystems.Guild
     public class GuildManager : MonoBehaviourPunCallbacks
     {
         [HideInInspector] public UnityEvent onGuildCreated = new();
+        [HideInInspector] public UnityEvent onGuildSynced = new();
+
         public static GuildManager i;
 
         [Header("Start Values")]
@@ -29,7 +31,15 @@ namespace GameSystems.Guild
         private void Awake()
         {
             i = this;
+            onGuildSynced.AddListener(OnGuildSynced);
         }
+
+        private void OnGuildSynced()
+        {
+            onGuildSynced.RemoveListener(OnGuildSynced);
+            CreateGuild();
+        }
+
 
         // public override void OnJoinedRoom()
         // {
@@ -51,8 +61,6 @@ namespace GameSystems.Guild
             if (!PhotonNetwork.IsMasterClient)
             {
                 photonView.RPC("RequestGuildsFromMaster", RpcTarget.MasterClient);
-                Debug.Log(playerGuilds.Count);
-                CreateGuild();
             }
             else
             {
@@ -66,6 +74,7 @@ namespace GameSystems.Guild
         {
             playerGuilds = DeserializeGuilds(serializedGuilds);
             Debug.Log("Guilds have been synchronized.");
+            onGuildSynced.Invoke();
         }
         
         // This method sends the current guilds list to all players
@@ -75,7 +84,7 @@ namespace GameSystems.Guild
         }
 
         // Helper function to initialize guilds (only for Master Client)
-        private void CreateGuild()
+        private GuildStats CreateGuild()
         {
             // Initialize your playerGuilds list here with data
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
@@ -89,6 +98,8 @@ namespace GameSystems.Guild
             SyncGuilds();
             
             onGuildCreated.Invoke();
+
+            return guildStats;
         }
         
         
@@ -153,7 +164,12 @@ namespace GameSystems.Guild
         public GuildStats GetPlayerStats()
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
-            return playerGuilds.FirstOrDefault(gs => gs.playerID == id);
+            
+            var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
+            if(guildStats == null)
+                guildStats = CreateGuild();
+
+            return guildStats;
         }
     }
 }
