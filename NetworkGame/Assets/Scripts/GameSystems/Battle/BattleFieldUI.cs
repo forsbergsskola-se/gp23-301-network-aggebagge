@@ -22,6 +22,7 @@ namespace GameSystems.Battle
         
         public void SetupSlots(int slots)
         {
+            fieldSlots.Clear();
             units.Clear();
             foreach (Transform child in layout)
                 Destroy(child.gameObject);

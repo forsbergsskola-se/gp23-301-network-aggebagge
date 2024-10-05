@@ -186,7 +186,14 @@ namespace GameSystems.Battle
         private int GetOpponentIndex(int index)
         {
             foreach (var battleRoom in battleRooms)
-                return battleRoom.guild1Index == index? battleRoom.guild2Index : battleRoom.guild1Index;
+            {
+                Debug.Log(battleRoom.guild1Index + " " + battleRoom.guild2Index + " | " + index);
+                
+                if(battleRoom.guild1Index == index)
+                    return battleRoom.guild2Index;
+                if(battleRoom.guild2Index == index)
+                    return battleRoom.guild1Index;
+            }
 
             return -1;
         }

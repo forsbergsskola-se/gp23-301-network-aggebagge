@@ -58,6 +58,7 @@ namespace GameSystems.Battle
         private void GetOpponent()
         {
             opponent =  BattleRoomManager.i.GetOpponentGuildStats();
+            Debug.Log(opponent.guildName);
         }
 
         public void SetupBattleField()
@@ -91,7 +92,6 @@ namespace GameSystems.Battle
                 opponentUnits = BattleRoomManager.i.GetOpponentUnits();
                 enemyBattleField.SetupSlots(opponentUnits.Count);
             }
-            Debug.Log(opponentUnits.Count);
 
             StartCoroutine(AnimateBonuses());
         }
@@ -109,6 +109,7 @@ namespace GameSystems.Battle
                 {
                     if (unitData.data.goldGain > 0)
                     {
+                        PlayerStats.AddGold(unitData.data.goldGain);
                         unitData.PopupText(false, unitData.data.goldGain);
                         yield return new WaitForSeconds(animationWaitTime);
                     }
@@ -147,6 +148,7 @@ namespace GameSystems.Battle
                 opponentDamage = battleStat.monsterDamage;
             }
 
+            Debug.Log(playerBattleStats.GetDamage() + " " +  opponentDamage);
             bool isWin = playerBattleStats.GetDamage() > opponentDamage;
             bool isLose = playerBattleStats.GetDamage() < opponentDamage;
 

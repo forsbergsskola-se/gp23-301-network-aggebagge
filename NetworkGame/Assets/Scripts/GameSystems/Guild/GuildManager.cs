@@ -31,7 +31,6 @@ namespace GameSystems.Guild
             i = this;
         }
         
-        // This method is called when the local player joins the room
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
@@ -42,51 +41,49 @@ namespace GameSystems.Guild
             else
                 CreateGuildForPlayer(PhotonNetwork.LocalPlayer.ActorNumber);
         }
-        
+
+        // RPC for requesting guilds from the master client
+        [PunRPC]
+        void RequestGuildsFromMaster(int playerId)
+        {
+            // Call the method to synchronize guilds with the requesting client
+            CreateGuildForPlayer(playerId);
+        }
 
         private void SyncGuilds()
         {
-            // Create an object array to hold the serialized guilds
+            // Create a Hashtable to hold the serialized guilds
             Hashtable serializedGuilds = new Hashtable();
-            // object[] serializedGuilds = new object[playerGuilds.Count];
-    
+
             for (int i = 0; i < playerGuilds.Count; i++)
             {
                 serializedGuilds[i] = playerGuilds[i].ToHashtable(); // Convert each GuildStats to Hashtable
             }
 
-            // Use object[] instead of List<Hashtable>
-            photonView.RPC("SyncGuildsRPC", RpcTarget.OthersBuffered, serializedGuilds);
-            onGuildSynced.Invoke();
+            // Send the serialized guilds as a single Hashtable
+            photonView.RPC("SyncGuildsRPC", RpcTarget.All, serializedGuilds);
         }
-        
+
         [PunRPC]
         void SyncGuildsRPC(Hashtable serializedGuilds)
         {
             playerGuilds.Clear(); // Clear existing guilds
 
             foreach (DictionaryEntry guildData in serializedGuilds)
-            {
                 playerGuilds.Add(GuildStats.FromHashtable((Hashtable)guildData.Value)); // Cast to Hashtable
-            }
 
-            Debug.Log("Received guild data: " + serializedGuilds.Count + " guild(s) synced.");
+            playerGuilds.Sort((x, y) => x.playerID.CompareTo(y.playerID));
+            
+            Debug.Log("SYNC COMPLETE");
             onGuildSynced.Invoke();
-        }
-        
-        
-        // RPC for requesting guilds from the master client
-        [PunRPC]
-        void RequestGuildsFromMaster(int playerId)
-        {
-            // Only the master client should respond to this request
-            if (PhotonNetwork.IsMasterClient)
+
+            foreach (var gs in playerGuilds)
             {
-                // Call the method to synchronize guilds with the requesting client
-                CreateGuildForPlayer(playerId);
+                Debug.Log(gs.guildName + " " + gs.playerID);
             }
         }
-        
+
+        // When creating a guild, add a check for valid indices
         private void CreateGuildForPlayer(int playerId)
         {
             int playerIndex = playerId - 1; // Assuming player IDs start from 1
@@ -99,11 +96,8 @@ namespace GameSystems.Guild
                 // Synchronize the updated guilds list with all players
                 SyncGuilds();
             }
-            else
-            {
-                Debug.LogWarning($"Player index {playerIndex} is out of range for guilds.");
-            }
         }
+
         
         public GuildStats GetPlayerGuildStats()
         {

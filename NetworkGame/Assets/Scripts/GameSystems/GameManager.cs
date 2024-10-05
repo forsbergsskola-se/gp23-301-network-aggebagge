@@ -20,16 +20,6 @@ namespace GameSystems
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
         public int playersAlive;
-        
-        // [Header("Start Values")]
-        // public int startHp;
-        // public int startGold;
-        // public int startGroupSize;
-        //
-        // [Header("Guild Configurations")]
-        // public List<GuildStats> playerGuilds = new ();
-        // public string[] guildNames;
-        // public Color[] guildColors;
         public Color damageColor;
         public Color goldColor;
 
@@ -86,7 +76,6 @@ namespace GameSystems
 
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                Debug.Log(player.ActorNumber);
                 playerIdList.Add(player.ActorNumber);
             }
         }
@@ -135,7 +124,6 @@ namespace GameSystems
         {
             for(int i = 0; i < playerIdList.Count; i++)
             {
-                Debug.Log(playerIdList[i] + " " + id);
                 if (playerIdList[i] == id)
                     return i;
             }
