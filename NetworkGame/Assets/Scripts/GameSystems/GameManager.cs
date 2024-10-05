@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameRooms;
 using GameSystems.Guild;
 using GameSystems.Units;
 using Photon.Pun;
@@ -54,10 +55,16 @@ namespace GameSystems
             }
 
             PhotonCustomTypes.Register();
+            FindObjectOfType<RoomManager>().onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
             // PhotonNetwork.ConnectUsingSettings();
         }
 
-        
+        private void OnUpdatePlayerCount()
+        {
+            playersAlive = PhotonNetwork.PlayerList.Length;
+        }
+
+
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
