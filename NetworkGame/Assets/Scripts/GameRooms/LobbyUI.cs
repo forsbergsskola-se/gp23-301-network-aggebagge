@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GameSystems;
 using GameSystems.Guild;
-using GameSystems.Player;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -94,12 +93,6 @@ namespace GameRooms
 
         void UpdateLobbyGuilds()
         {
-
-            foreach (var gs in GuildManager.i.playerGuilds)
-            {
-                Debug.Log(gs.guildName);
-            }
-            
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
                 if(i >= GuildManager.i.playerGuilds.Count)
@@ -111,8 +104,6 @@ namespace GameRooms
                     continue;
                 
                 var lp = Instantiate(lobbyPlayerPrefab, layout);
-                Debug.Log(GuildManager.i.playerGuilds[i].guildName);
-
                 lp.SetupValues(GuildManager.i.playerGuilds[i]);
                 
                 lobbyPlayers.Add(lp);
