@@ -39,7 +39,6 @@ namespace GameSystems
         // Singleton instance for easy access
         public static GameManager i;
         public List<int> playerIdList = new ();
-
         
         
         private void Awake()
@@ -62,6 +61,11 @@ namespace GameSystems
         private void OnUpdatePlayerCount()
         {
             playersAlive = PhotonNetwork.PlayerList.Length;
+            
+            playerIdList.Clear();
+
+            foreach (var player in PhotonNetwork.PlayerList)
+                playerIdList.Add(player.ActorNumber);
         }
 
 
