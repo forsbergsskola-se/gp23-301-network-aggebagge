@@ -10,7 +10,7 @@ namespace GameSystems.Guild
         public int playerID;
         public string guildName;
         // public int maxHp;
-        // public int hp;
+        public int hp;
         // public int gold;
         // public int groupSize;
         public Color guildColor;
