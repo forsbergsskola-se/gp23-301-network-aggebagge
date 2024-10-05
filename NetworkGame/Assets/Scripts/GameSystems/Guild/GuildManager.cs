@@ -43,26 +43,6 @@ namespace GameSystems.Guild
                 CreateGuildForPlayer(PhotonNetwork.LocalPlayer.ActorNumber);
 
         }
-
-        // Helper function to initialize guilds (only for Master Client)
-        // private GuildStats CreateGuild()
-        // {
-        //     // Initialize your playerGuilds list here with data
-        //     int id = PhotonNetwork.LocalPlayer.ActorNumber;
-        //     int playerIndex = PhotonNetwork.PlayerList.Length;
-        //
-        //     var guildStats = new GuildStats(id, guildNames[playerIndex - 1], guildColors[playerIndex - 1]);
-        //     playerGuilds.Add(guildStats);
-        //     Debug.Log(playerGuilds.Count);
-        //     
-        //     // Synchronize the updated guilds list with all players
-        //     SyncGuilds();
-        //     
-        //     onGuildCreated.Invoke();
-        //
-        //     return guildStats;
-        // }
-        
         
         private void SyncGuilds()
         {
