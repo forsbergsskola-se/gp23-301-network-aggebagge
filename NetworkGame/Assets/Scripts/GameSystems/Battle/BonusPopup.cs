@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,21 +6,13 @@ namespace GameSystems.Battle
 {
     public class BonusPopup : MonoBehaviour
     {
-        private float speed = 1;
-        private float targetYPos = 1;
-        private float startYPos;
 
-        private RectTransform rectTransform;
         public TextMeshProUGUI text;
         public Image image;
 
         private void Awake()
         {
-            startYPos = transform.position.y;
             // StartCoroutine(DestroyDelay());
-            
-            rectTransform = GetComponent<RectTransform>();
-
         }
 
         public void SetText(bool isDamage, int value)

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using ExitGames.Client.Photon;
+using GameSystems.Guild;
 using GameSystems.Units;
 
 public class PhotonCustomTypes
@@ -7,7 +9,7 @@ public class PhotonCustomTypes
     {
         PhotonPeer.RegisterType(typeof(UnitData), (byte)'U', SerializeUnitData, DeserializeUnitData);
     }
-
+    
     // Serialize UnitData into a byte array
     public static byte[] SerializeUnitData(object customObject)
     {

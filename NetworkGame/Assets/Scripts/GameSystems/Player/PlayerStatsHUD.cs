@@ -22,7 +22,7 @@ namespace GameSystems.Player
 
         private void Setup()
         {
-            guildStats = GuildManager.i.GetPlayerStats();
+            guildStats = PlayerStats.GetGuildStats();
             
             guildTitle.text = guildStats.guildName;
             guildTitle.color = guildStats.guildColor;

@@ -25,7 +25,9 @@ namespace GameRooms
         private void Start()
         {
             roomManager.onJoinedRoom.AddListener(OnJoinedRoom);
-            GuildManager.i.onGuildCreated.AddListener(OnGuildCreated);
+            // GuildManager.i.onGuildCreated.AddListener(OnGuildCreated);
+            GuildManager.i.onGuildSynced.AddListener(UpdateLobbyGuilds);
+
         }
 
         private void OnJoinedRoom()
@@ -35,9 +37,11 @@ namespace GameRooms
                 startButton.onClick.AddListener(OnClickStart);
                 startButton.gameObject.SetActive(true);
                 startButton.gameObject.SetActive(true);
-                codeUITransform.gameObject.SetActive(true);
-                codeText.text = roomManager.GetRoomCode();
             }
+            
+            codeUITransform.gameObject.SetActive(true);
+            codeText.text = roomManager.GetRoomCode();
+            
         }
 
         private void OnClickStart()
@@ -46,20 +50,25 @@ namespace GameRooms
             lobby.gameObject.SetActive(false);
         }
 
-        private void OnGuildCreated()
-        {
-            UpdateLobbyGuilds();
-            roomManager.onUpdatePlayerCount.AddListener(UpdateLobbyGuilds);
-        }
+        // private void OnGuildCreated()
+        // {
+        //     UpdateLobbyGuilds();
+        //     
+        //     // roomManager.onUpdatePlayerCount.AddListener(UpdateLobbyGuilds);
+        // }
 
         void UpdateLobbyGuilds()
         {
-            Debug.Log(PhotonNetwork.PlayerList.Length + " " + GuildManager.i.playerGuilds.Count);
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
+                if(i >= GuildManager.i.playerGuilds.Count)
+                    continue;
                 if(lobbyPlayers.Any(lp => lp.id == PhotonNetwork.PlayerList[i].ActorNumber))
                     continue;
-
+                
+                if(GuildManager.i.playerGuilds.All(pg => pg.playerID != PhotonNetwork.PlayerList[i].ActorNumber))
+                    continue;
+                
                 var lp = Instantiate(lobbyPlayerPrefab, layout);
                 lp.SetupValues(GuildManager.i.playerGuilds[i]);
                 

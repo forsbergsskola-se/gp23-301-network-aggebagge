@@ -51,7 +51,7 @@ namespace GameSystems
                 Destroy(gameObject);
             }
 
-            // PhotonCustomTypes.Register();
+            PhotonCustomTypes.Register();
             // PhotonNetwork.ConnectUsingSettings();
         }
 
