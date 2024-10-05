@@ -15,19 +15,19 @@ namespace GameRooms
         public RoomManager roomManager;
 
         public Transform lobby;
-        public List<LobbyPlayer> lobbyPlayers = new();
+        [HideInInspector]public List<LobbyPlayer> lobbyPlayers = new();
         public LobbyPlayer lobbyPlayerPrefab;
         public Transform layout;
 
         public TextMeshProUGUI codeText;
         public Button startButton;
         public Transform codeUITransform;
-        
+
+        [Header("Countdown")] 
+        public Transform countdownTransform;
         public TextMeshProUGUI countdownText;
         public int countdownTime;
         private float countdownTimer;
-        public bool hasGameStarted;
-
         
         private void Start()
         {
@@ -40,9 +40,6 @@ namespace GameRooms
         
         private void Update()
         {
-            if(hasGameStarted)
-                return;
-            
             if(countdownTimer <= 0)
                 return;
 
@@ -51,7 +48,6 @@ namespace GameRooms
 
             if (countdownTimer <= 0)
             {
-                hasGameStarted = true;
                 countdownText.gameObject.SetActive(false);
                 GameManager.i.onStartGame.Invoke();
             }
@@ -61,12 +57,13 @@ namespace GameRooms
         {
             codeUITransform.gameObject.SetActive(false);
             countdownTimer = countdownTime;
-            countdownText.gameObject.SetActive(true);
+            countdownTransform.gameObject.SetActive(true);
         }
 
         private void OnStartGame()
         {
             lobby.gameObject.SetActive(false);
+            countdownTransform.gameObject.SetActive(false);
         }
 
         private void OnJoinedRoom()
@@ -74,7 +71,6 @@ namespace GameRooms
             if (PhotonNetwork.IsMasterClient)
             {
                 startButton.onClick.AddListener(OnClickStart);
-                startButton.gameObject.SetActive(true);
                 startButton.gameObject.SetActive(true);
             }
             
@@ -86,6 +82,7 @@ namespace GameRooms
         private void OnClickStart()
         {
             GameManager.i.StartGame();
+            startButton.gameObject.SetActive(false);
         }
 
         // private void OnGuildCreated()
