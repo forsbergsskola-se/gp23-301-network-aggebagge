@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ExitGames.Client.Photon;
 using GameSystems.Guild;
 using GameSystems.Phases;
 using GameSystems.Player;
@@ -9,6 +9,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace GameSystems.Battle
 {
@@ -135,15 +136,17 @@ namespace GameSystems.Battle
         }
         
         [PunRPC]
-        void SyncBattleRooms(object[] serializedBattleRooms)
+        void SyncBattleRooms(Hashtable serializedBattleRooms)
         {
             // Clear existing battleRooms on the client (if needed)
             battleRooms.Clear();
 
-            // Deserialize each serialized BattleRoom and add it to the list
-            foreach (object serializedRoom in serializedBattleRooms)
+            // Deserialize each BattleRoom from the Hashtable
+            foreach (DictionaryEntry entry in serializedBattleRooms)
             {
-                battleRooms.Add(BattleRoom.FromHashtable((Hashtable)serializedRoom));
+                Hashtable serializedRoom = (Hashtable)entry.Value;
+                // Convert Hashtable back to BattleRoom and add to list
+                battleRooms.Add(BattleRoom.FromHashtable(serializedRoom));
             }
 
             // Call an event or method to indicate that the battle rooms are ready
