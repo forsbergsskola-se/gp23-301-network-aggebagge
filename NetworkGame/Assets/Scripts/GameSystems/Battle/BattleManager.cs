@@ -81,17 +81,18 @@ namespace GameSystems.Battle
             foreach (var unit in playerBattleStats.battleUnits)
                 dataList.Add(unit.data);
             
-            BattleRoomManager.i.PlayerEndBattle(dataList, battleRoomIndex, isGuild1);
+            BattleRoomManager.i.PlayerEndBattle(dataList);
         }
 
         public void OnBattlePhaseBegin()
         {
             if (opponent != null)
             {
-                opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
+                opponentUnits = BattleRoomManager.i.GetOpponentUnits(GameManager.i.GetPlayerIndex(opponent.playerID));
                 enemyBattleField.SetupSlots(opponentUnits.Count);
             }
-            
+            Debug.Log(opponentUnits.Count);
+
             StartCoroutine(AnimateBonuses());
         }
 
