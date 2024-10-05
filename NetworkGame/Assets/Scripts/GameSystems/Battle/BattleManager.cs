@@ -76,16 +76,16 @@ namespace GameSystems.Battle
         public void EndPlayerPrep()
         {
             onPlayerEndPrep.Invoke();
-        }
-
-        public void OnBattlePhaseBegin()
-        {
+            
             List<UnitData> dataList = new();
             foreach (var unit in playerBattleStats.battleUnits)
                 dataList.Add(unit.data);
             
-            BattleRoomManager.i.SetPlayerUnits(dataList, battleRoomIndex, isGuild1);
+            BattleRoomManager.i.PlayerEndBattle(dataList, battleRoomIndex, isGuild1);
+        }
 
+        public void OnBattlePhaseBegin()
+        {
             if (opponent != null)
             {
                 opponentUnits = BattleRoomManager.i.GetOpponentUnits(battleRoomIndex, !isGuild1);
