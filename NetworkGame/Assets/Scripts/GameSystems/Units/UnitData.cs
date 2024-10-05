@@ -1,4 +1,5 @@
 using System;
+using ExitGames.Client.Photon;
 
 namespace GameSystems.Units
 {
@@ -9,13 +10,6 @@ namespace GameSystems.Units
         public int damage;
         public int goldGain;
         public AttributeType attributeType;
-
-        public UnitData(int dmg, int gold, AttributeType atType)
-        {
-            damage = dmg;
-            goldGain = gold;
-            attributeType = atType;
-        }
         
         public UnitData(UnitSo unitSo)
         {
@@ -26,8 +20,30 @@ namespace GameSystems.Units
             attributeType = unitSo.attribute == null? AttributeType.None : unitSo.attribute.type;
         }
 
-        public UnitData()
+        public UnitData() {}
+        
+        // Convert UnitData to a Hashtable for Photon
+        public Hashtable ToHashtable()
         {
+            Hashtable data = new Hashtable();
+            data["id"] = id;
+            data["damage"] = damage;
+            data["goldGain"] = goldGain;
+            data["attributeType"] = (int)attributeType; // Store as an int since enums can be tricky
+            return data;
         }
+
+        // Create UnitData from a Hashtable
+        public static UnitData FromHashtable(Hashtable data)
+        {
+            return new UnitData
+            {
+                id = (int)data["id"],
+                damage = (int)data["damage"],
+                goldGain = (int)data["goldGain"],
+                attributeType = (AttributeType)(int)data["attributeType"] // Cast the int back to the enum
+            };
+        }
+        
     }
 }
