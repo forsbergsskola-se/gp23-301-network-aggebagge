@@ -12,18 +12,16 @@ namespace GameSystems.Guild
         // public int maxHp;
         public int hp;
         // public int gold;
-        // public int groupSize;
+        public int groupSize;
         public Color guildColor;
 
-        public GuildStats(int id, string gName, Color color)
+        public GuildStats(int id, string gName, Color color, int gSize, int gHp)
         {
             playerID = id;
-            // maxHp = startHp;
-            // hp = maxHp;
-            // gold = startGold;
             guildName = gName;
             guildColor = color;
-            // groupSize = startGroupSize;
+            groupSize = gSize;
+            hp = gHp;
         }
 
         public GuildStats()
@@ -37,7 +35,11 @@ namespace GameSystems.Guild
             {
                 { "Id", playerID },
                 { "Name", guildName },
-                { "Color", ColorToString(guildColor) } // Use a method to convert color to string
+                { "Color", ColorToString(guildColor) }, // Use a method to convert color to string
+                { "GroupSize", groupSize },
+                { "Hp", hp }
+
+                
             };
             
             return hashtable;
@@ -49,7 +51,10 @@ namespace GameSystems.Guild
             int id = (int)hashtable["Id"];
             string name = (string)hashtable["Name"];
             Color color = StringToColor((string)hashtable["Color"]); // Convert string back to color
-            return new GuildStats(id, name, color);
+            int groupSize = (int)hashtable["GroupSize"];
+            int hp = (int)hashtable["Hp"];
+
+            return new GuildStats(id, name, color, groupSize, hp);
         }
         
         private static string ColorToString(Color color)

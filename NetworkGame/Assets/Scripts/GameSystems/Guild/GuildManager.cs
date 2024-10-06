@@ -89,7 +89,7 @@ namespace GameSystems.Guild
             int playerIndex = playerId - 1; // Assuming player IDs start from 1
             if (playerIndex >= 0 && playerIndex < guildNames.Length)
             {
-                var guildStats = new GuildStats(playerId, guildNames[playerIndex], guildColors[playerIndex]);
+                var guildStats = new GuildStats(playerId, guildNames[playerIndex], guildColors[playerIndex], 0, 0);
                 playerGuilds.Add(guildStats);
                 Debug.Log($"Created guild for player {playerId}: {guildStats.guildName}");
 
@@ -98,6 +98,17 @@ namespace GameSystems.Guild
             }
         }
 
+        public void UpdateHp(int index, int hp)
+        {
+            playerGuilds[index].hp = hp;
+            SyncGuilds();
+        }
+        
+        public void UpdateGroupSize(int index, int groupSize)
+        {
+            playerGuilds[index].groupSize = groupSize;
+            SyncGuilds();
+        }
         
         public GuildStats GetPlayerGuildStats()
         {

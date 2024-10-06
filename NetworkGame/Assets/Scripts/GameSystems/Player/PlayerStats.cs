@@ -45,6 +45,8 @@ namespace GameSystems.Player
             hp = maxHp;
             gold = GuildManager.i.startGold;
             groupSize = GuildManager.i.startGroupSize;
+            GuildManager.i.UpdateHp(GameManager.i.GetMyPlayerIndex(), hp);
+            GuildManager.i.UpdateGroupSize(GameManager.i.GetMyPlayerIndex(), groupSize);
         }
 
         private void OnUpdatePlayerHp(GuildStats guildStats)
@@ -74,7 +76,9 @@ namespace GameSystems.Player
         {
             i.hp -= damage;
             i.onUpdateHp.Invoke();
-
+            
+            GuildManager.i.UpdateHp(GameManager.i.GetMyPlayerIndex(), i.hp);
+            
             if (i.hp <= 0)
             {
                 //DEATH!
@@ -84,6 +88,7 @@ namespace GameSystems.Player
         {
             i.groupSize++;
             i.onAddGroupSize.Invoke();
+            GuildManager.i.UpdateGroupSize(GameManager.i.GetMyPlayerIndex(), i.groupSize);
         }
         
        
