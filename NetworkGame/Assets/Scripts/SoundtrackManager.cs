@@ -17,7 +17,7 @@ public class SoundtrackManager : MonoBehaviour
     private static SoundtrackManager i;
     
     public List<Track> tracks;
-    private List<AudioSource> sources;
+    private List<AudioSource> sources = new();
     
     [Serializable]
     public class Track
