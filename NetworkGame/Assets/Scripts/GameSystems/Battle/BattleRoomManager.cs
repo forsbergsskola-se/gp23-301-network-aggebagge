@@ -201,6 +201,8 @@ namespace GameSystems.Battle
         public GuildStats GetOpponentGuildStats()
         {
             int index = GetOpponentIndex(GameManager.i.GetMyPlayerIndex());
+            if (index == -1)
+                return null;
             return GuildManager.i.playerGuilds[index];
         }
         
