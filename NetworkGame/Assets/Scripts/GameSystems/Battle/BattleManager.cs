@@ -8,6 +8,7 @@ using GameSystems.Units;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace GameSystems.Battle
 {
@@ -28,7 +29,8 @@ namespace GameSystems.Battle
         [HideInInspector]public GuildStats opponent;
         public TextMeshProUGUI opponentDamageText;
         public TextMeshProUGUI opponentCursedText;
-
+        public Image monster;
+        
         private List<UnitData> opponentUnits;
 
         public TextMeshProUGUI resultText;
@@ -59,6 +61,7 @@ namespace GameSystems.Battle
         private void GetOpponent()
         {
             opponent =  BattleRoomManager.i.GetOpponentGuildStats();
+            monster.gameObject.SetActive(opponent == null);
         }
 
         public void SetupBattleField()
@@ -96,23 +99,25 @@ namespace GameSystems.Battle
             StartCoroutine(AnimateBonuses());
         }
 
-        private bool FullPartyBonus(int groupSize, List<BattleUnit> units)
+        private int FullPartyBonus(int groupSize, List<BattleUnit> units)
         {
             if(groupSize > units.Count)
-                return false;
+                return 0;
             
             var leaders =
                 units.Where(unit => unit.data.attributeType == AttributeType.FullParty);
 
             if (!leaders.Any())
-                return false;
-            
+                return 0;
+
+            int damage = 0;
             foreach (var battleUnit in leaders)
             {
                 battleUnit.PopupText(false, 4);
                 playerBattleStats.AddDamage(4);
+                damage += 4;
             }
-            return true;
+            return damage;
         }
 
         private bool RoyaltyBonus()
@@ -152,9 +157,14 @@ namespace GameSystems.Battle
                     }
                 }
                 yield return new WaitForSeconds(1.5f);
+
+                int fullPartyBonus = FullPartyBonus(PlayerStats.GetGroupSize(), playerBattleField.units);
                 
-                if( FullPartyBonus(PlayerStats.GetGroupSize(), playerBattleField.units))
+                if (fullPartyBonus > 0)
+                {
                     yield return new WaitForSeconds(1.5f);
+                    playerBattleStats.AddDamage(fullPartyBonus);
+                }
                     
                 if(RoyaltyBonus())
                     yield return new WaitForSeconds(1.5f);
@@ -186,10 +196,17 @@ namespace GameSystems.Battle
                     yield return new WaitForSeconds(animationWaitTime);
                 }
                 yield return new WaitForSeconds(1.5f);
-                
-                if(opponentDamage < 3)
-                    if(FullPartyBonus(opponent.groupSize, enemyBattleField.units))
+
+                if (opponentCurses < 3)
+                {
+                    int fullpartyBonus = FullPartyBonus(opponent.groupSize, enemyBattleField.units);
+                    if (fullpartyBonus > 0)
+                    {
+                        opponentDamage += fullpartyBonus;
+                        opponentDamageText.text = opponentDamage.ToString();
                         yield return new WaitForSeconds(1.5f);
+                    }
+                }
             }
             else
             {
