@@ -7,7 +7,10 @@ namespace GameSystems.Units
         None,
         Curse,
         AntiCurse,
-        Foresight
+        Foresight,
+        FullParty,
+        Royalty,
+        Scaling
     }
     
     [CreateAssetMenu(fileName = "ua_", menuName = "SO/Attribute", order = 0)]
