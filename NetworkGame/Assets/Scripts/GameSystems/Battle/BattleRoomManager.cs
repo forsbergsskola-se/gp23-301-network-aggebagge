@@ -162,7 +162,6 @@ namespace GameSystems.Battle
                 units.Add(UnitData.FromHashtable((Hashtable)serializedUnit));
 
             // Store the deserialized list in unitList at the given index
-            Debug.Log(index + " " + opponentUnits.Count);
             opponentUnits[index].units = units;
 
             // Invoke any event to indicate the units have been synced
