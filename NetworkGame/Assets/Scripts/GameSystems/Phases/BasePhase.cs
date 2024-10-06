@@ -51,7 +51,6 @@ namespace GameSystems.Phases
 
         protected virtual void OnEndPhase()
         {
-            Debug.Log(pm.phase);
             if (phase != pm.phase)
                 return;
             
