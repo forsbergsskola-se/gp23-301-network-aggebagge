@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameSystems.RecruitShop;
 using GameSystems.Units;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,9 +33,16 @@ namespace Tooltip
             foreach (var result in results)
             {
                 var unitUI = result.gameObject.GetComponent<UnitUI>();
-                if (unitUI != null)
+                var shopGroupSize = result.gameObject.GetComponent<ShopGroupSize>();
+
+                if (unitUI != null && unitUI.gameObject.activeSelf)
                 {
                     TooltipUI.DisplayTooltip(unitUI.data);
+                    return;
+                }
+                if (shopGroupSize != null && shopGroupSize.gameObject.activeSelf)
+                {
+                    TooltipUI.DisplayTooltip("+1 Unit Slot", "Increases the maximum unit limit by 1");
                     return;
                 }
             }

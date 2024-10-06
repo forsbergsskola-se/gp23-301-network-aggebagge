@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GameSystems.Guild;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace GameSystems.Phases
 {
@@ -86,7 +82,8 @@ namespace GameSystems.Phases
         public void PlayerReady(int index)
         {
             photonView.RPC("SyncPlayersReady", RpcTarget.All, index);
-            canvasGroup.interactable = false;
+            if(GameManager.i.GetMyPlayerIndex() == index)
+                canvasGroup.interactable = false;
         }
         
         [PunRPC]

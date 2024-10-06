@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ namespace GameSystems.Guild
     {
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI hpText;
-        
+
         
         public void SetupUI(GuildStats guildStats)
         {

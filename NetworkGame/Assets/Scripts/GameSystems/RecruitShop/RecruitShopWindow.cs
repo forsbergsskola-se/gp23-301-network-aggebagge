@@ -1,6 +1,7 @@
 using System;
 using GameSystems.Units;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameSystems.RecruitShop
 {
@@ -8,7 +9,7 @@ namespace GameSystems.RecruitShop
     {
         public ShopUnit shopUnitPrefab;
         public Transform unitLayout;
-        
+
         private void Start()
         {
             var unitList = UnitManager.GetShopUnits();
@@ -18,6 +19,14 @@ namespace GameSystems.RecruitShop
                 ShopUnit unitInstance = Instantiate(shopUnitPrefab, unitLayout);
                 unitInstance.SetupUI(unitData);
             }
+            
+            EnableShop(false);
+        }
+
+        public void EnableShop(bool enable)
+        {
+            foreach (Transform child in unitLayout)
+                child.gameObject.SetActive(enable);
         }
     }
 }

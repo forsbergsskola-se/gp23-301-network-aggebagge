@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit8_queen
+  m_Name: unit5.5_queen
   m_EditorClassIdentifier: 
   id: 8
   unitName: Queen
   sprite: {fileID: 21300000, guid: 58c1a53bcd4a3e34abf71eaa0aa90367, type: 3}
-  cost: 11
+  cost: 6
   tooltipText: <color=#4EA3CE>1 Gold for every Adventurer in your group</color>
   damage: 0
   goldGain: 0

@@ -15,8 +15,10 @@ MonoBehaviour:
   id: 9
   unitName: Miner
   sprite: {fileID: 21300000, guid: bf734c87f8f28274fac0f459780ab064, type: 3}
-  cost: 11
-  tooltipText: <color=yellow>gg Gold</color>
-  damage: 0
+  cost: 10
+  tooltipText: '<color=#FF0057>dmg Damage</color>
+
+    <color=yellow>gg Gold</color>'
+  damage: 1
   goldGain: 3
   attribute: {fileID: 0}

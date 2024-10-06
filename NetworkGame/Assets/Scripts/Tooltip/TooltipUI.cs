@@ -47,8 +47,18 @@ namespace Tooltip
 
             text.text = tooltipText;
         }
-   
         
+        private void DisplaySpecificTooltip(string title, string stringText)
+        {
+            gameObject.SetActive(true);
+            characterText.text = title;
+            text.text = stringText;
+        }
+   
+        public static void DisplayTooltip(string title, string stringText)
+        {
+            i.DisplaySpecificTooltip(title, stringText);
+        }
         
         public static void DisplayTooltip(UnitData unitData)
         {

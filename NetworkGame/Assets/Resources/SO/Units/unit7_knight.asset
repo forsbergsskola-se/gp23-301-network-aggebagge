@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 7
   unitName: Knight
   sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
-  cost: 8
+  cost: 9
   tooltipText: <color=#FF0057>dmg Damage</color>
   damage: 3
   goldGain: 0

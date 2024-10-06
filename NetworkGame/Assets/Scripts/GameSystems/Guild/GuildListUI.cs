@@ -8,28 +8,22 @@ namespace GameSystems.Guild
     {
         public GuildListObject guildObjectPrefab;
         public Transform layout;
-
-        private List<GuildListObject> guildObjects = new ();
-        
         
         private void Start()
         {
-            GameManager.i.onStartGame.AddListener(OnJoinRoom);
+            GuildManager.i.onGuildSynced.AddListener(OnGuildsSynced);
         }
 
-        private void OnJoinRoom()
+        private void OnGuildsSynced()
         {
+            foreach (Transform child in layout)
+                Destroy(child.gameObject);
+            
             foreach (var guildStats in GuildManager.i.playerGuilds)
             {
                 var guildObject = Instantiate(guildObjectPrefab, layout);
                 guildObject.SetupUI(guildStats);
-                guildObjects.Add(guildObject);
             }
-        }
-
-        private void UpdateUI(int playerId, int hp)
-        {
-            guildObjects[playerId].UpdateUI(hp.ToString());
         }
     }
 }

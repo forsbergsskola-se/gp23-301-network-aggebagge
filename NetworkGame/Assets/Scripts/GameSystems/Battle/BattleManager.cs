@@ -85,13 +85,12 @@ namespace GameSystems.Battle
 
         public void EndPlayerPrep()
         {
-            onPlayerEndPrep.Invoke();
-            
             List<UnitData> dataList = new();
             foreach (var unit in playerBattleStats.battleUnits)
                 dataList.Add(unit.data);
             
             BattleRoomManager.i.PlayerEndBattle(dataList);
+            onPlayerEndPrep.Invoke();
         }
 
         public void OnBattlePhaseBegin()
@@ -216,6 +215,7 @@ namespace GameSystems.Battle
             else
             {
                 opponentDamage = battleStat.monsterDamage;
+                opponentDamageText.text = opponentDamage.ToString();
             }
 
             bool isWin = playerBattleStats.GetDamage() > opponentDamage;

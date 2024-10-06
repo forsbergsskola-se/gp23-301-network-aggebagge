@@ -1,3 +1,4 @@
+using GameSystems.RecruitShop;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,8 @@ namespace GameSystems.Phases
     {
         public Transform recruitTransform;
         public Button readyButton;
-
+        public RecruitShopWindow window;
+        
         public override void Awake()
         {
             base.Awake();
@@ -26,11 +28,13 @@ namespace GameSystems.Phases
             base.OnBeginPhase();
             readyButton.interactable = true;
             recruitTransform.gameObject.SetActive(true);
+            window.EnableShop(true);
         }
 
         protected override void OnEndPhase()
         {
             base.OnEndPhase();
+            window.EnableShop(false);
             recruitTransform.gameObject.SetActive(false);
             SoundtrackManager.StopMusic(Soundtrack.Recruit);
         }

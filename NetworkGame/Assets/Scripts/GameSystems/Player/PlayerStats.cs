@@ -31,7 +31,6 @@ namespace GameSystems.Player
 
         private void Start()
         {
-            GameManager.i.onUpdatePlayerHp.AddListener(OnUpdatePlayerHp);
             GameManager.i.onStartGame.AddListener(OnStartGame);
         }
 
@@ -47,16 +46,11 @@ namespace GameSystems.Player
             groupSize = GuildManager.i.startGroupSize;
             GuildManager.i.UpdateHp(GameManager.i.GetMyPlayerIndex(), hp);
             GuildManager.i.UpdateGroupSize(GameManager.i.GetMyPlayerIndex(), groupSize);
-        }
-
-        private void OnUpdatePlayerHp(GuildStats guildStats)
-        {
-            if (guildStats != stats)
-                return;
             
-            onUpdateHp.Invoke();
+            i.onUpdateGold.Invoke();
+            i.onAddUnit.Invoke();
+            i.onUpdateHp.Invoke();
         }
-
 
         public static void AddUnit(UnitData unitData)
         {
