@@ -63,7 +63,7 @@ namespace GameSystems.Phases
             yield return new WaitForSeconds(1);
 
             opponentText.text = BattleManager.i.opponent == null ? "Monster" : BattleManager.i.opponent.guildName;
-            opponentText.color = BattleManager.i.opponent == null ? Color.grey : BattleManager.i.opponent.guildColor;
+            opponentText.color = BattleManager.i.opponent == null ? Color.white : BattleManager.i.opponent.guildColor;
                 
             opponentText.gameObject.SetActive(true);
             opponentText.GetComponent<Animator>().Play("TextComingAtScreen", 0, 0);
