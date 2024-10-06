@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GameSystems.Guild;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -53,6 +54,9 @@ namespace GameSystems.Phases
         // ReSharper disable Unity.PerformanceAnalysis
         public void NextPhase()
         {
+            if(GuildManager.i.GetPlayerGuildStats().hp <= 0)
+                return;
+            
             // StartCoroutine(PrepareNextPhase());
             ResetPlayerReady();
             

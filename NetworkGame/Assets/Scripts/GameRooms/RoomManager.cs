@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
+using GameSystems.Guild;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -93,7 +94,7 @@ namespace GameRooms
             SceneManager.LoadScene("MainMenu");
             Debug.Log("Could not join room");
         }
-
+        
         private string GenerateRoomCode()
         {
             const string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
@@ -107,6 +108,14 @@ namespace GameRooms
             playerCount = players;
             onUpdatePlayerCount.Invoke();
         }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            base.OnPlayerLeftRoom(otherPlayer);
+            
+            onUpdatePlayerCount.Invoke();
+        }
+
 
         public string GetRoomCode()
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GameRooms;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,8 +30,26 @@ namespace GameSystems.Guild
         private void Awake()
         {
             i = this;
+            FindObjectOfType<RoomManager>().onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
         }
-        
+
+        private void OnUpdatePlayerCount()
+        {
+            List<GuildStats> itemsToRemove = new List<GuildStats>();
+
+            // Iterate through the playerGuilds list
+            foreach (var gs in playerGuilds)
+            {
+                // If the condition is met, add the item to the removal list
+                if (PhotonNetwork.PlayerList.Any(player => player.ActorNumber == gs.playerID))
+                    itemsToRemove.Add(gs);
+            }
+
+            // After the loop, remove the collected items from the original list
+            foreach (var item in itemsToRemove)
+                playerGuilds.Remove(item);
+        }
+
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
@@ -107,11 +126,8 @@ namespace GameSystems.Guild
         public GuildStats GetPlayerGuildStats()
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
-            
             var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
-            // if(guildStats == null)
-            //     guildStats = CreateGuild();
-
+            
             return guildStats;
         }
     }

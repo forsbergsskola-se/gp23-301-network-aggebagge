@@ -14,9 +14,9 @@ namespace GameRooms
         public RoomManager roomManager;
 
         public Transform lobby;
-        [HideInInspector]public List<LobbyPlayer> lobbyPlayers = new();
         public LobbyPlayer lobbyPlayerPrefab;
         public Transform layout;
+        public LobbyPlayer myLobbyPlayer;
 
         public TextMeshProUGUI codeText;
         public Button startButton;
@@ -96,21 +96,29 @@ namespace GameRooms
 
         void UpdateLobbyGuilds()
         {
+            foreach (Transform child in layout)
+                Destroy(child.gameObject);
+            
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
                 if(i >= GuildManager.i.playerGuilds.Count)
                     continue;
-                if(lobbyPlayers.Any(lp => lp.id == GuildManager.i.playerGuilds[i].playerID))
-                    continue;
                 
                 if(GuildManager.i.playerGuilds.All(pg => pg.playerID != PhotonNetwork.PlayerList[i].ActorNumber))
                     continue;
+
+                if (GuildManager.i.playerGuilds[i].playerID == PhotonNetwork.LocalPlayer.ActorNumber)
+                {
+                    myLobbyPlayer.SetupValues(GuildManager.i.playerGuilds[i]);
+                    myLobbyPlayer.gameObject.SetActive(true);
+                    continue;
+                }
                 
                 var lp = Instantiate(lobbyPlayerPrefab, layout);
                 lp.SetupValues(GuildManager.i.playerGuilds[i]);
-                
-                lobbyPlayers.Add(lp);
             }
+
+           
         }
         
     }

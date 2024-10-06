@@ -44,14 +44,10 @@ namespace GameSystems
             }
 
             PhotonCustomTypes.Register();
-            FindObjectOfType<RoomManager>().onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
             // PhotonNetwork.ConnectUsingSettings();
         }
 
-        private void OnUpdatePlayerCount()
-        {
-            
-        }
+
 
 
         public override void OnJoinedRoom()
