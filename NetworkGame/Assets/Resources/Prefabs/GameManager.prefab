@@ -167,58 +167,58 @@ MonoBehaviour:
   resultText: {fileID: 0}
   battleStats:
   - loseDamage: 2
-    winGold: 2
-    monsterDamage: 5
+    winGold: 1
+    monsterDamage: 4
   - loseDamage: 3
-    winGold: 2
-    monsterDamage: 8
+    winGold: 1
+    monsterDamage: 7
   - loseDamage: 4
-    winGold: 3
-    monsterDamage: 12
+    winGold: 2
+    monsterDamage: 10
   - loseDamage: 6
-    winGold: 3
-    monsterDamage: 15
+    winGold: 2
+    monsterDamage: 14
   - loseDamage: 8
     winGold: 3
     monsterDamage: 18
   - loseDamage: 10
-    winGold: 4
+    winGold: 3
     monsterDamage: 22
   - loseDamage: 12
     winGold: 4
     monsterDamage: 26
   - loseDamage: 15
-    winGold: 5
+    winGold: 4
     monsterDamage: 30
   - loseDamage: 18
     winGold: 5
     monsterDamage: 34
   - loseDamage: 21
-    winGold: 6
+    winGold: 5
     monsterDamage: 38
   - loseDamage: 24
     winGold: 6
     monsterDamage: 42
   - loseDamage: 28
-    winGold: 7
+    winGold: 6
     monsterDamage: 46
   - loseDamage: 32
-    winGold: 8
+    winGold: 7
     monsterDamage: 50
   - loseDamage: 36
-    winGold: 9
+    winGold: 7
     monsterDamage: 54
   - loseDamage: 40
-    winGold: 10
+    winGold: 8
     monsterDamage: 60
   - loseDamage: 44
-    winGold: 11
+    winGold: 8
     monsterDamage: 64
   - loseDamage: 48
-    winGold: 12
+    winGold: 9
     monsterDamage: 68
   - loseDamage: 52
-    winGold: 13
+    winGold: 10
     monsterDamage: 72
 --- !u!114 &5456327476860408400
 MonoBehaviour:
