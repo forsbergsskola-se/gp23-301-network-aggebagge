@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using GameSystems.Guild;
 using GameSystems.Player;
 using GameSystems.Units;
@@ -58,7 +59,6 @@ namespace GameSystems.Battle
         private void GetOpponent()
         {
             opponent =  BattleRoomManager.i.GetOpponentGuildStats();
-            Debug.Log(opponent.guildName);
         }
 
         public void SetupBattleField()
@@ -96,6 +96,43 @@ namespace GameSystems.Battle
             StartCoroutine(AnimateBonuses());
         }
 
+        private bool FullPartyBonus(int groupSize, List<BattleUnit> units)
+        {
+            if(groupSize > units.Count)
+                return false;
+            
+            var leaders =
+                units.Where(unit => unit.data.attributeType == AttributeType.FullParty);
+
+            if (!leaders.Any())
+                return false;
+            
+            foreach (var battleUnit in leaders)
+            {
+                battleUnit.PopupText(false, 4);
+                playerBattleStats.AddDamage(4);
+            }
+            return true;
+        }
+
+        private bool RoyaltyBonus()
+        {
+            var queens =
+                playerBattleStats.battleUnits.Where(unit => unit.data.attributeType == AttributeType.Royalty);
+            
+            if (!queens.Any())
+                return false;
+            
+            int adventurerCount = playerBattleStats.battleUnits.Count(unit => unit.data.id == 1);
+            
+            foreach (var battleUnit in queens)
+            {
+                battleUnit.PopupText(false, adventurerCount);
+                PlayerStats.AddGold(adventurerCount);
+            }
+            return true;
+        }
+        
         private IEnumerator AnimateBonuses()
         {
             float animationWaitTime = 0.25f;
@@ -105,17 +142,22 @@ namespace GameSystems.Battle
             if (!playerBattleStats.isCursed)
             {
                 //loop and animate each bonus
-                foreach (var unitData in playerBattleStats.battleUnits)
+                foreach (var battleUnit in playerBattleStats.battleUnits)
                 {
-                    if (unitData.data.goldGain > 0)
+                    if (battleUnit.data.goldGain > 0)
                     {
-                        PlayerStats.AddGold(unitData.data.goldGain);
-                        unitData.PopupText(false, unitData.data.goldGain);
+                        PlayerStats.AddGold(battleUnit.data.goldGain);
+                        battleUnit.PopupText(false, battleUnit.data.goldGain);
                         yield return new WaitForSeconds(animationWaitTime);
                     }
                 }
+                yield return new WaitForSeconds(1.5f);
                 
-                yield return new WaitForSeconds(1);
+                if( FullPartyBonus(PlayerStats.GetGroupSize(), playerBattleField.units))
+                    yield return new WaitForSeconds(1.5f);
+                    
+                if(RoyaltyBonus())
+                    yield return new WaitForSeconds(1.5f);
             }
             
             int opponentDamage = 0;
@@ -140,8 +182,10 @@ namespace GameSystems.Battle
                     
                     yield return new WaitForSeconds(animationWaitTime);
                 }
+                yield return new WaitForSeconds(1.5f);
                 
-                yield return new WaitForSeconds(1);
+                if(FullPartyBonus(opponent.groupSize, enemyBattleField.units))
+                    yield return new WaitForSeconds(1.5f);
             }
             else
             {
@@ -167,29 +211,6 @@ namespace GameSystems.Battle
             onPlayerEndBattle.Invoke();
         }
         
-
-        // private GuildStats GetOpponentGuildStats(List<BattleRoomManager.BattleRoom> battleRooms)
-        // {
-        //     GuildStats playerGuildStats = PlayerStats.GetGuildStats();
-        //
-        //     foreach (var battleRoom in battleRooms)
-        //     {
-        //         if (battleRoom.guild1 == playerGuildStats)
-        //         {
-        //             battleRoomIndex = battleRooms.IndexOf(battleRoom);
-        //             isGuild1 = true;
-        //             return battleRoom.guild2;
-        //         }
-        //         if (battleRoom.guild2 == playerGuildStats)
-        //         {
-        //             battleRoomIndex = battleRooms.IndexOf(battleRoom);
-        //             isGuild1 = false;
-        //             return battleRoom.guild1;
-        //         }
-        //     }
-        //
-        //     return null;
-        // }
 
         public BattleStats GetBattleStats()
         {
