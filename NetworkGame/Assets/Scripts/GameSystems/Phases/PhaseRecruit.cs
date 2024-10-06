@@ -12,11 +12,19 @@ namespace GameSystems.Phases
         {
             base.Awake();
             readyButton.onClick.AddListener(pm.PlayerReady);
+            readyButton.onClick.AddListener(DisableButton);
+
+        }
+
+        private void DisableButton()
+        {
+            readyButton.interactable = false;
         }
 
         public override void OnBeginPhase()
         {
             base.OnBeginPhase();
+            readyButton.interactable = true;
             recruitTransform.gameObject.SetActive(true);
         }
 
