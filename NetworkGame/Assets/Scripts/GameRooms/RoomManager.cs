@@ -45,9 +45,9 @@ namespace GameRooms
              var roomOptions = new RoomOptions();
              Hashtable customRoomProperties = new Hashtable();
              customRoomProperties.Add("roomCode", roomCode);  // Store the code as a custom property
+             roomOptions.MaxPlayers = 20;
              roomOptions.CustomRoomProperties = customRoomProperties;
              roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };  // Make sure this property is visible in the lobby
-             
              PhotonNetwork.CreateRoom(null, roomOptions); // Create a room with default name (or you can use roomCode as the name)
              
         }
