@@ -74,13 +74,7 @@ namespace GameSystems.Guild
 
             playerGuilds.Sort((x, y) => x.playerID.CompareTo(y.playerID));
             
-            Debug.Log("SYNC COMPLETE");
             onGuildSynced.Invoke();
-
-            foreach (var gs in playerGuilds)
-            {
-                Debug.Log(gs.guildName + " " + gs.playerID);
-            }
         }
 
         // When creating a guild, add a check for valid indices
