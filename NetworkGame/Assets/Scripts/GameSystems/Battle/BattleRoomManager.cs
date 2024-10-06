@@ -16,7 +16,7 @@ namespace GameSystems.Battle
         [HideInInspector] public UnityEvent<int> onSyncUnitsComplete = new();
         [HideInInspector] public UnityEvent onOpponentsPrepared = new();
         private readonly List<BattleRoom> battleRooms = new();
-        private readonly List<UnitDataList> unitListList = new();
+        private readonly List<OpponentUnits> opponentUnits = new();
         
         
         private void Awake()
@@ -29,6 +29,7 @@ namespace GameSystems.Battle
         {
             public int guild1Index;
             public int guild2Index;
+            
 
             public void SetBattleRoomPlayers(int index1, int index2)
             {
@@ -62,11 +63,11 @@ namespace GameSystems.Battle
                 return room;
             }
         }
-        public class UnitDataList
+        public class OpponentUnits
         {
             public List<UnitData> units = new();
 
-            public UnitDataList()
+            public OpponentUnits()
             {}
         }
 
@@ -79,7 +80,7 @@ namespace GameSystems.Battle
         private void OnStartGame()
         {
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-                unitListList.Add(new UnitDataList());
+                opponentUnits.Add(new OpponentUnits());
             
             if (!PhotonNetwork.LocalPlayer.IsMasterClient)
                 return;
@@ -159,8 +160,8 @@ namespace GameSystems.Battle
                 units.Add(UnitData.FromHashtable((Hashtable)serializedUnit));
 
             // Store the deserialized list in unitList at the given index
-            Debug.Log(index + " " + unitListList.Count);
-            unitListList[index].units = units;
+            Debug.Log(index + " " + opponentUnits.Count);
+            opponentUnits[index].units = units;
 
             // Invoke any event to indicate the units have been synced
             onSyncUnitsComplete.Invoke(index);
@@ -180,7 +181,7 @@ namespace GameSystems.Battle
 
         public List<UnitData> GetOpponentUnits()
         {
-            return unitListList[GetOpponentIndex(GameManager.i.GetMyPlayerIndex())].units;
+            return opponentUnits[GetOpponentIndex(GameManager.i.GetMyPlayerIndex())].units;
         }
 
         private int GetOpponentIndex(int index)
