@@ -4962,6 +4962,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133574448}
   m_CullTransparentMesh: 1
+--- !u!1 &1134484466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134484467}
+  - component: {fileID: 1134484468}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1134484467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134484466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 690.6052, y: 497.71582, z: -4.6983204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134484468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134484466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622e7eab66d746e191d72f31859f6c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracks:
+  - clip: {fileID: 8300000, guid: 09691c36f1bdd6b4290a5268979e54bd, type: 3}
+    isLooping: 1
+  - clip: {fileID: 8300000, guid: 06786a28c1b5cf842aac6ce34db0edb4, type: 3}
+    isLooping: 0
+  - clip: {fileID: 8300000, guid: 3eadba3c91f857c4698200a98a3b229c, type: 3}
+    isLooping: 0
+  - clip: {fileID: 8300000, guid: 9d751818761045b48b37f80e6f54f9f2, type: 3}
+    isLooping: 0
 --- !u!1 &1134574116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,6 +5966,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 1
   phaseDuration: 30
+  track: 0
   canvas: {fileID: 0}
   recruitTransform: {fileID: 204420839}
   readyButton: {fileID: 219433735}
@@ -5931,6 +5985,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 3
   phaseDuration: 40
+  track: 0
   canvas: {fileID: 0}
   battleTransform: {fileID: 1374593006}
 --- !u!114 &1263463875
@@ -5948,6 +6003,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 4
   phaseDuration: 0
+  track: 0
   canvas: {fileID: 0}
   battleTransform: {fileID: 1374593006}
 --- !u!114 &1263463876
@@ -5965,6 +6021,7 @@ MonoBehaviour:
   pm: {fileID: 0}
   phase: 2
   phaseDuration: 3
+  track: 0
   canvas: {fileID: 0}
   background: {fileID: 915500521}
   guildText: {fileID: 56258633}
@@ -10373,3 +10430,4 @@ SceneRoots:
   - {fileID: 343233680}
   - {fileID: 583022832}
   - {fileID: 146032705}
+  - {fileID: 1134484467}

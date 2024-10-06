@@ -54,6 +54,8 @@ namespace GameRooms
 
         private void OnBeginCountdown()
         {
+            SoundtrackManager.StopMusic();
+
             codeUITransform.gameObject.SetActive(false);
             countdownTimer = countdownTime;
             countdownTransform.gameObject.SetActive(true);
@@ -75,6 +77,8 @@ namespace GameRooms
             
             codeUITransform.gameObject.SetActive(true);
             codeText.text = roomManager.GetRoomCode();
+            
+            SoundtrackManager.PlayMusic(Soundtrack.Lobby);
             
         }
 

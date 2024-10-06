@@ -12,6 +12,9 @@ namespace GameSystems.Phases
         public PhaseManager.Phase phase;
         public float phaseDuration;
 
+        public Soundtrack track;
+        
+        
         private float countdown;
 
         private bool isEndingPhase = false;
@@ -31,6 +34,8 @@ namespace GameSystems.Phases
             countdown = phaseDuration;
             pm.countdownText.text = Mathf.CeilToInt(countdown).ToString();
             pm.countdownText.gameObject.SetActive(phaseDuration > 0);
+            
+            SoundtrackManager.PlayMusic(track);
         }
 
         protected virtual void OnEndingPhase()
@@ -50,6 +55,7 @@ namespace GameSystems.Phases
                 return;
 
             pm.NextPhase();
+            SoundtrackManager.StopMusic();
         }
 
         private IEnumerator EndPhaseDelay()
