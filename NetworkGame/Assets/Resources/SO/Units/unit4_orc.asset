@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit4_goblin
+  m_Name: unit4_orc
   m_EditorClassIdentifier: 
-  id: 3
-  unitName: Goblin
-  sprite: {fileID: 21300000, guid: 8e79faa5be5105142a30ea5ec8002d54, type: 3}
-  cost: 4
-  damage: 0
-  goldGain: 4
+  id: 4
+  unitName: Orc
+  sprite: {fileID: 21300000, guid: de3bc6af246568e449b97f09943c477e, type: 3}
+  cost: 6
+  damage: 3
+  goldGain: 2
   attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}

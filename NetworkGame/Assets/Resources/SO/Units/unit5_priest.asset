@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit7_knight
+  m_Name: unit5_priest
   m_EditorClassIdentifier: 
-  id: 7
-  unitName: Knight
-  sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
-  cost: 8
-  damage: 3
-  goldGain: 0
-  attribute: {fileID: 0}
+  id: 5
+  unitName: Priest
+  sprite: {fileID: 21300000, guid: 2c6f1e3ecd5272a41b2a38476a63c87f, type: 3}
+  cost: 6
+  damage: 0
+  goldGain: 1
+  attribute: {fileID: 11400000, guid: 728ad7b30adf6514b8e345310ca05f85, type: 2}

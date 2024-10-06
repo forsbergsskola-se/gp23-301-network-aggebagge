@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit7_knight
+  m_Script: {fileID: 11500000, guid: 929c180c8b59e1548a16dc9e20d527b1, type: 3}
+  m_Name: ua_royalty
   m_EditorClassIdentifier: 
-  id: 7
-  unitName: Knight
-  sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
-  cost: 8
-  damage: 3
-  goldGain: 0
-  attribute: {fileID: 0}
+  attributeName: Royalty
+  type: 5
+  icon: {fileID: 21300000, guid: 2c13ebde3c9be934d9ddae7859575948, type: 3}
