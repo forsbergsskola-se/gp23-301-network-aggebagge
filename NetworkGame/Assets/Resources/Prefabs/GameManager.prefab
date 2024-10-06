@@ -1,0 +1,309 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1486528198972859873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7787470907220590582}
+  - component: {fileID: 6774107752620547792}
+  - component: {fileID: 4683014557080277707}
+  - component: {fileID: 6717098334454314096}
+  - component: {fileID: 1807589200704640942}
+  - component: {fileID: 7920255190838327320}
+  - component: {fileID: 5456327476860408400}
+  - component: {fileID: 5949935229972481187}
+  - component: {fileID: 5081650941702314313}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7787470907220590582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6774107752620547792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4066738122004458be3dce97c56e718d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBeginCountdown:
+    m_PersistentCalls:
+      m_Calls: []
+  onStartGame:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdatePlayerHp:
+    m_PersistentCalls:
+      m_Calls: []
+  playersAlive: 0
+  damageColor: {r: 1, g: 0, b: 0.34117648, a: 1}
+  goldColor: {r: 1, g: 1, b: 0.32156864, a: 1}
+  myId: 0
+  playerIdList: 
+--- !u!114 &4683014557080277707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a953a6f76f941c4830b92170ea1e754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 3
+  startUnits:
+  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
+  - {fileID: 11400000, guid: 1937c2a495f9c324cb87c9c68ecd44ba, type: 2}
+  - {fileID: 11400000, guid: 9a534dfc3b4a76d4bb26ff0a00c60fe2, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+  - {fileID: 11400000, guid: 32fc811513f5e1e4390a5eef9420ae2e, type: 2}
+--- !u!114 &6717098334454314096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bd8422098445a9af29b8eb86989061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayerSetupComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdateHp:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdateGold:
+    m_PersistentCalls:
+      m_Calls: []
+  onAddUnit:
+    m_PersistentCalls:
+      m_Calls: []
+  onAddGroupSize:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHp: 0
+  hp: 0
+  gold: 0
+  groupSize: 0
+--- !u!114 &1807589200704640942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab13178e2dd64d74b4e3cc04b8e7583f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSyncUnitsComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onOpponentsPrepared:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7920255190838327320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c57661693f14c799d02753dd30f7ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayerEndPrep:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerEndBattle:
+    m_PersistentCalls:
+      m_Calls: []
+  playerBattleField: {fileID: 0}
+  enemyBattleField: {fileID: 0}
+  playerBattleStats: {fileID: 0}
+  opponent:
+    playerID: 0
+    guildName: 
+    hp: 0
+    guildColor: {r: 0, g: 0, b: 0, a: 0}
+  opponentDamageText: {fileID: 0}
+  opponentCursedText: {fileID: 0}
+  resultText: {fileID: 0}
+  battleStats:
+  - loseDamage: 2
+    winGold: 2
+    monsterDamage: 5
+  - loseDamage: 3
+    winGold: 2
+    monsterDamage: 8
+  - loseDamage: 4
+    winGold: 3
+    monsterDamage: 12
+  - loseDamage: 6
+    winGold: 3
+    monsterDamage: 15
+  - loseDamage: 8
+    winGold: 3
+    monsterDamage: 18
+  - loseDamage: 10
+    winGold: 4
+    monsterDamage: 22
+  - loseDamage: 12
+    winGold: 4
+    monsterDamage: 26
+  - loseDamage: 15
+    winGold: 5
+    monsterDamage: 30
+  - loseDamage: 18
+    winGold: 5
+    monsterDamage: 34
+  - loseDamage: 21
+    winGold: 6
+    monsterDamage: 38
+  - loseDamage: 24
+    winGold: 6
+    monsterDamage: 42
+  - loseDamage: 28
+    winGold: 7
+    monsterDamage: 46
+  - loseDamage: 32
+    winGold: 8
+    monsterDamage: 50
+  - loseDamage: 36
+    winGold: 9
+    monsterDamage: 54
+  - loseDamage: 40
+    winGold: 10
+    monsterDamage: 60
+  - loseDamage: 44
+    winGold: 11
+    monsterDamage: 64
+  - loseDamage: 48
+    winGold: 12
+    monsterDamage: 68
+  - loseDamage: 52
+    winGold: 13
+    monsterDamage: 72
+--- !u!114 &5456327476860408400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16556f9f9349496da6b2b70d65b51622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onJoinedRoom:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdatePlayerCount:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5949935229972481187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5081650941702314313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486528198972859873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9459a429f46d4980980ca84f0d97b59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGuildCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onGuildSynced:
+    m_PersistentCalls:
+      m_Calls: []
+  startHp: 50
+  startGold: 5
+  startGroupSize: 5
+  playerGuilds: []
+  guildNames:
+  - Valor
+  - Ember
+  - Aegis
+  - Thorn
+  - Sentinel
+  - Blades
+  - Raven
+  - Titan
+  - Phoenix
+  - Lotus
+  - Nexus
+  - Prime
+  guildColors:
+  - {r: 0.19999999, g: 0.704731, b: 1, a: 1}
+  - {r: 0.9169811, g: 0.21978551, b: 0.21280874, a: 1}
+  - {r: 1, g: 0.79984796, b: 0, a: 1}
+  - {r: 0.3244357, g: 0.93962264, b: 0.49876475, a: 1}
+  - {r: 0.16860795, g: 0.22569767, b: 0.7509433, a: 1}
+  - {r: 0.55949444, g: 0.6719031, b: 0.6754716, a: 1}
+  - {r: 0.509839, g: 0.16862743, b: 0.7490196, a: 1}
+  - {r: 0, g: 0.4566037, b: 0.03418869, a: 1}
+  - {r: 1, g: 0.47860008, b: 0, a: 1}
+  - {r: 1, g: 0.37647057, b: 0.7227306, a: 1}
+  - {r: 0.18414383, g: 0.8792453, b: 0.8189348, a: 1}
+  - {r: 0.4566037, g: 0, b: 0.13431841, a: 1}
