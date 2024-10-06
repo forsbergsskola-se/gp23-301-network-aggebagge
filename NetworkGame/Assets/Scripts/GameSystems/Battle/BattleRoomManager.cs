@@ -85,7 +85,7 @@ namespace GameSystems.Battle
             if (!PhotonNetwork.LocalPlayer.IsMasterClient)
                 return;
             
-            int rooms = Mathf.CeilToInt(GameManager.i.playersAlive * 0.5f);
+            int rooms = Mathf.CeilToInt(PhotonNetwork.PlayerList.Length * 0.5f);
             
             for (int r = 0; r < rooms; r++)
                 battleRooms.Add(new BattleRoom());
@@ -102,6 +102,8 @@ namespace GameSystems.Battle
             if (!PhotonNetwork.LocalPlayer.IsMasterClient)
                 return;
 
+            Debug.Log("MASTER PREPARES OPPONENTS");
+            
             int player = 0;
     
             for (int room = 0; room < battleRooms.Count && player < GameManager.i.playersAlive; room++)

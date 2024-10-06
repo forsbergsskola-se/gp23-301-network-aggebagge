@@ -54,12 +54,10 @@ namespace GameSystems.Phases
         // ReSharper disable Unity.PerformanceAnalysis
         public void NextPhase()
         {
-            if(GuildManager.i.GetPlayerGuildStats().hp <= 0)
-                return;
-            
             // StartCoroutine(PrepareNextPhase());
             ResetPlayerReady();
-            
+            Debug.Log("NEXT PHASE: " + phase);
+
             switch (phase)
             {
                 case Phase.Recruit: phase = Phase.OpponentReveal; 

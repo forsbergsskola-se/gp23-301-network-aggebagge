@@ -68,6 +68,8 @@ namespace GameRooms
 
         private void OnJoinedRoom()
         {
+            startButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+
             if (PhotonNetwork.IsMasterClient)
             {
                 startButton.onClick.AddListener(OnClickStart);

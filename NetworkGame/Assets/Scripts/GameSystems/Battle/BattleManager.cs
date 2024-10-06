@@ -228,7 +228,8 @@ namespace GameSystems.Battle
             
             yield return new WaitForSeconds(2);
 
-            onPlayerEndBattle.Invoke();
+            if(GuildManager.i.GetPlayerGuildStats().hp > 0)
+                onPlayerEndBattle.Invoke();
         }
         
 

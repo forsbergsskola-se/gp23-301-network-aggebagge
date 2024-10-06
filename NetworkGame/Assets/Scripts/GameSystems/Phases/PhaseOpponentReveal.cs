@@ -30,7 +30,7 @@ namespace GameSystems.Phases
         public override void OnBeginPhase()
         {
             base.OnBeginPhase();
-            
+            Debug.Log("BEGIN OPPONENT PHASE");
             background.gameObject.SetActive(true);
             BattleRoomManager.i.PrepareBattleOpponents();
         }

@@ -41,7 +41,7 @@ namespace GameSystems.Guild
             foreach (var gs in playerGuilds)
             {
                 // If the condition is met, add the item to the removal list
-                if (PhotonNetwork.PlayerList.Any(player => player.ActorNumber == gs.playerID))
+                if (PhotonNetwork.PlayerList.All(player => player.ActorNumber != gs.playerID))
                     itemsToRemove.Add(gs);
             }
 
@@ -127,7 +127,6 @@ namespace GameSystems.Guild
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
-            
             return guildStats;
         }
     }
