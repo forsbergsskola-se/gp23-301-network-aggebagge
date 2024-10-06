@@ -21,6 +21,7 @@ namespace GameSystems.Phases
 
         public TextMeshProUGUI countdownText;
         private List<bool> playersReady = new ();
+        public CanvasGroup canvasGroup;
         
         public enum Phase
         {
@@ -85,6 +86,7 @@ namespace GameSystems.Phases
         public void PlayerReady(int index)
         {
             photonView.RPC("SyncPlayersReady", RpcTarget.All, index);
+            canvasGroup.interactable = false;
         }
         
         [PunRPC]

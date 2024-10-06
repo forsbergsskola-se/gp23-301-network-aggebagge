@@ -10760,6 +10760,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 889599550551344195, guid: eed729103cf5ba243aec4f84f161d61f, type: 3}
+      propertyPath: canvasGroup
+      value: 
+      objectReference: {fileID: 343233684}
+    - target: {fileID: 889599550551344195, guid: eed729103cf5ba243aec4f84f161d61f, type: 3}
       propertyPath: countdownText
       value: 
       objectReference: {fileID: 563346913}
@@ -10859,6 +10863,10 @@ PrefabInstance:
     - target: {fileID: 1486528198972859873, guid: 0b7b75098e4c05448b4837282acb4a3f, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949935229972481187, guid: 0b7b75098e4c05448b4837282acb4a3f, type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7787470907220590582, guid: 0b7b75098e4c05448b4837282acb4a3f, type: 3}
       propertyPath: m_LocalPosition.x
