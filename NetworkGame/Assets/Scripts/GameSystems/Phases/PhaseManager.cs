@@ -53,7 +53,6 @@ namespace GameSystems.Phases
         {
             // StartCoroutine(PrepareNextPhase());
             ResetPlayerReady();
-            Debug.Log("NEXT PHASE: " + phase);
 
             switch (phase)
             {
