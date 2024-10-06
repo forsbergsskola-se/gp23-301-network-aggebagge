@@ -47,6 +47,7 @@ namespace GameRooms
 
             if (countdownTimer <= 0)
             {
+                SoundtrackManager.StopMusic();
                 countdownText.gameObject.SetActive(false);
                 GameManager.i.onStartGame.Invoke();
             }
@@ -54,8 +55,6 @@ namespace GameRooms
 
         private void OnBeginCountdown()
         {
-            SoundtrackManager.StopMusic();
-
             codeUITransform.gameObject.SetActive(false);
             countdownTimer = countdownTime;
             countdownTransform.gameObject.SetActive(true);
