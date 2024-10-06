@@ -8,6 +8,7 @@ using GameSystems.Units;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GameSystems.Battle
@@ -37,6 +38,11 @@ namespace GameSystems.Battle
 
         private int battleCount;
         public BattleStats[] battleStats;
+
+        [FormerlySerializedAs("win")] public AudioClip winClip;
+        [FormerlySerializedAs("lose")] public AudioClip loseClip;
+        [FormerlySerializedAs("draw")] public AudioClip drawClip;
+        public AudioSource battleResultAudio;
         
         [Serializable]
         public class BattleStats
@@ -217,6 +223,9 @@ namespace GameSystems.Battle
 
             resultText.text = isWin? "<size=150%>Winner</size>\n+" + battleStat.winGold + " Gold" : isLose? "<size=150%>Loser</size>\n-" + battleStat.loseDamage + " Hp" : "<size=150%>Draw</size>";
             resultText.gameObject.SetActive(true);
+
+            battleResultAudio.clip = isWin ? winClip : isLose ? loseClip : drawClip;
+            battleResultAudio.Play();
             
             yield return new WaitForSeconds(1);
             
