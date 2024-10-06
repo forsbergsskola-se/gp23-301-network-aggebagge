@@ -88,6 +88,13 @@ namespace GameSystems.Battle
         {
             UnitData unit = unitQueue.Dequeue();
             var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit);
+            
+            if (unit.attributeType == AttributeType.Scaling && unit.damage < 9)
+            {
+                unit.damage++;
+                battleUnit.PopupText(true, 1);
+            }
+            
             onDeployUnit.Invoke(unit);
             battleUnits.Add(battleUnit);
             
@@ -110,7 +117,7 @@ namespace GameSystems.Battle
         
         private void CreateUnitQueue()
         {
-            List<UnitData> units = new List<UnitData>(PlayerStats.GetUnits());
+            List<UnitData> units = PlayerStats.GetUnits();
             ShuffleList(units);
 
             unitQueue = new Queue<UnitData>(units);
