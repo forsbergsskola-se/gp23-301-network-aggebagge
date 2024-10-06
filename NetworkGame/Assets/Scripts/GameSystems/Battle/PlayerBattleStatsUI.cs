@@ -53,6 +53,7 @@ namespace GameSystems.Battle
 
         public void ResetBattleUI()
         {
+            cursedText.gameObject.SetActive(false);
             OnUpdateCurseUI(0, 3);
             playerDamageText.text = "0";
             opponentDamageText.text = "";

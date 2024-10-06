@@ -175,7 +175,10 @@ namespace GameSystems.Battle
                     {
                         opponentCurses++;
                         if (opponentCurses == 3)
+                        {
                             opponentCursedText.gameObject.SetActive(true);
+                            opponentDamage = 0;
+                        }
                     }
                     else if (unitSo.attributeType == AttributeType.AntiCurse)
                         opponentCurses--;
@@ -184,15 +187,15 @@ namespace GameSystems.Battle
                 }
                 yield return new WaitForSeconds(1.5f);
                 
-                if(FullPartyBonus(opponent.groupSize, enemyBattleField.units))
-                    yield return new WaitForSeconds(1.5f);
+                if(opponentDamage < 3)
+                    if(FullPartyBonus(opponent.groupSize, enemyBattleField.units))
+                        yield return new WaitForSeconds(1.5f);
             }
             else
             {
                 opponentDamage = battleStat.monsterDamage;
             }
 
-            Debug.Log(playerBattleStats.GetDamage() + " " +  opponentDamage);
             bool isWin = playerBattleStats.GetDamage() > opponentDamage;
             bool isLose = playerBattleStats.GetDamage() < opponentDamage;
 

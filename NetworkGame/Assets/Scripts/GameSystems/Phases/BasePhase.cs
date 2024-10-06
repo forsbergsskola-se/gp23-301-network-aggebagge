@@ -55,7 +55,7 @@ namespace GameSystems.Phases
                 return;
 
             pm.NextPhase();
-            SoundtrackManager.StopMusic();
+            // SoundtrackManager.StopMusic();
         }
 
         private IEnumerator EndPhaseDelay()

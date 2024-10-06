@@ -11,7 +11,7 @@ namespace GameSystems.Phases
 
         private void Start()
         {
-            BattleManager.i.onPlayerEndBattle.AddListener(OnEndingPhase);
+            BattleManager.i.onPlayerEndBattle.AddListener(pm.PlayerReady);
         }
 
 

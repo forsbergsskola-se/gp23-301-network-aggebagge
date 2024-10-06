@@ -43,16 +43,25 @@ public class SoundtrackManager : MonoBehaviour
     {
         if(track == Soundtrack.None)
             return;
-        
+
         for (int n = 0; n < i.tracks.Count; n++)
+        {
             if ((int)track == n)
                 i.sources[n].Play();
+            else
+            {
+                i.sources[n].Stop();
+            }
+        }
     }
 
-    public static void StopMusic()
+    public static void StopMusic(Soundtrack track)
     {
-        foreach (var source in i.sources)
-            source.Stop();
+        for (int n = 0; n < i.tracks.Count; n++)
+        {
+            if ((int)track == n)
+                i.sources[n].Stop();
+        }
     }
     
 }

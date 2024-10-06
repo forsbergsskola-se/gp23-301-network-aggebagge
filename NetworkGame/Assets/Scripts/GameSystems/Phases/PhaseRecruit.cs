@@ -32,6 +32,7 @@ namespace GameSystems.Phases
         {
             base.OnEndPhase();
             recruitTransform.gameObject.SetActive(false);
+            SoundtrackManager.StopMusic(Soundtrack.Recruit);
         }
 
         protected override void OnEndingPhase()
