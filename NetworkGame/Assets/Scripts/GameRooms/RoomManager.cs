@@ -97,7 +97,7 @@ namespace GameRooms
         
         private string GenerateRoomCode()
         {
-            const string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
             return new string(Enumerable.Repeat(chars, 5)
                 .Select(s => s[Random.Range(0, s.Length)]).ToArray());
         }
