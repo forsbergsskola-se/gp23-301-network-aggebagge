@@ -48,7 +48,7 @@ namespace GameSystems.Battle
         }
 
 
-        private void AddDamage(int dmg)
+        public void AddDamage(int dmg)
         {
             damage += dmg;
             battleStatsUI.OnUpdatePlayerDamage(damage);
