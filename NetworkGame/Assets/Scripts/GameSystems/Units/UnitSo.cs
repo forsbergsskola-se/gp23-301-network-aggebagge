@@ -11,6 +11,9 @@ namespace GameSystems.Units
         public Sprite sprite;
         public int cost;
 
+        [TextArea(5, 6)]
+        public string tooltipText;
+
         [FormerlySerializedAs("physicalDamage")] [Header("Stats")]
         public int damage;
         public int goldGain;
