@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit0_adventurer_cursed
+  m_Name: unit0_criminal
   m_EditorClassIdentifier: 
   id: 0
-  unitName: Cursed Adventurer
+  unitName: Criminal
   sprite: {fileID: 21300000, guid: 8fdd7c95fdb79b84da1f258619030b36, type: 3}
   cost: 0
   tooltipText: '<color=#FF0057>This text is brown!</color>dmg Damage</color>

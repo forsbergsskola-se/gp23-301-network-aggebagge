@@ -113,8 +113,7 @@ namespace GameSystems.Battle
             int damage = 0;
             foreach (var battleUnit in leaders)
             {
-                battleUnit.PopupText(false, 4);
-                playerBattleStats.AddDamage(4);
+                battleUnit.PopupText(true, 4);
                 damage += 4;
             }
             return damage;
@@ -199,10 +198,10 @@ namespace GameSystems.Battle
 
                 if (opponentCurses < 3)
                 {
-                    int fullpartyBonus = FullPartyBonus(opponent.groupSize, enemyBattleField.units);
-                    if (fullpartyBonus > 0)
+                    int fullPartyBonus = FullPartyBonus(opponent.groupSize, enemyBattleField.units);
+                    if (fullPartyBonus > 0)
                     {
-                        opponentDamage += fullpartyBonus;
+                        opponentDamage += fullPartyBonus;
                         opponentDamageText.text = opponentDamage.ToString();
                         yield return new WaitForSeconds(1.5f);
                     }

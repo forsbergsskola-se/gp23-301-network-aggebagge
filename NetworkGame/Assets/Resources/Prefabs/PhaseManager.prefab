@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
   phase: 1
-  phaseDuration: 30
+  phaseDuration: 40
   track: 1
   canvas: {fileID: 0}
   recruitTransform: {fileID: 0}
