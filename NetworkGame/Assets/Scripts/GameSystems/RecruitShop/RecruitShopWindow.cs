@@ -2,6 +2,7 @@ using System;
 using GameSystems.Units;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameSystems.RecruitShop
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using GameSystems.Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameSystems.Units
 {
@@ -11,7 +12,7 @@ namespace GameSystems.Units
     {
         private static UnitManager i;
         public int unitCount;
-        private HashSet<UnitSo> unitList = new();
+        private List<UnitSo> unitList = new();
         private HashSet<UnitData> shopUnits = new();
 
         public List<UnitSo> startUnits;
@@ -24,12 +25,20 @@ namespace GameSystems.Units
             var allUnits = Resources.LoadAll<UnitSo>("SO");
             unitList.AddRange(allUnits);
 
-            foreach (var unitSo in allUnits)
+            while (unitList.Count > 12)
+            {
+                int index = Random.Range(0, unitList.Count);
+
+                if (!unitList[index].mustBeInShop)
+                    unitList.RemoveAt(index);
+            }
+            
+            Debug.Log(unitList.Count());
+            
+            foreach (var unitSo in unitList)
             {
                 if (unitSo.cost > 0)
-                {
                     shopUnits.Add(new UnitData(unitSo));
-                }
             }
 
             foreach (var startUnit in startUnits)
