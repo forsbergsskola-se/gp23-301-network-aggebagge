@@ -72,7 +72,6 @@ namespace GameSystems.Battle
 
         public void SetupBattleField()
         {
-            battleCount++;
             opponentDamageText.text = "";
             opponentCursedText.gameObject.SetActive(false);
             resultText.gameObject.SetActive(false);
@@ -236,6 +235,7 @@ namespace GameSystems.Battle
             
             yield return new WaitForSeconds(2);
 
+            battleCount++;
             if(GuildManager.i.GetPlayerGuildStats().hp > 0)
                 onPlayerEndBattle.Invoke();
         }

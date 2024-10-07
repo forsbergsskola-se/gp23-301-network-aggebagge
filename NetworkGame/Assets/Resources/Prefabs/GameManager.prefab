@@ -174,57 +174,69 @@ MonoBehaviour:
   - loseDamage: 2
     winGold: 1
     monsterDamage: 4
-  - loseDamage: 3
+  - loseDamage: 2
     winGold: 1
-    monsterDamage: 7
+    monsterDamage: 6
+  - loseDamage: 3
+    winGold: 2
+    monsterDamage: 8
   - loseDamage: 4
     winGold: 2
     monsterDamage: 10
+  - loseDamage: 5
+    winGold: 3
+    monsterDamage: 13
   - loseDamage: 6
-    winGold: 2
-    monsterDamage: 14
+    winGold: 3
+    monsterDamage: 16
   - loseDamage: 8
-    winGold: 3
-    monsterDamage: 18
+    winGold: 4
+    monsterDamage: 19
   - loseDamage: 10
-    winGold: 3
+    winGold: 4
     monsterDamage: 22
   - loseDamage: 12
-    winGold: 4
-    monsterDamage: 26
-  - loseDamage: 15
-    winGold: 4
-    monsterDamage: 30
+    winGold: 5
+    monsterDamage: 25
+  - loseDamage: 14
+    winGold: 5
+    monsterDamage: 28
+  - loseDamage: 16
+    winGold: 6
+    monsterDamage: 31
   - loseDamage: 18
-    winGold: 5
+    winGold: 6
     monsterDamage: 34
-  - loseDamage: 21
-    winGold: 5
+  - loseDamage: 20
+    winGold: 7
     monsterDamage: 38
-  - loseDamage: 24
-    winGold: 6
+  - loseDamage: 22
+    winGold: 7
     monsterDamage: 42
-  - loseDamage: 28
-    winGold: 6
+  - loseDamage: 24
+    winGold: 8
     monsterDamage: 46
-  - loseDamage: 32
-    winGold: 7
+  - loseDamage: 26
+    winGold: 8
     monsterDamage: 50
-  - loseDamage: 36
-    winGold: 7
-    monsterDamage: 54
-  - loseDamage: 40
-    winGold: 8
-    monsterDamage: 60
-  - loseDamage: 44
-    winGold: 8
-    monsterDamage: 64
-  - loseDamage: 48
+  - loseDamage: 28
     winGold: 9
-    monsterDamage: 68
-  - loseDamage: 52
+    monsterDamage: 54
+  - loseDamage: 30
+    winGold: 9
+    monsterDamage: 58
+  - loseDamage: 32
     winGold: 10
-    monsterDamage: 72
+    monsterDamage: 60
+  - loseDamage: 34
+    winGold: 10
+    monsterDamage: 60
+  - loseDamage: 36
+    winGold: 10
+    monsterDamage: 60
+  - loseDamage: 38
+    winGold: 10
+    monsterDamage: 60
   winClip: {fileID: 8300000, guid: 0ef9538a82ba21f488af45046eaa5920, type: 3}
   loseClip: {fileID: 8300000, guid: a175099cc4a4f0744b86d5ce9a3487ed, type: 3}
   drawClip: {fileID: 8300000, guid: cb8c95aaf38f3f142b1a42f1c8e0128c, type: 3}
@@ -294,14 +306,14 @@ MonoBehaviour:
   guildNames:
   - Valor
   - Ember
-  - Aegis
+  - Divinity
   - Wildthorn
+  - Phoenix
   - Sentinel
   - Zephyr
   - Twilight
   - Blades
   - Titan
-  - Phoenix
   - Hallow
   - Lotus
   - Nexus
@@ -317,12 +329,12 @@ MonoBehaviour:
   - {r: 0.9169811, g: 0.21978551, b: 0.21280874, a: 1}
   - {r: 1, g: 0.79984796, b: 0, a: 1}
   - {r: 0.3244357, g: 0.93962264, b: 0.49876475, a: 1}
+  - {r: 1, g: 0.47860008, b: 0, a: 1}
   - {r: 0.16860795, g: 0.22569767, b: 0.7509433, a: 1}
   - {r: 0.6805385, g: 0.9245283, b: 0.24247056, a: 1}
   - {r: 0.54925185, g: 0.14318973, b: 0.83396226, a: 1}
   - {r: 0.55949444, g: 0.6719031, b: 0.6754716, a: 1}
   - {r: 0, g: 0.4566037, b: 0.03418869, a: 1}
-  - {r: 1, g: 0.47860008, b: 0, a: 1}
   - {r: 1, g: 0.97927016, b: 0.47358483, a: 1}
   - {r: 1, g: 0.4584905, b: 0.7581939, a: 1}
   - {r: 0.27228904, g: 0.86415094, b: 0.8139931, a: 1}
