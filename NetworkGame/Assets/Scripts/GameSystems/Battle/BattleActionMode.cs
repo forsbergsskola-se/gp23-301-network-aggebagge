@@ -24,6 +24,7 @@ namespace GameSystems.Battle
         
         public static void ActionComplete()
         {
+            i.actionUnit.uniqueImage.gameObject.SetActive(false);
             i.actionUnit.RemoveAction();
             i.actionUnit = null;
             i.type = AttributeType.None;

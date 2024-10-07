@@ -47,7 +47,7 @@ namespace GameSystems.Battle
         {
             var battleUnit = Instantiate(battleUnitPrefab, fieldSlots.Dequeue().transform);
             battleUnit.SetupUI(unitData);
-            if(isPlayer)
+            if(!isPlayer)
                 battleUnit.RemoveAction();
             
             battleUnit.onKill.AddListener(OnKillUnit);

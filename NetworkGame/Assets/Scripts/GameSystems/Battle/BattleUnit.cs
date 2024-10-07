@@ -12,7 +12,7 @@ namespace GameSystems.Battle
 
         public BonusPopup popupPrefab;
         public Button actionButton;
-
+        
         public override void SetupUI(UnitData unitData)
         {
             base.SetupUI(unitData);
@@ -43,7 +43,6 @@ namespace GameSystems.Battle
         public void RemoveAction()
         {
             actionButton.interactable = false;
-            uniqueImage.gameObject.SetActive(false);
         }
 
         private void Kill()
