@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 929c180c8b59e1548a16dc9e20d527b1, type: 3}
-  m_Name: ua_fullparty
+  m_Name: ua_buff
   m_EditorClassIdentifier: 
-  attributeName: Full Party
-  type: 4
-  icon: {fileID: 21300000, guid: 6d9635f69f1551649b1b4beb7babcc56, type: 3}
+  attributeName: Buff
+  type: 8
+  icon: {fileID: 21300000, guid: 48d0891a66f77ef42a7ebc7548e7078e, type: 3}
