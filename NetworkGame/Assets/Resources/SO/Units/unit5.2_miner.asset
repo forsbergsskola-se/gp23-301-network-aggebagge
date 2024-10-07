@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit_14_miner
+  m_Name: unit5.2_miner
   m_EditorClassIdentifier: 
   id: 14
   unitName: Miner
   sprite: {fileID: 21300000, guid: bf734c87f8f28274fac0f459780ab064, type: 3}
-  cost: 10
+  cost: 5
+  mustBeInShop: 0
   tooltipText: '<color=#FF0057>dmg Damage</color>
 
     <color=yellow>gg Gold</color>'
-  damage: 1
+  damage: 0
   goldGain: 3
   attribute: {fileID: 0}

@@ -16,6 +16,7 @@ MonoBehaviour:
   unitName: Goblin
   sprite: {fileID: 21300000, guid: 8e79faa5be5105142a30ea5ec8002d54, type: 3}
   cost: 4
+  mustBeInShop: 0
   tooltipText: '<color=purple>1 Curse</color>
 
     <color=yellow>gg Gold</color>'
