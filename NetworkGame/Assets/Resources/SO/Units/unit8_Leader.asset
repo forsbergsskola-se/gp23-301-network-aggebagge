@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit2_looter
+  m_Name: unit8_Leader
   m_EditorClassIdentifier: 
-  id: 2
-  unitName: Looter
-  sprite: {fileID: 21300000, guid: de3f300cd4205614ca4b9c815c531ece, type: 3}
-  cost: 3
-  mustBeInShop: 1
-  tooltipText: <color=yellow>gg Gold</color>
+  id: 8
+  unitName: Leader
+  sprite: {fileID: 21300000, guid: 6e1f69d5563eee045beae4772a7c04ae, type: 3}
+  cost: 7
+  mustBeInShop: 0
+  tooltipText: <color=#913253>4 Damage if you have a full group</color>
   damage: 0
-  goldGain: 2
-  attribute: {fileID: 0}
+  goldGain: 0
+  attribute: {fileID: 11400000, guid: 758a96131f777d146a7fe610da1857d9, type: 2}

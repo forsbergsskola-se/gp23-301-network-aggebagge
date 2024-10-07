@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit2_looter
+  m_Name: unit7_bandit
   m_EditorClassIdentifier: 
-  id: 2
-  unitName: Looter
-  sprite: {fileID: 21300000, guid: de3f300cd4205614ca4b9c815c531ece, type: 3}
-  cost: 3
-  mustBeInShop: 1
-  tooltipText: <color=yellow>gg Gold</color>
-  damage: 0
-  goldGain: 2
-  attribute: {fileID: 0}
+  id: 7
+  unitName: Bandit
+  sprite: {fileID: 21300000, guid: d7b5bcff5c098cb4caf8c00ae7ab2af3, type: 3}
+  cost: 6
+  tooltipText: '<color=purple>1 Curse</color>
+
+    <color=#FF0057>dmg Damage</color>
+
+    <color=yellow>gg
+    Gold</color>'
+  damage: 4
+  goldGain: 1
+  attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}

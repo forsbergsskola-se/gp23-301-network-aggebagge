@@ -11,6 +11,8 @@ namespace GameSystems.Units
         public Sprite sprite;
         public int cost;
 
+        public bool mustBeInShop;
+        
         [TextArea(5, 6)]
         public string tooltipText;
 

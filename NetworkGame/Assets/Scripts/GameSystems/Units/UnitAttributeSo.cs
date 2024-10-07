@@ -10,7 +10,11 @@ namespace GameSystems.Units
         Foresight,
         FullParty,
         Royalty,
-        Scaling
+        Scaling,
+        Viking,
+        Buff,
+        Kill,
+        Copy
     }
     
     [CreateAssetMenu(fileName = "ua_", menuName = "SO/Attribute", order = 0)]

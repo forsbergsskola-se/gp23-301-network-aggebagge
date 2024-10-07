@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit9_miner
+  m_Name: unit_13_knight
   m_EditorClassIdentifier: 
-  id: 9
-  unitName: Miner
-  sprite: {fileID: 21300000, guid: bf734c87f8f28274fac0f459780ab064, type: 3}
-  cost: 10
-  tooltipText: '<color=#FF0057>dmg Damage</color>
-
-    <color=yellow>gg Gold</color>'
-  damage: 1
-  goldGain: 3
+  id: 13
+  unitName: Knight
+  sprite: {fileID: 21300000, guid: a2029a1963817e149aa16a2d68ffdcb9, type: 3}
+  cost: 9
+  tooltipText: <color=#FF0057>dmg Damage</color>
+  damage: 3
+  goldGain: 0
   attribute: {fileID: 0}

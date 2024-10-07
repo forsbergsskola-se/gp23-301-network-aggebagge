@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
-  m_Name: unit_10_Barbarian
+  m_Name: unit_11_bard
   m_EditorClassIdentifier: 
-  id: 10
-  unitName: Barbarian
-  sprite: {fileID: 21300000, guid: 53238d79d00e4ba449a26bcf5c46171d, type: 3}
-  cost: 11
-  tooltipText: <color=#CC5C30>When deployed, increase damage by 1 (max 9 damage)</color>
+  id: 11
+  unitName: Bard
+  sprite: {fileID: 21300000, guid: 968b143db3af65345bddab63c809187d, type: 3}
+  cost: 9
+  tooltipText: <color=#79CE4E>Add 1 damage to a unit in your group</color>
   damage: 0
-  goldGain: 0
-  attribute: {fileID: 11400000, guid: 3dd8eeecb2213814da47359d3507eac2, type: 2}
+  goldGain: -1
+  attribute: {fileID: 11400000, guid: 3692bcf7b7e0ff740a5bc43c8b77c570, type: 2}
