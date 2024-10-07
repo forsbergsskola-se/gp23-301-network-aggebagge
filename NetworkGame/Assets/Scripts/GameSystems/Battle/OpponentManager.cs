@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
@@ -9,25 +8,30 @@ namespace GameSystems.Battle
 {
     public class OpponentManager : MonoBehaviourPunCallbacks
     {
-        public List<OpponentTracker> opponentTrackerList = new();
-        private Dictionary<int, OpponentTracker> opponentTrackers = new ();
+        // public List<OpponentTracker> opponentTrackerList = new();
+        [HideInInspector] public Dictionary<int, OpponentTracker> opponentTrackers = new ();
 
         // Method to prepare opponent trackers for all players
         public void PrepareOpponentTrackers()
         {
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                var tracker = new OpponentTracker(player.ActorNumber); // Pass the playerId here
+                var tracker = new OpponentTracker(player.ActorNumber);
 
                 // Populate the tracker with the data
                 tracker.opponentsMet = GetOpponentsMetForPlayer(player.ActorNumber);
                 tracker.currentOpponent = GetCurrentOpponentForPlayer(player.ActorNumber);
+
+                // Update the dictionary directly
+                opponentTrackers[player.ActorNumber] = tracker;
 
                 // Send the data to all players
                 Hashtable serializedData = tracker.ToHashtable();
                 photonView.RPC("ReceiveOpponentTracker", RpcTarget.All, player.ActorNumber, serializedData);
             }
         }
+        
+        
 
         // Method to get the list of opponents met by a player
         private List<int> GetOpponentsMetForPlayer(int playerId)
@@ -66,16 +70,11 @@ namespace GameSystems.Battle
         }
 
         // Method to update the opponent tracker
-        public void UpdateOpponentTracker(int playerId, OpponentTracker tracker)
+        private void UpdateOpponentTracker(int playerId, OpponentTracker tracker)
         {
-            if (opponentTrackers.ContainsKey(playerId))
-            {
-                opponentTrackers[playerId] = tracker; // Update existing tracker
-            }
-            else
-            {
-                opponentTrackers.Add(playerId, tracker); // Add new tracker
-            }
+            // Update existing tracker
+            // Add new tracker
+            opponentTrackers[playerId] = tracker;
         }
         
         
@@ -85,15 +84,15 @@ namespace GameSystems.Battle
             List<int> availablePlayers = new List<int>();
 
             // Add all alive players to the availablePlayers list
-            foreach (var opponentTracker in opponentTrackerList)
+            foreach (var tracker in opponentTrackers.Values)
             {
-                int playerID = opponentTracker.playerId;
+                int playerID = tracker.playerId;
                 if (GameManager.i.IsPlayerAlive(playerID))
                 {
                     availablePlayers.Add(playerID);
                 }
                 // Reset current opponents from the previous round
-                opponentTracker.ResetCurrentOpponent();
+                tracker.ResetCurrentOpponent();
             }
 
             bool isOddNumberOfPlayers = availablePlayers.Count % 2 != 0;
@@ -109,11 +108,11 @@ namespace GameSystems.Battle
                     int player2 = availablePlayers[j];
 
                     // Check if player1 and player2 haven't battled yet
-                    if (!opponentTrackerList[i].HasMet(player2))
+                    if (!opponentTrackers[player1].HasMet(player2))
                     {
                         // Record the current opponents
-                        opponentTrackerList[i].SetCurrentOpponent(player2);
-                        opponentTrackerList[j].SetCurrentOpponent(player1);
+                        opponentTrackers[player1].SetCurrentOpponent(player2);
+                        opponentTrackers[player2].SetCurrentOpponent(player1);
 
                         battlePairs.Add((player1, player2));
                         availablePlayers.RemoveAt(j); // Remove player2 since they're now paired
@@ -125,7 +124,7 @@ namespace GameSystems.Battle
                 if (isOddNumberOfPlayers && !battlePairs.Any(pair => pair.player1 == player1 || pair.player2 == player1))
                 {
                     // Player1 battles the AI (player ID -1)
-                    opponentTrackerList[i].SetCurrentOpponent(-1); // Set AI as opponent
+                    opponentTrackers[player1].SetCurrentOpponent(-1); // Set AI as opponent
                     battlePairs.Add((player1, -1));
                     isOddNumberOfPlayers = false; // Reset flag after AI pairing
                 }
@@ -137,10 +136,10 @@ namespace GameSystems.Battle
         // Reset all opponent lists for a new round
         private void ResetAllBattles()
         {
-            foreach (var opponentMet in opponentTrackerList)
+            foreach (var opponentTracker in opponentTrackers.Values)
             {
-                opponentMet.ResetOpponentsMet(); // Clear the list for each player
-                opponentMet.ResetCurrentOpponent(); // Reset the current opponent as well
+                opponentTracker.ResetOpponentsMet(); // Clear the list for each player
+                opponentTracker.ResetCurrentOpponent(); // Reset the current opponent as well
             }
 
             Debug.Log("All battles reset! New cycle can begin.");
@@ -149,29 +148,33 @@ namespace GameSystems.Battle
         // After a battle, mark it as complete
         private void RegisterBattle(int player1, int player2)
         {
-            var p1 = opponentTrackerList.Find(p => p.playerId == player1);
-            var p2 = opponentTrackerList.Find(p => p.playerId == player2);
+            if (opponentTrackers.TryGetValue(player1, out var p1))
+            {
+               p1.SetCurrentOpponent(player2);
+            }
 
-            p1?.SetCurrentOpponent(player2);
-            p2?.SetCurrentOpponent(player1);
+            if (opponentTrackers.TryGetValue(player2, out var p2))
+            {
+               p2.SetCurrentOpponent(player1);
+            }
         }
 
         public void SetupBattles()
         {
             // After all battles in the round, reset current opponents
-            foreach (var opponentMet in opponentTrackerList)
+            foreach (var opponentTracker in opponentTrackers.Values)
             {
-                opponentMet.ResetCurrentOpponent();
+                opponentTracker.ResetCurrentOpponent();
             }
 
             // Check if all players have met all other players
-            List<int> allPlayerIDs = opponentTrackerList.Select(op => op.playerId).ToList();
-            if (opponentTrackerList.All(op => op.HasMetAllPlayers(allPlayerIDs)))
+            List<int> allPlayerIDs = opponentTrackers.Keys.ToList(); // Get all player IDs from the dictionary
+            if (opponentTrackers.Values.All(op => op.HasMetAllPlayers(allPlayerIDs)))
             {
                 // Reset the opponentsMet list when all players have battled everyone
                 ResetAllBattles();
             }
-            
+    
             List<(int player1, int player2)> allBattlePairs = FindAllBattles();
 
             foreach (var pair in allBattlePairs)
@@ -192,15 +195,13 @@ namespace GameSystems.Battle
 
         public int GetMyOpponentID()
         {
-            var opTracker = opponentTrackerList.FirstOrDefault(opt => opt.playerId == GameManager.i.GetID());
+            int myID = GameManager.i.GetID();
 
-            if (opTracker == null)
-            {
-                Debug.LogWarning("Could not find any opponent?");
-                return -1;
-            }
-            
-            return opTracker.currentOpponent;
+            if (opponentTrackers.TryGetValue(myID, out var opTracker))
+                return opTracker.currentOpponent;
+    
+            Debug.LogWarning("Could not find any opponent?");
+            return -1;
         }
     }
 }

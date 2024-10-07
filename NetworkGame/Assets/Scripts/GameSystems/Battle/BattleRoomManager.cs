@@ -90,15 +90,15 @@ namespace GameSystems.Battle
         public void PrepareBattleOpponents()
         {
             opponentManager.SetupBattles();
-    
+
             // Create a Hashtable to hold the serialized opponent trackers
             Hashtable serializedTrackers = new Hashtable();
 
-            for (int i = 0; i < opponentManager.opponentTrackerList.Count; i++)
+            foreach (var trackerEntry in opponentManager.opponentTrackers)
             {
-                serializedTrackers[i] = opponentManager.opponentTrackerList[i].ToHashtable(); // Convert each OpponentTracker to Hashtable
+                serializedTrackers[trackerEntry.Key] = trackerEntry.Value.ToHashtable(); // Convert each OpponentTracker to Hashtable
             }
-    
+
             // Send the serialized opponent trackers as a single Hashtable
             photonView.RPC("SyncOpponentsData", RpcTarget.All, serializedTrackers);
         }
@@ -106,13 +106,14 @@ namespace GameSystems.Battle
         [PunRPC]
         void SyncOpponentsData(Hashtable serializedTrackers)
         {
-            opponentManager.opponentTrackerList.Clear(); // Clear the list before syncing new data
-    
-            // Convert each Hashtable back into an OpponentTracker and add it to the list
+            opponentManager.opponentTrackers.Clear(); // Clear the dictionary before syncing new data
+
+            // Convert each Hashtable back into an OpponentTracker and add it to the dictionary
             foreach (DictionaryEntry trackerData in serializedTrackers)
             {
+                int playerId = (int)trackerData.Key; // The key is the playerId
                 OpponentTracker tracker = OpponentTracker.FromHashtable((Hashtable)trackerData.Value);
-                opponentManager.opponentTrackerList.Add(tracker);
+                opponentManager.opponentTrackers[playerId] = tracker; // Add to the dictionary
             }
 
             onOpponentsPrepared.Invoke();
@@ -161,7 +162,7 @@ namespace GameSystems.Battle
 
         public GuildStats GetOpponentGuildStats()
         {
-            int index = GetOpponentId();
+            int index = GameManager.i.GetPlayerIndex(GetOpponentId());
             if (index == -1)
                 return null;
             return GuildManager.i.playerGuilds[index];
