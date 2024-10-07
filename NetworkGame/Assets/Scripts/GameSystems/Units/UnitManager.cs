@@ -25,12 +25,12 @@ namespace GameSystems.Units
             var allUnits = Resources.LoadAll<UnitSo>("SO");
             unitList.AddRange(allUnits);
             List<UnitSo> shopUnitList = new();
-            shopUnitList.AddRange(unitList);
-            
+            shopUnitList.AddRange(unitList.Where(unit => unit.cost > 0));
+
             while (shopUnitList.Count > 11)
             {
                 int index = Random.Range(0, shopUnitList.Count);
-                if (!shopUnitList[index].mustBeInShop && shopUnitList[index].cost > 0)
+                if (!shopUnitList[index].mustBeInShop)
                     shopUnitList.RemoveAt(index);
             }
             

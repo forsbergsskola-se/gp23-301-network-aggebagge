@@ -39,11 +39,11 @@ namespace GameSystems.Battle
         private int battleCount;
         public BattleStats[] battleStats;
 
-        [FormerlySerializedAs("win")] public AudioClip winClip;
-        [FormerlySerializedAs("lose")] public AudioClip loseClip;
-        [FormerlySerializedAs("draw")] public AudioClip drawClip;
+        public AudioClip winClip;
+        public AudioClip loseClip;
+        public AudioClip drawClip;
         public AudioSource battleResultAudio;
-        
+
         [Serializable]
         public class BattleStats
         {
@@ -123,6 +123,26 @@ namespace GameSystems.Battle
             return damage;
         }
 
+        private int VikingBonus(List<BattleUnit> units)
+        {
+            var vikings =
+                units.Where(unit => unit.data.attributeType == AttributeType.Viking);
+
+            foreach (var viking in vikings)
+                viking.PopupIcon(UnitManager.GetUnitSo(viking.data.id).attribute.icon);
+            
+            switch (vikings.Count())
+            {
+                case 0: return 0;
+                case 1: return 1;
+                case 2: return 2;
+                case 3: return 3;
+                case 4: return 4;
+                default: return 4;
+            }
+        }
+
+
         private bool RoyaltyBonus()
         {
             var queens =
@@ -140,6 +160,7 @@ namespace GameSystems.Battle
             }
             return true;
         }
+        
         
         private IEnumerator AnimateBonuses()
         {
@@ -162,13 +183,18 @@ namespace GameSystems.Battle
                 yield return new WaitForSeconds(1.5f);
 
                 int fullPartyBonus = FullPartyBonus(PlayerStats.GetGroupSize(), playerBattleField.units);
-                
                 if (fullPartyBonus > 0)
                 {
-                    yield return new WaitForSeconds(1.5f);
                     playerBattleStats.AddDamage(fullPartyBonus);
+                    yield return new WaitForSeconds(1.5f);
                 }
-                    
+
+                int vikingBonus = VikingBonus(playerBattleField.units);
+                if (vikingBonus > 0)
+                {
+                    playerBattleStats.AddDamage(vikingBonus);
+                    yield return new WaitForSeconds(1.5f);
+                }
                 if(RoyaltyBonus())
                     yield return new WaitForSeconds(1.5f);
             }
@@ -181,7 +207,7 @@ namespace GameSystems.Battle
             {
                 foreach (var unitSo in opponentUnits)
                 {
-                    enemyBattleField.AddUnit(unitSo);
+                    enemyBattleField.AddUnit(unitSo, false);
                     opponentDamage += unitSo.damage;
                     opponentDamageText.text = opponentDamage.ToString();
                     if (unitSo.attributeType == AttributeType.Curse)
@@ -209,14 +235,25 @@ namespace GameSystems.Battle
                         opponentDamageText.text = opponentDamage.ToString();
                         yield return new WaitForSeconds(1.5f);
                     }
+                    int vikingBonus = VikingBonus(enemyBattleField.units);
+                    if (vikingBonus > 0)
+                    {
+                        opponentDamage += vikingBonus;
+                        opponentDamageText.text = opponentDamage.ToString();
+                        yield return new WaitForSeconds(1.5f);
+                    }
+
                 }
             }
             else
             {
                 opponentDamage = battleStat.monsterDamage;
                 opponentDamageText.text = opponentDamage.ToString();
+                yield return new WaitForSeconds(1.5f);
             }
-
+            
+            SoundtrackManager.StopMusic(Soundtrack.Battle);
+            
             bool isWin = playerBattleStats.GetDamage() > opponentDamage;
             bool isLose = playerBattleStats.GetDamage() < opponentDamage;
 
@@ -233,7 +270,7 @@ namespace GameSystems.Battle
             else if (isLose)
                 PlayerStats.TakeDamage(battleStat.loseDamage);
             
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(3);
 
             battleCount++;
             if(GuildManager.i.GetPlayerGuildStats().hp > 0)

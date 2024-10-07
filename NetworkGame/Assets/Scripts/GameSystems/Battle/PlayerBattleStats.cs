@@ -91,7 +91,7 @@ namespace GameSystems.Battle
             if (unit.attributeType == AttributeType.Scaling && unit.damage < 9)
                 unit.damage++;
             
-            var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit);
+            var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit, true);
             
             if (unit.attributeType == AttributeType.Scaling && unit.damage < 9)
             {

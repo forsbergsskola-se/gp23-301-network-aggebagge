@@ -13,7 +13,7 @@ namespace GameSystems.Units
         public TextMeshProUGUI damage;
         public TextMeshProUGUI gold;
 
-        public void SetupUI(UnitData unitData)
+        public virtual void SetupUI(UnitData unitData)
         {
             data = unitData;
             UnitSo unitSo = UnitManager.GetUnitSo(unitData.id);

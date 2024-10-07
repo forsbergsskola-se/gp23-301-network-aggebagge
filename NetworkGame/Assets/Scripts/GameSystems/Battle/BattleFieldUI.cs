@@ -9,10 +9,6 @@ namespace GameSystems.Battle
 {
     public class BattleFieldUI : MonoBehaviour
     {
-        [HideInInspector] public UnityEvent onAddCurse = new();
-        [HideInInspector] public UnityEvent onAddAntiCurse = new();
-        [HideInInspector] public UnityEvent<int> onAddDamage = new();
-
         public Transform layout;
         public BattleUnit battleUnitPrefab;
         public GameObject fieldSlotPrefab;
@@ -47,10 +43,14 @@ namespace GameSystems.Battle
             }
         }
 
-        public BattleUnit AddUnit(UnitData unitData)
+        public BattleUnit AddUnit(UnitData unitData, bool isPlayer)
         {
             var battleUnit = Instantiate(battleUnitPrefab, fieldSlots.Dequeue().transform);
             battleUnit.SetupUI(unitData);
+            if(isPlayer)
+                battleUnit.RemoveAction();
+            
+            battleUnit.onKill.AddListener(OnKillUnit);
             units.Add(battleUnit);
             
             if(unitData.attributeType == AttributeType.Curse)
@@ -60,5 +60,13 @@ namespace GameSystems.Battle
             
             return battleUnit;
         }
+
+        private void OnKillUnit(BattleUnit battleUnit)
+        {
+            units.Remove(battleUnit);
+            BattleManager.i.playerBattleStats.battleUnits.Remove(battleUnit);
+            BattleManager.i.playerBattleStats.AddDamage(-battleUnit.data.damage);
+        }
+
     }
 }
