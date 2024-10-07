@@ -37,8 +37,12 @@ namespace GameSystems.Units
             foreach (var unitSo in shopUnitList)
                 shopUnits.Add(new UnitData(unitSo));
 
+
             foreach (var startUnit in startUnits)
+            {
+                Debug.Log(startUnit.unitName);
                 startUnitDataList.Add(new UnitData(startUnit));
+            }
         }
         
 

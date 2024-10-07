@@ -20,6 +20,9 @@ namespace GameSystems.Battle
         {
             i.actionUnit = unit;
             i.type = newType;
+            
+            foreach (var battleUnit in BattleManager.i.playerBattleField.units)
+                battleUnit.actionButton.interactable = true;
         }
         
         public static void ActionComplete()

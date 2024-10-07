@@ -38,6 +38,7 @@ namespace GameSystems.Player
         {
             stats = GuildManager.i.GetPlayerGuildStats();
             unitList.AddRange(UnitManager.GetStartUnits());
+            Debug.Log(unitList.Count);
             onPlayerSetupComplete.Invoke();
 
             maxHp = GuildManager.i.startHp;
@@ -46,9 +47,7 @@ namespace GameSystems.Player
             groupSize = GuildManager.i.startGroupSize;
             GuildManager.i.UpdateHp(GameManager.i.GetMyPlayerIndex(), hp);
             GuildManager.i.UpdateGroupSize(GameManager.i.GetMyPlayerIndex(), groupSize);
-            
             i.onUpdateGold.Invoke();
-            i.onAddUnit.Invoke();
             i.onUpdateHp.Invoke();
         }
 

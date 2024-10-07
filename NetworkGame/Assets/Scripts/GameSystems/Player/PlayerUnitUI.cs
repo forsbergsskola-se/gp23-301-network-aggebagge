@@ -14,8 +14,8 @@ namespace GameSystems.Player
         {
             count++;
             countText.text = count.ToString();
-            if (count == 1)
-                gameObject.SetActive(false);
+            if (count >= 1)
+                gameObject.SetActive(true);
         }
 
         public void RemoveUnit()

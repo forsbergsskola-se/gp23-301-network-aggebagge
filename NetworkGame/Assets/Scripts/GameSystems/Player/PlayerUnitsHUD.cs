@@ -37,6 +37,7 @@ namespace GameSystems.Player
 
         public void ReturnDeployedUnits()
         {
+            Debug.Log(deployedUnits.Count);
             for (int i = 0; i < deployedUnits.Count; i++)
                 AddUnitToHUD(deployedUnits.Dequeue());
         }
@@ -55,10 +56,6 @@ namespace GameSystems.Player
             {
                 playerUnitUI.AddUnit();
             }
-            
-            // var unitUI = Instantiate(unitUIPrefab, layout);
-            // unitUI.SetupUI(unitData);
-            // playerUnits.Add(unitUI);
         }
 
         private void RemoveUnitFromHUD(UnitData unitData)
@@ -69,8 +66,8 @@ namespace GameSystems.Player
                 Debug.LogError("Missing? | Unit Id:" + unitData.id);
                 return;
             }
-            playerUnitUI.RemoveUnit();
             deployedUnits.Enqueue(unitData);
+            playerUnitUI.RemoveUnit();
         }
     }
 }
