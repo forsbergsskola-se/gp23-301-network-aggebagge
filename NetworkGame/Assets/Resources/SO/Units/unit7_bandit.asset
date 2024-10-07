@@ -16,6 +16,7 @@ MonoBehaviour:
   unitName: Bandit
   sprite: {fileID: 21300000, guid: d7b5bcff5c098cb4caf8c00ae7ab2af3, type: 3}
   cost: 6
+  mustBeInShop: 0
   tooltipText: '<color=purple>1 Curse</color>
 
     <color=#FF0057>dmg Damage</color>
