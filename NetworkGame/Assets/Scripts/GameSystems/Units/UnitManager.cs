@@ -39,10 +39,7 @@ namespace GameSystems.Units
 
 
             foreach (var startUnit in startUnits)
-            {
-                Debug.Log(startUnit.unitName);
                 startUnitDataList.Add(new UnitData(startUnit));
-            }
         }
         
 

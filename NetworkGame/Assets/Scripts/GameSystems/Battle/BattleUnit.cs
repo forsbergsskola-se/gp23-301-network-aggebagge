@@ -12,6 +12,8 @@ namespace GameSystems.Battle
 
         public BonusPopup popupPrefab;
         public Button actionButton;
+
+        [HideInInspector] public bool hasAction;
         
         public override void SetupUI(UnitData unitData)
         {
@@ -21,6 +23,7 @@ namespace GameSystems.Battle
                 unitData.attributeType == AttributeType.Kill || unitData.attributeType == AttributeType.Copy)
             {
                 actionButton.interactable = true;
+                hasAction = true;
             }
             
             actionButton.onClick.AddListener(OnSelect);
@@ -32,16 +35,25 @@ namespace GameSystems.Battle
 
             switch (actionType)
             {
-                case AttributeType.Buff: Kill(); break;
-                case AttributeType.Kill: Buff(); break;
+                case AttributeType.Buff: Buff(); break;
+                case AttributeType.Kill: Kill(); break;
                 case AttributeType.Copy: Copy(BattleActionMode.GetUnit()); break;
                 case AttributeType.None: BattleActionMode.SetActionType(data.attributeType, this);
                     break;
             }
         }
 
+        private void UpdateUI()
+        {
+            if(data.damage > 0)
+                damage.text = data.damage.ToString();
+            if(data.goldGain > 0)
+                gold.text = data.goldGain.ToString();
+        }
+        
         public void RemoveAction()
         {
+            hasAction = false;
             actionButton.interactable = false;
         }
 
@@ -54,6 +66,7 @@ namespace GameSystems.Battle
         private void Buff()
         {
             data.damage += 1;
+            UpdateUI();
             PopupText(true, 1);
             BattleActionMode.ActionComplete();
 
@@ -62,6 +75,7 @@ namespace GameSystems.Battle
         {
             actionUnit.data.damage = data.damage;
             actionUnit.data.goldGain = data.goldGain;
+            actionUnit.UpdateUI();
             BattleActionMode.ActionComplete();
         }
         

@@ -17,13 +17,12 @@ namespace GameSystems.Battle
         [HideInInspector] public UnityEvent onOpponentsPrepared = new();
         private readonly List<BattleRoom> battleRooms = new();
         private readonly List<OpponentUnits> opponentUnits = new();
-        
-        
+        // Initialize the battle manager
+        OpponentManager opponentManager;
         private void Awake()
         {
             i = this;
         }
-
         
         public class BattleRoom
         {
@@ -63,12 +62,9 @@ namespace GameSystems.Battle
                 return room;
             }
         }
-        public class OpponentUnits
+        private class OpponentUnits
         {
             public List<UnitData> units = new();
-
-            public OpponentUnits()
-            {}
         }
 
         private void Start()
@@ -79,8 +75,10 @@ namespace GameSystems.Battle
 
         private void OnStartGame()
         {
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            for (int players = 0; players < PhotonNetwork.PlayerList.Length; players++)
                 opponentUnits.Add(new OpponentUnits());
+
+            opponentManager = new OpponentManager(GameManager.i.playerIdList);
             
             if (!PhotonNetwork.LocalPlayer.IsMasterClient)
                 return;
@@ -99,26 +97,40 @@ namespace GameSystems.Battle
 
         public void PrepareBattleOpponents()
         {
-            if (!PhotonNetwork.LocalPlayer.IsMasterClient)
-                return;
-
-            Debug.Log("MASTER PREPARES OPPONENTS");
-            
-            int player = 0;
-    
-            for (int room = 0; room < battleRooms.Count && player < GameManager.i.playersAlive; room++)
+            var nextBattle = opponentManager.FindNextBattle();
+            if (nextBattle.player1 != -1)
             {
-                if (player < GameManager.i.playersAlive - 1)
-                    battleRooms[room].SetBattleRoomPlayers(player, player + 1);
-                else
-                    battleRooms[room].SetBattleRoomPlayers(player);
+                Debug.Log($"Next Battle: {nextBattle.player1} vs {nextBattle.player2}");
 
-                player += 2;
+                // Register the battle after it's completed
+                opponentManager.RegisterBattle(nextBattle.player1, nextBattle.player2);
             }
-
-            // Now sync the battle rooms with all clients
-            SyncBattleRoomsWithClients();
+            else
+            {
+                opponentManager.ResetAllBattles();
+            }
         }
+
+        // public void PrepareBattleOpponents()
+        // {
+        //     if (!PhotonNetwork.LocalPlayer.IsMasterClient)
+        //         return;
+        //     
+        //     int player = 0;
+        //
+        //     for (int room = 0; room < battleRooms.Count && player < GameManager.i.playersAlive; room++)
+        //     {
+        //         if (player < GameManager.i.playersAlive - 1)
+        //             battleRooms[room].SetBattleRoomPlayers(player, player + 1);
+        //         else
+        //             battleRooms[room].SetBattleRoomPlayers(player);
+        //
+        //         player += 2;
+        //     }
+        //
+        //     // Now sync the battle rooms with all clients
+        //     SyncBattleRoomsWithClients();
+        // }
 
         private void SyncBattleRoomsWithClients()
         {

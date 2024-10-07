@@ -116,6 +116,11 @@ namespace GameSystems
         //     return playerGuilds[GetPlayerIndex(playerId)];
         // }
 
+        public bool IsPlayerAlive(int id)
+        {
+            return playerIdList.Contains(id);
+        }
+        
         public int GetPlayerIndex(int id)
         {
             for(int i = 0; i < playerIdList.Count; i++)

@@ -37,15 +37,15 @@ namespace GameSystems.Player
 
         public void ReturnDeployedUnits()
         {
-            Debug.Log(deployedUnits.Count);
-            for (int i = 0; i < deployedUnits.Count; i++)
+            while(deployedUnits.Any())
                 AddUnitToHUD(deployedUnits.Dequeue());
         }
 
         private void AddUnitToHUD(UnitData unitData)
         {
             PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
-            
+            Debug.Log(unitData.id + " " + playerUnitUI);
+
             if (playerUnitUI == null)
             {
                 var unitUI = Instantiate(unitUIPrefab, layout);
@@ -61,6 +61,9 @@ namespace GameSystems.Player
         private void RemoveUnitFromHUD(UnitData unitData)
         {
             PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
+            
+            Debug.Log(unitData.id);
+            
             if (playerUnitUI == null)
             {
                 Debug.LogError("Missing? | Unit Id:" + unitData.id);

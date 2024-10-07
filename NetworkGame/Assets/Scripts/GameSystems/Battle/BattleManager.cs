@@ -96,6 +96,7 @@ namespace GameSystems.Battle
         {
             if (opponent != null)
             {
+                Debug.Log(opponent);
                 opponentUnits = BattleRoomManager.i.GetOpponentUnits();
                 enemyBattleField.SetupSlots(opponentUnits.Count);
             }

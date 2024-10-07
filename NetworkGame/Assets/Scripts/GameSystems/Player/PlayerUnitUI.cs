@@ -13,6 +13,7 @@ namespace GameSystems.Player
         public void AddUnit()
         {
             count++;
+            Debug.Log(count);
             countText.text = count.ToString();
             if (count >= 1)
                 gameObject.SetActive(true);
@@ -21,6 +22,7 @@ namespace GameSystems.Player
         public void RemoveUnit()
         {
             count--;
+            Debug.Log(count);
             countText.text = count.ToString();
             if(count <= 0)
                 gameObject.SetActive(false);
