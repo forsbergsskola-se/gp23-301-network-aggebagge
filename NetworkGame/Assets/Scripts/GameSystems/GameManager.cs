@@ -22,9 +22,6 @@ namespace GameSystems
         public int playersAlive;
         public Color damageColor;
         public Color goldColor;
-
-
-        [HideInInspector] public int myId;
         
         // Singleton instance for easy access
         public static GameManager i;
@@ -53,7 +50,6 @@ namespace GameSystems
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            myId = PhotonNetwork.LocalPlayer.ActorNumber;
         }
         
         public void StartGame()
@@ -135,6 +131,11 @@ namespace GameSystems
         public int GetMyPlayerIndex()
         {
             return GetPlayerIndex(PhotonNetwork.LocalPlayer.ActorNumber);
+        }
+
+        public int GetID()
+        {
+            return PhotonNetwork.LocalPlayer.ActorNumber;
         }
     }
 }

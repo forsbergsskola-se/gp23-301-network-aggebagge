@@ -5,6 +5,7 @@ using GameSystems.Units;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
+using ExitGames.Client.Photon;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace GameSystems.Battle
@@ -15,53 +16,56 @@ namespace GameSystems.Battle
         
         [HideInInspector] public UnityEvent<int> onSyncUnitsComplete = new();
         [HideInInspector] public UnityEvent onOpponentsPrepared = new();
-        private readonly List<BattleRoom> battleRooms = new();
+        // private readonly List<BattleRoom> battleRooms = new();
         private readonly List<OpponentUnits> opponentUnits = new();
         // Initialize the battle manager
         OpponentManager opponentManager;
+        
+
         private void Awake()
         {
             i = this;
+            opponentManager = GetComponent<OpponentManager>();
         }
         
-        public class BattleRoom
-        {
-            public int guild1Index;
-            public int guild2Index;
-            
-
-            public void SetBattleRoomPlayers(int index1, int index2)
-            {
-                guild1Index = index1;
-                guild2Index = index2;
-            }
-            
-            public void SetBattleRoomPlayers(int index)
-            {
-                guild1Index = index;
-                guild2Index = -1;
-            }
-            
-            // Convert BattleRoom to a Hashtable for Photon
-            public Hashtable ToHashtable()
-            {
-                Hashtable data = new Hashtable();
-                data["guild1Index"] = guild1Index;
-                data["guild2Index"] = guild2Index;
-                return data;
-            }
-
-            // Create a BattleRoom from a Hashtable
-            public static BattleRoom FromHashtable(Hashtable data)
-            {
-                BattleRoom room = new BattleRoom
-                {
-                    guild1Index = (int)data["guild1Index"],
-                    guild2Index = (int)data["guild2Index"]
-                };
-                return room;
-            }
-        }
+        // public class BattleRoom
+        // {
+        //     public int guild1Index;
+        //     public int guild2Index;
+        //     
+        //
+        //     public void SetBattleRoomPlayers(int index1, int index2)
+        //     {
+        //         guild1Index = index1;
+        //         guild2Index = index2;
+        //     }
+        //     
+        //     public void SetBattleRoomPlayers(int index)
+        //     {
+        //         guild1Index = index;
+        //         guild2Index = -1;
+        //     }
+        //     
+        //     // Convert BattleRoom to a Hashtable for Photon
+        //     public Hashtable ToHashtable()
+        //     {
+        //         Hashtable data = new Hashtable();
+        //         data["guild1Index"] = guild1Index;
+        //         data["guild2Index"] = guild2Index;
+        //         return data;
+        //     }
+        //
+        //     // Create a BattleRoom from a Hashtable
+        //     public static BattleRoom FromHashtable(Hashtable data)
+        //     {
+        //         BattleRoom room = new BattleRoom
+        //         {
+        //             guild1Index = (int)data["guild1Index"],
+        //             guild2Index = (int)data["guild2Index"]
+        //         };
+        //         return room;
+        //     }
+        // }
         private class OpponentUnits
         {
             public List<UnitData> units = new();
@@ -71,6 +75,7 @@ namespace GameSystems.Battle
         {
             BattleManager.i.onPlayerEndBattle.AddListener(OnBattleEnd);
             GameManager.i.onStartGame.AddListener(OnStartGame);
+            
         }
 
         private void OnStartGame()
@@ -78,90 +83,42 @@ namespace GameSystems.Battle
             for (int players = 0; players < PhotonNetwork.PlayerList.Length; players++)
                 opponentUnits.Add(new OpponentUnits());
 
-            opponentManager = new OpponentManager(GameManager.i.playerIdList);
             
-            if (!PhotonNetwork.LocalPlayer.IsMasterClient)
-                return;
-            
-            int rooms = Mathf.CeilToInt(PhotonNetwork.PlayerList.Length * 0.5f);
-            
-            for (int r = 0; r < rooms; r++)
-                battleRooms.Add(new BattleRoom());
-        }
-
-        private void OnBattleEnd()
-        {
-            for (int room = 0; room < battleRooms.Count; room++)
-                battleRooms[0] = new BattleRoom();
+            opponentManager.PrepareOpponentTrackers();
         }
 
         public void PrepareBattleOpponents()
         {
-            var nextBattle = opponentManager.FindNextBattle();
-            if (nextBattle.player1 != -1)
-            {
-                Debug.Log($"Next Battle: {nextBattle.player1} vs {nextBattle.player2}");
+            opponentManager.SetupBattles();
+    
+            // Create a Hashtable to hold the serialized opponent trackers
+            Hashtable serializedTrackers = new Hashtable();
 
-                // Register the battle after it's completed
-                opponentManager.RegisterBattle(nextBattle.player1, nextBattle.player2);
-            }
-            else
+            for (int i = 0; i < opponentManager.opponentTrackerList.Count; i++)
             {
-                opponentManager.ResetAllBattles();
+                serializedTrackers[i] = opponentManager.opponentTrackerList[i].ToHashtable(); // Convert each OpponentTracker to Hashtable
             }
+    
+            // Send the serialized opponent trackers as a single Hashtable
+            photonView.RPC("SyncOpponentsData", RpcTarget.All, serializedTrackers);
         }
-
-        // public void PrepareBattleOpponents()
-        // {
-        //     if (!PhotonNetwork.LocalPlayer.IsMasterClient)
-        //         return;
-        //     
-        //     int player = 0;
-        //
-        //     for (int room = 0; room < battleRooms.Count && player < GameManager.i.playersAlive; room++)
-        //     {
-        //         if (player < GameManager.i.playersAlive - 1)
-        //             battleRooms[room].SetBattleRoomPlayers(player, player + 1);
-        //         else
-        //             battleRooms[room].SetBattleRoomPlayers(player);
-        //
-        //         player += 2;
-        //     }
-        //
-        //     // Now sync the battle rooms with all clients
-        //     SyncBattleRoomsWithClients();
-        // }
-
-        private void SyncBattleRoomsWithClients()
-        {
-            // Create a Hashtable to hold serialized battle rooms
-            Hashtable serializedBattleRooms = new Hashtable();
-
-            for (int i = 0; i < battleRooms.Count; i++)
-            {
-                serializedBattleRooms[i.ToString()] = battleRooms[i].ToHashtable(); // Serialize to Hashtable
-            }
-
-            // Send the serialized data to all players via RPC
-            photonView.RPC("SyncBattleRooms", RpcTarget.All, serializedBattleRooms);
-        }
-
+        
         [PunRPC]
-        void SyncBattleRooms(Hashtable serializedBattleRooms)
+        void SyncOpponentsData(Hashtable serializedTrackers)
         {
-            // Clear existing battleRooms on the client (if needed)
-            battleRooms.Clear();
-
-            // Deserialize each BattleRoom from the Hashtable
-            foreach (DictionaryEntry entry in serializedBattleRooms)
+            opponentManager.opponentTrackerList.Clear(); // Clear the list before syncing new data
+    
+            // Convert each Hashtable back into an OpponentTracker and add it to the list
+            foreach (DictionaryEntry trackerData in serializedTrackers)
             {
-                Hashtable roomData = (Hashtable)entry.Value; // Cast to Hashtable
-                battleRooms.Add(BattleRoom.FromHashtable(roomData)); // Deserialize to BattleRoom
+                OpponentTracker tracker = OpponentTracker.FromHashtable((Hashtable)trackerData.Value);
+                opponentManager.opponentTrackerList.Add(tracker);
             }
 
-            // Call an event or method to indicate that the battle rooms are ready
             onOpponentsPrepared.Invoke();
+            Debug.Log("Opponents data synchronized with all players.");
         }
+        
         
         [PunRPC]
         void SetPlayerUnits(int index, object[] serializedUnits)
@@ -194,27 +151,17 @@ namespace GameSystems.Battle
 
         public List<UnitData> GetOpponentUnits()
         {
-            return opponentUnits[GetOpponentIndex(GameManager.i.GetMyPlayerIndex())].units;
+            return opponentUnits[GameManager.i.GetPlayerIndex(GetOpponentId())].units;
         }
 
-        private int GetOpponentIndex(int index)
+        private int GetOpponentId()
         {
-            foreach (var battleRoom in battleRooms)
-            {
-                Debug.Log(battleRoom.guild1Index + " " + battleRoom.guild2Index + " | " + index);
-                
-                if(battleRoom.guild1Index == index)
-                    return battleRoom.guild2Index;
-                if(battleRoom.guild2Index == index)
-                    return battleRoom.guild1Index;
-            }
-
-            return -1;
+            return opponentManager.GetMyOpponentID();
         }
 
         public GuildStats GetOpponentGuildStats()
         {
-            int index = GetOpponentIndex(GameManager.i.GetMyPlayerIndex());
+            int index = GetOpponentId();
             if (index == -1)
                 return null;
             return GuildManager.i.playerGuilds[index];
@@ -241,6 +188,11 @@ namespace GameSystems.Battle
         // {
         //     return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
         // }
+        private void OnBattleEnd()
+        {
+            // for (int room = 0; room < battleRooms.Count; room++)
+            //     battleRooms[0] = new BattleRoom();
+        }
         
     }
 }

@@ -31,6 +31,20 @@ namespace GameSystems.Battle
             yourGuildText.color = PlayerStats.GetGuildStats().guildColor;
         }
 
+        private void Update()
+        {
+            if (addUnitButton.interactable)
+            {
+                if(Input.GetKeyUp(KeyCode.D))
+                    addUnitButton.onClick.Invoke();
+            }
+            if (readyButton.interactable)
+            {
+                if(Input.GetKeyUp(KeyCode.R))
+                    readyButton.onClick.Invoke();
+            }
+        }
+
         public void OnUpdatePlayerDamage(int damage)
         {
             playerDamageText.text = damage.ToString();

@@ -3831,8 +3831,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -3847,7 +3847,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -7302,7 +7302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Enter]'
+  m_text: '[R]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
   m_sharedMaterial: {fileID: 7771865114312701276, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
@@ -8360,7 +8360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[SPACE]'
+  m_text: '[D]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}
   m_sharedMaterial: {fileID: 7771865114312701276, guid: 674c8d3522a1f994a86fd4938494c5e7, type: 2}

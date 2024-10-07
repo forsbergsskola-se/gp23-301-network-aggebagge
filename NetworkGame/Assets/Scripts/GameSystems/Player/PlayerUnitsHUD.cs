@@ -44,7 +44,6 @@ namespace GameSystems.Player
         private void AddUnitToHUD(UnitData unitData)
         {
             PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
-            Debug.Log(unitData.id + " " + playerUnitUI);
 
             if (playerUnitUI == null)
             {
@@ -61,8 +60,6 @@ namespace GameSystems.Player
         private void RemoveUnitFromHUD(UnitData unitData)
         {
             PlayerUnitUI playerUnitUI = playerUnits.FirstOrDefault(pUnit => pUnit.data.id == unitData.id);
-            
-            Debug.Log(unitData.id);
             
             if (playerUnitUI == null)
             {
