@@ -12,7 +12,7 @@ namespace GameSystems.Units
     {
         private static UnitManager i;
         public int unitCount;
-        private List<UnitSo> unitList = new();
+        private HashSet<UnitSo> unitList = new();
         private HashSet<UnitData> shopUnits = new();
 
         public List<UnitSo> startUnits;
@@ -24,22 +24,18 @@ namespace GameSystems.Units
             
             var allUnits = Resources.LoadAll<UnitSo>("SO");
             unitList.AddRange(allUnits);
-
-            while (unitList.Count > 12)
+            List<UnitSo> shopUnitList = new();
+            shopUnitList.AddRange(unitList);
+            
+            while (shopUnitList.Count > 11)
             {
-                int index = Random.Range(0, unitList.Count);
-
-                if (!unitList[index].mustBeInShop)
-                    unitList.RemoveAt(index);
+                int index = Random.Range(0, shopUnitList.Count);
+                if (!shopUnitList[index].mustBeInShop && shopUnitList[index].cost > 0)
+                    shopUnitList.RemoveAt(index);
             }
             
-            Debug.Log(unitList.Count());
-            
-            foreach (var unitSo in unitList)
-            {
-                if (unitSo.cost > 0)
-                    shopUnits.Add(new UnitData(unitSo));
-            }
+            foreach (var unitSo in shopUnitList)
+                shopUnits.Add(new UnitData(unitSo));
 
             foreach (var startUnit in startUnits)
                 startUnitDataList.Add(new UnitData(startUnit));

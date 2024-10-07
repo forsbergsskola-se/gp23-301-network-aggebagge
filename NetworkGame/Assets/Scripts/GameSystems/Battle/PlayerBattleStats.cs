@@ -87,11 +87,14 @@ namespace GameSystems.Battle
         private void DeployUnit()
         {
             UnitData unit = unitQueue.Dequeue();
+            
+            if (unit.attributeType == AttributeType.Scaling && unit.damage < 9)
+                unit.damage++;
+            
             var battleUnit = BattleManager.i.playerBattleField.AddUnit(unit);
             
             if (unit.attributeType == AttributeType.Scaling && unit.damage < 9)
             {
-                unit.damage++;
                 battleUnit.PopupText(true, 1);
             }
             
