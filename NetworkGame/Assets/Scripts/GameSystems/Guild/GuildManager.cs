@@ -30,7 +30,6 @@ namespace GameSystems.Guild
         private void Awake()
         {
             i = this;
-            GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
 
         private void OnPlayerLeave(int id, int index)
@@ -50,6 +49,8 @@ namespace GameSystems.Guild
                 photonView.RPC("RequestGuildsFromMaster", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer.ActorNumber);
             else
                 CreateGuildForPlayer(PhotonNetwork.LocalPlayer.ActorNumber);
+            
+            GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
 
         // RPC for requesting guilds from the master client

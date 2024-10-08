@@ -16,9 +16,7 @@ namespace GameSystems.Battle
         
         [HideInInspector] public UnityEvent<int> onSyncUnitsComplete = new();
         [HideInInspector] public UnityEvent onOpponentsPrepared = new();
-        // private readonly List<BattleRoom> battleRooms = new();
         private readonly List<OpponentUnits> opponentUnits = new();
-        // Initialize the battle manager
         OpponentManager opponentManager;
         
 
@@ -28,44 +26,6 @@ namespace GameSystems.Battle
             opponentManager = GetComponent<OpponentManager>();
         }
         
-        // public class BattleRoom
-        // {
-        //     public int guild1Index;
-        //     public int guild2Index;
-        //     
-        //
-        //     public void SetBattleRoomPlayers(int index1, int index2)
-        //     {
-        //         guild1Index = index1;
-        //         guild2Index = index2;
-        //     }
-        //     
-        //     public void SetBattleRoomPlayers(int index)
-        //     {
-        //         guild1Index = index;
-        //         guild2Index = -1;
-        //     }
-        //     
-        //     // Convert BattleRoom to a Hashtable for Photon
-        //     public Hashtable ToHashtable()
-        //     {
-        //         Hashtable data = new Hashtable();
-        //         data["guild1Index"] = guild1Index;
-        //         data["guild2Index"] = guild2Index;
-        //         return data;
-        //     }
-        //
-        //     // Create a BattleRoom from a Hashtable
-        //     public static BattleRoom FromHashtable(Hashtable data)
-        //     {
-        //         BattleRoom room = new BattleRoom
-        //         {
-        //             guild1Index = (int)data["guild1Index"],
-        //             guild2Index = (int)data["guild2Index"]
-        //         };
-        //         return room;
-        //     }
-        // }
         private class OpponentUnits
         {
             public List<UnitData> units = new();
@@ -73,9 +33,7 @@ namespace GameSystems.Battle
 
         private void Start()
         {
-            BattleManager.i.onPlayerEndBattle.AddListener(OnBattleEnd);
             GameManager.i.onStartGame.AddListener(OnStartGame);
-            
         }
 
         private void OnStartGame()
@@ -83,7 +41,6 @@ namespace GameSystems.Battle
             for (int players = 0; players < PhotonNetwork.PlayerList.Length; players++)
                 opponentUnits.Add(new OpponentUnits());
 
-            
             opponentManager.PrepareOpponentTrackers();
         }
 
@@ -95,9 +52,7 @@ namespace GameSystems.Battle
             Hashtable serializedTrackers = new Hashtable();
 
             foreach (var trackerEntry in opponentManager.opponentTrackers)
-            {
                 serializedTrackers[trackerEntry.Key] = trackerEntry.Value.ToHashtable(); // Convert each OpponentTracker to Hashtable
-            }
 
             // Send the serialized opponent trackers as a single Hashtable
             photonView.RPC("SyncOpponentsData", RpcTarget.All, serializedTrackers);
@@ -166,33 +121,6 @@ namespace GameSystems.Battle
             if (index == -1)
                 return null;
             return GuildManager.i.playerGuilds[index];
-        }
-        
-        
-        
-        // public void PlayerEndBattle(List<UnitData> units, int battleRoomIndex, bool isGuild1)
-        // {
-        //     int myIndex = GameManager.i.GetMyPlayerIndex();
-        //     
-        //     
-        //     photonView.RPC("SyncUnits", RpcTarget.MasterClient, units.ToArray(), battleRoomIndex, isGuild1, myIndex);
-        // }
-        
-        // [PunRPC]
-        // void SyncUnits(UnitData[] units, int battleRoomIndex, bool isGuild1, int playerIndex)
-        // {
-        //     battleRooms[battleRoomIndex].SetUnits(units.ToList(), isGuild1);
-        //     onSyncUnitsComplete.Invoke(playerIndex);
-        // }
-
-        // public List<UnitData> GetOpponentUnits(int index, bool isGuild1)
-        // {
-        //     return isGuild1 ? battleRooms[index].guild1Units : battleRooms[index].guild2Units;
-        // }
-        private void OnBattleEnd()
-        {
-            // for (int room = 0; room < battleRooms.Count; room++)
-            //     battleRooms[0] = new BattleRoom();
         }
         
     }

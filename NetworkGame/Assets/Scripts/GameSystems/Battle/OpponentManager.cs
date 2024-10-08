@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
@@ -10,6 +11,7 @@ namespace GameSystems.Battle
     {
         // public List<OpponentTracker> opponentTrackerList = new();
         [HideInInspector] public Dictionary<int, OpponentTracker> opponentTrackers = new ();
+        
 
         // Method to prepare opponent trackers for all players
         public void PrepareOpponentTrackers()
@@ -29,9 +31,15 @@ namespace GameSystems.Battle
                 Hashtable serializedData = tracker.ToHashtable();
                 photonView.RPC("ReceiveOpponentTracker", RpcTarget.All, player.ActorNumber, serializedData);
             }
+            
+            GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
-        
-        
+
+        private void OnPlayerLeave(int id, int index)
+        {
+            opponentTrackers.Remove(id);
+        }
+
 
         // Method to get the list of opponents met by a player
         private List<int> GetOpponentsMetForPlayer(int playerId)

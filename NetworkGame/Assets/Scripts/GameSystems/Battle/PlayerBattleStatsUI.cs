@@ -76,10 +76,10 @@ namespace GameSystems.Battle
 
             
             opponentGuildText.text = BattleManager.i.opponent != null ? BattleManager.i.opponent.guildName : "Monster";
-            opponentGuildText.color = BattleManager.i.opponent != null ? BattleManager.i.opponent.guildColor : Color.gray;
+            opponentGuildText.color = BattleManager.i.opponent != null ? BattleManager.i.opponent.guildColor : Color.white;
 
             winGoldText.text = BattleManager.i.GetBattleStats().winGold.ToString();
-            loseHpText.text = BattleManager.i.GetBattleStats().loseDamage.ToString();
+            loseHpText.text = "-" + BattleManager.i.GetBattleStats().loseDamage;
         }
 
         public void OnCursed()
