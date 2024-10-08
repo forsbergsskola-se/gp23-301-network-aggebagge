@@ -26,6 +26,7 @@ namespace GameSystems.Guild
         [HideInInspector] public List<GuildStats> playerGuilds = new ();
         public string[] guildNames;
         public Color[] guildColors;
+        public Sprite[] guildSprite;
         
         private void Awake()
         {
@@ -128,6 +129,11 @@ namespace GameSystems.Guild
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
             return guildStats;
+        }
+
+        public Sprite GetGuildSprite(int index)
+        {
+            return guildSprite[index];
         }
     }
 }
