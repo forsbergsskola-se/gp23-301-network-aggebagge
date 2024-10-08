@@ -178,21 +178,33 @@ MonoBehaviour:
     monsterDamage: 5
   - loseDamage: 3
     winGold: 2
+    monsterDamage: 5
+  - loseDamage: 3
+    winGold: 2
     monsterDamage: 6
   - loseDamage: 4
     winGold: 2
+    monsterDamage: 6
+  - loseDamage: 4
+    winGold: 3
     monsterDamage: 7
   - loseDamage: 5
     winGold: 3
     monsterDamage: 8
   - loseDamage: 6
     winGold: 3
+    monsterDamage: 9
+  - loseDamage: 7
+    winGold: 4
     monsterDamage: 10
   - loseDamage: 8
     winGold: 4
+    monsterDamage: 11
+  - loseDamage: 9
+    winGold: 4
     monsterDamage: 12
   - loseDamage: 10
-    winGold: 4
+    winGold: 5
     monsterDamage: 14
   - loseDamage: 12
     winGold: 5
@@ -207,35 +219,89 @@ MonoBehaviour:
     winGold: 6
     monsterDamage: 22
   - loseDamage: 20
-    winGold: 7
+    winGold: 6
     monsterDamage: 24
   - loseDamage: 22
     winGold: 7
     monsterDamage: 26
   - loseDamage: 24
-    winGold: 8
+    winGold: 7
     monsterDamage: 28
   - loseDamage: 26
-    winGold: 8
+    winGold: 7
     monsterDamage: 30
   - loseDamage: 28
-    winGold: 9
+    winGold: 8
     monsterDamage: 32
   - loseDamage: 30
-    winGold: 9
+    winGold: 8
     monsterDamage: 34
-  - loseDamage: 32
-    winGold: 10
-    monsterDamage: 36
-  - loseDamage: 34
-    winGold: 10
-    monsterDamage: 38
-  - loseDamage: 36
-    winGold: 10
-    monsterDamage: 40
-  - loseDamage: 38
-    winGold: 10
-    monsterDamage: 42
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
+  - loseDamage: 30
+    winGold: 8
+    monsterDamage: 34
   winClip: {fileID: 8300000, guid: 0ef9538a82ba21f488af45046eaa5920, type: 3}
   loseClip: {fileID: 8300000, guid: a175099cc4a4f0744b86d5ce9a3487ed, type: 3}
   drawClip: {fileID: 8300000, guid: cb8c95aaf38f3f142b1a42f1c8e0128c, type: 3}
