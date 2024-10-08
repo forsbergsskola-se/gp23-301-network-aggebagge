@@ -9,7 +9,7 @@ namespace GameSystems.Guild
     {
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI hpText;
-
+        public Image crest;
         
         public void SetupUI(GuildStats guildStats)
         {
@@ -18,6 +18,9 @@ namespace GameSystems.Guild
             nameText.color = guildStats.guildColor;
             GetComponent<Image>().color = new Color(guildStats.guildColor.r, guildStats.guildColor.g,
                 guildStats.guildColor.b, 0.75f);
+
+            crest.sprite = GuildManager.i.GetGuildSprite(GuildManager.i.playerGuilds.IndexOf(guildStats));
+            crest.color = guildStats.guildColor;
         }
         
         public void UpdateUI(string hp)
