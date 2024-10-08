@@ -487,6 +487,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: guildcrests_18
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 10
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1e495e405ce8244bf7f3036717e124
+      internalID: -1547983051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guildcrests_19
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 10
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547dc19981619524d8f58fdfb600557e
+      internalID: 17388739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guildcrests_20
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 10
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b31e4a4a627f3c4d9585834d39b4a5c
+      internalID: -364431485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -508,7 +571,10 @@ TextureImporter:
       guildcrests_15: 553879859
       guildcrests_16: 124460657
       guildcrests_17: 1356811649
+      guildcrests_18: -1547983051
+      guildcrests_19: 17388739
       guildcrests_2: -875202165
+      guildcrests_20: -364431485
       guildcrests_3: -1943487587
       guildcrests_4: -921764070
       guildcrests_5: -98132242
