@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 5427848742833908848}
   hpText: {fileID: 8445670473800663063}
+  crest: {fileID: 7310599982777422734}
 --- !u!1 &4835598131234953734
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,8 +185,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
