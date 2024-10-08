@@ -19,9 +19,8 @@ namespace GameSystems
         [HideInInspector] public UnityEvent onStartGame = new ();
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
-        [HideInInspector] public UnityEvent<int> onPlayerLeaveGame = new ();
+        [HideInInspector] public UnityEvent<int, int> onPlayerLeaveGame = new ();
 
-        
         public Color damageColor;
         public Color goldColor;
         
@@ -45,14 +44,7 @@ namespace GameSystems
             PhotonCustomTypes.Register();
             // PhotonNetwork.ConnectUsingSettings();
         }
-
-
-
-
-        public override void OnJoinedRoom()
-        {
-            base.OnJoinedRoom();
-        }
+        
         
         public void StartGame()
         {
@@ -76,49 +68,15 @@ namespace GameSystems
         private void OnUpdatePlayerCount()
         {
             var removedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(player => !playerIdList.Contains(player.ActorNumber));
-            if(removedPlayer != null)
-                onPlayerLeaveGame.Invoke(removedPlayer.ActorNumber);
+            if (removedPlayer != null)
+            {
+                int id = removedPlayer.ActorNumber;
+                int index = GetPlayerIndex(id);
+                onPlayerLeaveGame.Invoke(id, index);
+                playerIdList.RemoveAt(index);
+            }
         }
-
-
-        // public void PlayerTakeDamage(int damage)
-        // {
-        //     int index = GetMyPlayerIndex();
-        //     playerGuilds[index].hp -= damage;
-        //     playerGuilds[index].hp = Mathf.Clamp(playerGuilds[index].hp, 0, playerGuilds[index].maxHp);
-        //
-        //     if (playerGuilds[index].hp <= 0)
-        //     {
-        //         //REMOVE PLAYER
-        //     }
-        //     photonView.RPC("SyncPlayerStats", RpcTarget.All, index, playerGuilds[index].hp, playerGuilds[index].gold);
-        //
-        //     onUpdatePlayerHp.Invoke(playerGuilds[index]);
-        // }
-        //
-        // public void AddToPlayerGold(int playerId, int goldToAdd)
-        // {
-        //     int playerIndex = GetPlayerIndex(playerId);
-        //     playerGuilds[playerIndex].gold += goldToAdd;
-        //     playerGuilds[playerIndex].gold = Mathf.Clamp(playerGuilds[playerIndex].gold, 0, 99);
-        //     
-        //     photonView.RPC("SyncPlayerStats", RpcTarget.All, playerIndex, playerGuilds[playerIndex].hp, playerGuilds[playerIndex].gold);
-        // }
-        //
-        //
-        // [PunRPC]
-        // void SyncPlayerStats(int playerIndex, int hp, int gold)
-        // {
-        //     playerGuilds[playerIndex].hp = hp;
-        //     playerGuilds[playerIndex].gold = gold;
-        // }
         
-        // Method to get stats for a specific player
-        // public GuildStats GetPlayerStats(int playerId)
-        // {
-        //     return playerGuilds[GetPlayerIndex(playerId)];
-        // }
-
         public bool IsPlayerAlive(int id)
         {
             return playerIdList.Contains(id);

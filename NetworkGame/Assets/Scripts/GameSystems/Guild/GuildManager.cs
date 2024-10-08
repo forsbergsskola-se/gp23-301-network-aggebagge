@@ -33,7 +33,7 @@ namespace GameSystems.Guild
             GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
 
-        private void OnPlayerLeave(int id)
+        private void OnPlayerLeave(int id, int index)
         {
             var leavingGuild = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
             if (leavingGuild != null)

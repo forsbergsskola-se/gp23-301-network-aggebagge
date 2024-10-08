@@ -274,9 +274,9 @@ namespace GameSystems.Battle
             yield return new WaitForSeconds(3);
 
             battleCount++;
+            onPlayerEndBattle.Invoke();
+
             if(GuildManager.i.GetPlayerGuildStats().hp > 0)
-                onPlayerEndBattle.Invoke();
-            else
                 SceneManager.LoadScene("MainMenuScene");
         }
         

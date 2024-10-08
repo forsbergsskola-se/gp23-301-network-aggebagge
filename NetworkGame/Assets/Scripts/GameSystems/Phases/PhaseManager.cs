@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameRooms;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -42,13 +41,14 @@ namespace GameSystems.Phases
 
         private void OnStartGame()
         {
-            foreach (var players in GameManager.i.playerIdList)
+            foreach (var unused in GameManager.i.playerIdList)
                 playersReady.Add(false);
             
             phase = Phase.Recruit;
             phases[0].OnBeginPhase();
+            GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
-        
+
 
         // ReSharper disable Unity.PerformanceAnalysis
         public void NextPhase()
@@ -101,8 +101,13 @@ namespace GameSystems.Phases
         
         void ResetPlayerReady()
         {
-            for (int i = 0; i < playersReady.Count; i++)
-                playersReady[i] = false;
+            for (int index = 0; index < playersReady.Count; index++)
+                playersReady[index] = false;
+        }
+        
+        private void OnPlayerLeave(int id, int index)
+        {
+            playersReady.RemoveAt(index);
         }
         
     }
