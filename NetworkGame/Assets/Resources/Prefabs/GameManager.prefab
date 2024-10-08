@@ -372,8 +372,8 @@ MonoBehaviour:
   - Valor
   - Ember
   - Divinity
-  - Wildthorn
-  - Phoenix
+  - Thorns
+  - Forge
   - Sentinel
   - Zephyr
   - Twilight
@@ -410,6 +410,26 @@ MonoBehaviour:
   - {r: 0.5018867, g: 0.32407814, b: 0.18086863, a: 1}
   - {r: 0.8037735, g: 0, b: 0.57051903, a: 1}
   - {r: 0.241, g: 0.2754717, b: 0.2754717, a: 1}
+  guildSprite:
+  - {fileID: -1384241552, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 214625040, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -875202165, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -921764070, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 17388739, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 1356811649, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 733870534, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 553879859, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 132092721, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 1183354351, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -2073231109, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -364431485, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -713892701, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -2073231109, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -1943487587, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -1547983051, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 614840749, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: 467149053, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
+  - {fileID: -1085316423, guid: 1b6bc0c1be313694c80f9d764de22a63, type: 3}
 --- !u!82 &6391430513729603058
 AudioSource:
   m_ObjectHideFlags: 0
