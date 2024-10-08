@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GameRooms;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -31,25 +30,16 @@ namespace GameSystems.Guild
         private void Awake()
         {
             i = this;
-            FindObjectOfType<RoomManager>().onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
+            GameManager.i.onPlayerLeaveGame.AddListener(OnPlayerLeave);
         }
 
-        private void OnUpdatePlayerCount()
+        private void OnPlayerLeave(int id)
         {
-            List<GuildStats> itemsToRemove = new List<GuildStats>();
-
-            // Iterate through the playerGuilds list
-            foreach (var gs in playerGuilds)
-            {
-                // If the condition is met, add the item to the removal list
-                if (PhotonNetwork.PlayerList.All(player => player.ActorNumber != gs.playerID))
-                    itemsToRemove.Add(gs);
-            }
-
-            // After the loop, remove the collected items from the original list
-            foreach (var item in itemsToRemove)
-                playerGuilds.Remove(item);
+            var leavingGuild = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
+            if (leavingGuild != null)
+                playerGuilds.Remove(leavingGuild);
         }
+
 
         public override void OnJoinedRoom()
         {
@@ -75,9 +65,9 @@ namespace GameSystems.Guild
             // Create a Hashtable to hold the serialized guilds
             Hashtable serializedGuilds = new Hashtable();
 
-            for (int i = 0; i < playerGuilds.Count; i++)
+            for (int index = 0; index < playerGuilds.Count; index++)
             {
-                serializedGuilds[i] = playerGuilds[i].ToHashtable(); // Convert each GuildStats to Hashtable
+                serializedGuilds[index] = playerGuilds[index].ToHashtable(); // Convert each GuildStats to Hashtable
             }
 
             // Send the serialized guilds as a single Hashtable

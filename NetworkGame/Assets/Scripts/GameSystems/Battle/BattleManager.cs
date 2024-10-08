@@ -8,6 +8,7 @@ using GameSystems.Units;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -275,6 +276,8 @@ namespace GameSystems.Battle
             battleCount++;
             if(GuildManager.i.GetPlayerGuildStats().hp > 0)
                 onPlayerEndBattle.Invoke();
+            else
+                SceneManager.LoadScene("MainMenuScene");
         }
         
 

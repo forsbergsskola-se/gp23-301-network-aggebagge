@@ -19,7 +19,9 @@ namespace GameSystems
         [HideInInspector] public UnityEvent onStartGame = new ();
         [HideInInspector] public UnityEvent<GuildStats> onUpdatePlayerHp = new ();
 
-        public int playersAlive;
+        [HideInInspector] public UnityEvent<int> onPlayerLeaveGame = new ();
+
+        
         public Color damageColor;
         public Color goldColor;
         
@@ -61,18 +63,23 @@ namespace GameSystems
         void SyncGameStart()
         {
             onBeginCountdown.Invoke();
-            
-            playersAlive = PhotonNetwork.PlayerList.Length;
-
             playerIdList.Clear();
 
             foreach (var player in PhotonNetwork.PlayerList)
             {
                 playerIdList.Add(player.ActorNumber);
             }
+            FindObjectOfType<RoomManager>().onUpdatePlayerCount.AddListener(OnUpdatePlayerCount);
+
         }
 
-        
+        private void OnUpdatePlayerCount()
+        {
+            var removedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(player => !playerIdList.Contains(player.ActorNumber));
+            if(removedPlayer != null)
+                onPlayerLeaveGame.Invoke(removedPlayer.ActorNumber);
+        }
+
 
         // public void PlayerTakeDamage(int damage)
         // {

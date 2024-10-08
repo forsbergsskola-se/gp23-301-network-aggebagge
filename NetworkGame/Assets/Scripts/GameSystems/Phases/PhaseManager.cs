@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameRooms;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -47,6 +48,7 @@ namespace GameSystems.Phases
             phase = Phase.Recruit;
             phases[0].OnBeginPhase();
         }
+        
 
         // ReSharper disable Unity.PerformanceAnalysis
         public void NextPhase()
@@ -88,7 +90,8 @@ namespace GameSystems.Phases
         [PunRPC]
         void SyncPlayersReady(int playerIndex)
         {
-            playersReady[playerIndex] = true;
+            if(playerIndex >= 0)
+                playersReady[playerIndex] = true;
             
             if (playersReady.All(b => b == true))
                 onAllPlayersReady.Invoke();
