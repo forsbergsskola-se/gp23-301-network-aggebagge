@@ -85,7 +85,8 @@ namespace GameRooms
 
         private void OnClickStart()
         {
-            GameManager.i.StartGame();
+            GameManager.i.PrepareToStartGame();
+            GuildManager.i.SetupStartStats();
             startButton.gameObject.SetActive(false);
         }
 
