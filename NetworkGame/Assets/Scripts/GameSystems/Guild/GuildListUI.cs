@@ -12,6 +12,7 @@ namespace GameSystems.Guild
         private void Start()
         {
             GuildManager.i.onGuildSynced.AddListener(OnGuildsSynced);
+            
         }
 
         private void OnGuildsSynced()
@@ -24,6 +25,8 @@ namespace GameSystems.Guild
                 var guildObject = Instantiate(guildObjectPrefab, layout);
                 guildObject.SetupUI(guildStats);
             }
+            
+            Debug.Log(GuildManager.i.GetPlayerGuildStats().hp);
         }
     }
 }
