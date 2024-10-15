@@ -218,6 +218,7 @@ namespace GameSystems.Battle
                         {
                             opponentCursedText.gameObject.SetActive(true);
                             opponentDamage = 0;
+                            opponentDamageText.text = opponentDamage.ToString();
                         }
                     }
                     else if (unitSo.attributeType == AttributeType.AntiCurse)
@@ -266,6 +267,8 @@ namespace GameSystems.Battle
             
             yield return new WaitForSeconds(1);
             
+            Debug.Log(GuildManager.i.GetPlayerGuildStats().hp);
+            
             if(isWin)
                 PlayerStats.AddGold(battleStat.winGold);
             else if (isLose)
@@ -276,8 +279,11 @@ namespace GameSystems.Battle
             battleCount++;
             onPlayerEndBattle.Invoke();
 
-            if(GuildManager.i.GetPlayerGuildStats().hp > 0)
+            if (GuildManager.i.GetPlayerGuildStats().hp <= 0)
+            {
+                Debug.Log(GuildManager.i.GetPlayerGuildStats().hp);
                 SceneManager.LoadScene("MainMenuScene");
+            }
         }
         
 
