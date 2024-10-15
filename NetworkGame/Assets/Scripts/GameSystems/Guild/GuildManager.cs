@@ -103,9 +103,20 @@ namespace GameSystems.Guild
             }
         }
 
-        public void UpdateHp(int index, int hp)
+        public void SetupStartStats()
         {
-            playerGuilds[index].hp = hp;
+            foreach (var gs in playerGuilds)
+            {
+                gs.hp = startHp;
+                gs.groupSize = i.startGroupSize;
+            }
+            SyncGuilds();
+        }
+        
+        public void UpdateHp(int hp)
+        {
+            GetPlayerGuildStats().hp = hp;
+            Debug.Log(hp);
             SyncGuilds();
         }
         
@@ -119,6 +130,7 @@ namespace GameSystems.Guild
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
+            Debug.Log(guildStats.guildName);
             return guildStats;
         }
 
