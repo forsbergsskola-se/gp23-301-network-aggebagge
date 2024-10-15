@@ -46,7 +46,7 @@ namespace GameSystems
         }
         
         
-        public void StartGame()
+        public void PrepareToStartGame()
         {
             photonView.RPC("SyncGameStart", RpcTarget.All);
         }
