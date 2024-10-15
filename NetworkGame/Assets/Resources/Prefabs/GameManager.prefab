@@ -62,7 +62,9 @@ MonoBehaviour:
   onUpdatePlayerHp:
     m_PersistentCalls:
       m_Calls: []
-  playersAlive: 0
+  onPlayerLeaveGame:
+    m_PersistentCalls:
+      m_Calls: []
   damageColor: {r: 1, g: 0, b: 0.34117648, a: 1}
   goldColor: {r: 1, g: 1, b: 0.32156864, a: 1}
   playerIdList: 
@@ -371,7 +373,7 @@ MonoBehaviour:
   guildNames:
   - Valor
   - Ember
-  - Divinity
+  - Divine
   - Thorns
   - Forge
   - Sentinel
