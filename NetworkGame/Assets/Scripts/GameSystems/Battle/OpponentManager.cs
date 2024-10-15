@@ -187,14 +187,14 @@ namespace GameSystems.Battle
 
             foreach (var pair in allBattlePairs)
             {
-                if (pair.player2 == -1)
-                {
-                    Debug.Log($"Player {pair.player1} is battling the AI!");
-                }
-                else
-                {
-                    Debug.Log($"Player {pair.player1} vs Player {pair.player2}");
-                }
+                // if (pair.player2 == -1)
+                // {
+                //     Debug.Log($"Player {pair.player1} is battling the AI!");
+                // }
+                // else
+                // {
+                //     Debug.Log($"Player {pair.player1} vs Player {pair.player2}");
+                // }
 
                 // Perform the battle between player1 and player2 (or AI)
                 RegisterBattle(pair.player1, pair.player2);
