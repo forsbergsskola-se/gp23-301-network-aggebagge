@@ -130,7 +130,6 @@ namespace GameSystems.Guild
         {
             int id = PhotonNetwork.LocalPlayer.ActorNumber;
             var guildStats = playerGuilds.FirstOrDefault(gs => gs.playerID == id);
-            Debug.Log(guildStats.guildName);
             return guildStats;
         }
 

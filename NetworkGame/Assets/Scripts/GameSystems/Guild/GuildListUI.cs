@@ -25,8 +25,6 @@ namespace GameSystems.Guild
                 var guildObject = Instantiate(guildObjectPrefab, layout);
                 guildObject.SetupUI(guildStats);
             }
-            
-            Debug.Log(GuildManager.i.GetPlayerGuildStats().hp);
         }
     }
 }

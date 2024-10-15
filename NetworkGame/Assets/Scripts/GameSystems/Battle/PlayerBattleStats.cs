@@ -54,21 +54,30 @@ namespace GameSystems.Battle
             battleStatsUI.OnUpdatePlayerDamage(damage);
         }
         
-        private void AddCurseSlot()
+        private void UpdateCurseSlots(bool add)
         {
-            curseSlots++;
-            battleStatsUI.OnUpdateCurseUI(curses, curseSlots);
-        }
-
-        private void AddCurse()
-        {
-            curses++;
+            if(add)
+                curseSlots++;
+            else
+                curseSlots--;
+            
             battleStatsUI.OnUpdateCurseUI(curses, curseSlots);
             
             if (curses == curseSlots)
-            {
                 OnCursed();
-            }
+        }
+
+        private void UpdateCurses(bool add)
+        {
+            if(add)
+                curses++;
+            else
+                curses--;
+
+            battleStatsUI.OnUpdateCurseUI(curses, curseSlots);
+            
+            if (curses == curseSlots)
+                OnCursed();
         }
 
         private void OnCursed()
@@ -111,12 +120,22 @@ namespace GameSystems.Battle
             if (battleUnit.data.attributeType != AttributeType.None)
             {
                 if (battleUnit.data.attributeType == AttributeType.Curse)
-                    AddCurse();
+                    UpdateCurses(true);
                 else if (battleUnit.data.attributeType == AttributeType.AntiCurse)
-                    AddCurseSlot();
+                    UpdateCurseSlots(true);
             }
         }
-        
+
+        public void RemoveUnit(BattleUnit unit)
+        {
+            battleUnits.Remove(unit);
+            AddDamage(-unit.data.damage);
+            
+            if(unit.data.attributeType == AttributeType.Curse)
+                UpdateCurses(false);
+            else if(unit.data.attributeType == AttributeType.AntiCurse)
+                UpdateCurseSlots(false);
+        }
         
         private void CreateUnitQueue()
         {

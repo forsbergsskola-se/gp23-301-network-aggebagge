@@ -15,7 +15,7 @@ namespace GameSystems.Battle
 
         public List<BattleUnit> units = new();
         
-        private Queue<GameObject> fieldSlots = new ();
+        private List<GameObject> fieldSlots = new ();
         
         public AudioSource curseAudio;
         public AudioSource antiCurseAudio;
@@ -39,13 +39,14 @@ namespace GameSystems.Battle
             for (int i = 0; i < slots; i++)
             {
                 var fieldSlot = Instantiate(fieldSlotPrefab, layout);
-                fieldSlots.Enqueue(fieldSlot);
+                fieldSlots.Add(fieldSlot);
             }
         }
 
         public BattleUnit AddUnit(UnitData unitData, bool isPlayer)
         {
-            var battleUnit = Instantiate(battleUnitPrefab, fieldSlots.Dequeue().transform);
+            var battleUnit = Instantiate(battleUnitPrefab, fieldSlots[0].transform);
+            fieldSlots.RemoveAt(0);
             battleUnit.SetupUI(unitData);
             if(!isPlayer)
                 battleUnit.RemoveAction();
@@ -63,9 +64,10 @@ namespace GameSystems.Battle
 
         private void OnKillUnit(BattleUnit battleUnit)
         {
+            fieldSlots.Insert(0, battleUnit.transform.parent.gameObject);
             units.Remove(battleUnit);
-            BattleManager.i.playerBattleStats.battleUnits.Remove(battleUnit);
-            BattleManager.i.playerBattleStats.AddDamage(-battleUnit.data.damage);
+            
+            BattleManager.i.playerBattleStats.RemoveUnit(battleUnit);
         }
 
     }

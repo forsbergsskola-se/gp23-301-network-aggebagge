@@ -366,8 +366,8 @@ MonoBehaviour:
   onGuildSynced:
     m_PersistentCalls:
       m_Calls: []
-  startHp: 50
-  startGold: 5
+  startHp: 30
+  startGold: 9
   startGroupSize: 6
   playerGuilds: []
   guildNames:
