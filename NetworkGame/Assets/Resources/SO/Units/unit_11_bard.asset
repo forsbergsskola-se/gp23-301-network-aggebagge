@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
+  m_Name: unit_11_bard
+  m_EditorClassIdentifier: 
+  id: 11
+  unitName: Bard
+  sprite: {fileID: 21300000, guid: 968b143db3af65345bddab63c809187d, type: 3}
+  cost: 9
+  tooltipText: <color=#79CE4E>Add 1 damage to a unit in your group</color>
+  damage: 0
+  goldGain: -1
+  attribute: {fileID: 11400000, guid: 3692bcf7b7e0ff740a5bc43c8b77c570, type: 2}

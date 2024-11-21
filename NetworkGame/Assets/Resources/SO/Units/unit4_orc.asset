@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a98fc700ca4464da7b9b963b218e1f2, type: 3}
+  m_Name: unit4_orc
+  m_EditorClassIdentifier: 
+  id: 4
+  unitName: Orc
+  sprite: {fileID: 21300000, guid: de3bc6af246568e449b97f09943c477e, type: 3}
+  cost: 5
+  mustBeInShop: 0
+  tooltipText: '<color=purple>1 Curse</color>
+
+    <color=#FF0057>dmg Damage</color>
+
+    <color=yellow>gg
+    Gold</color>'
+  damage: 3
+  goldGain: 2
+  attribute: {fileID: 11400000, guid: 04ddd0ff732772049b48d4f0f575b7fa, type: 2}
